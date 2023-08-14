@@ -6,11 +6,11 @@ import Sidebar from "../components/Sidebar";
 
 function Home() {
   return (
-    <body className="flex gap-7">
+    <body className="flex ">
       <div className="hidden md:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9]">
+      <div className="bg-[#F9F9F9] md:ml-72">
         <Navbar />
         <DashboardHome />
         <Footer />

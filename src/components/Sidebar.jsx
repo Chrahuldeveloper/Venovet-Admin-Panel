@@ -21,8 +21,8 @@ function Sidebar() {
   };
 
   return (
-    <aside>
-      <div className="w-[17vw] shadow-sm ">
+    <aside className="fixed overflow-scroll top-2 bottom-10">
+      <div className="shadow-sm">
         <div className="px-5 mt-10">
           <img
             src="https://venovet.com/cw_admin/images/logo-full.png"

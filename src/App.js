@@ -11,6 +11,8 @@ import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import EditCategory from "./pages/EditCategory";
 import EditKey from "./pages/EditKey";
+import EditCompany from "./pages/EditCompany";
+import EditTrucks from "./pages/EditTrucks";
 function App() {
   return (
     <Routes>
@@ -26,6 +28,8 @@ function App() {
       <Route path="/career" element={<Careers />} />
       <Route path="/:id" element={<EditCategory />} />
       <Route path="/key/:keyid" element={<EditKey />} />
+      <Route path="/edit/:editid" element={<EditCompany />} />
+      <Route path="truckedit/:truckid" element={<EditTrucks />} />
     </Routes>
   );
 }
