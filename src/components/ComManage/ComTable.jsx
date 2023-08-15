@@ -21,7 +21,7 @@ export default function ComTable() {
     <div>
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
-          <div className="flex justify-between px-6 pt-2">
+          <div className="flex justify-between px-6 pt-2 flex-col md:flex-row space-y-5 md:space-y-0">
             <h1 className="text-xl font-semibold">List of Companies</h1>
             <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
               Add Company
@@ -32,7 +32,7 @@ export default function ComTable() {
               <table className="w-full text-left">
                 <thead className="border-y border-[#EEEEEE]">
                   <tr>
-                    <th className="py-2 pl-3">S.No</th>
+                    <th className="py-2 md:pl-3">S.No</th>
                     <th className="py-2 pl-3">Company ID</th>
                     <th className="py-2 pl-3">Username</th>
                     <th className="py-2 pl-3">Expiry date</th>

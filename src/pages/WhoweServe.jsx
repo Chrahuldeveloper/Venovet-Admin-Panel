@@ -2,17 +2,19 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import ServeTable from "../components/ServeTable";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 
 export default function WhoweServe() {
   return (
     <body className="flex">
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Sidebar />
       </div>
 
-      <div className="bg-[#F9F9F9] w-screen md:ml-72">
+      <div className="bg-[#F9F9F9] w-full lg:ml-24">
         <Navbar />
         <ServeTable />
+        <Footer />
       </div>
     </body>
   );

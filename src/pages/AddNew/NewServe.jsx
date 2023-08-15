@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { db, storage } from "../Firebase";
+import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { convert } from "html-to-text";
+import { useNavigate } from "react-router-dom";
 
-export default function EditCategory() {
-  const { id } = useParams();
+export default function NewServe() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
+    Title: "",
     Overview: "",
     Stats: "",
     How: "",
@@ -38,37 +39,35 @@ export default function EditCategory() {
     event.preventDefault();
 
     try {
-      if (Image) {
-        const imageRef = ref(storage, `images/${Image.name}`);
-        const uploadTask = uploadBytesResumable(imageRef, Image);
+      const imageRef = ref(storage, `images/${Image.name}`);
+      const uploadTask = uploadBytesResumable(imageRef, Image);
 
-        uploadTask.on(
-          "state_changed",
-          null,
-          (error) => {
-            console.error(error);
-          },
-          async () => {
-            // download url for upload file
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            const formData = {
-              ...form,
-              Image: downloadURL,
-            };
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error(error);
+        },
+        async () => {
+          // download url for upload file
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const formData = {
+            ...form,
+            Image: downloadURL,
+          };
 
-            const formDataPlainText = {
-              ...formData,
-              Overview: convert(formData.Overview),
-              Stats: convert(formData.Stats),
-              How: convert(formData.How),
-              Why: convert(formData.Why),
-            };
+          const formDataPlainText = {
+            ...formData,
+            Overview: convert(formData.Overview),
+            Stats: convert(formData.Stats),
+            How: convert(formData.How),
+            Why: convert(formData.Why),
+          };
 
-            const docRef = doc(db, "WHO-WE-SERVE", id);
-            await updateDoc(docRef, formDataPlainText);
-          }
-        );
-      }
+          await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);
+          navigate("/whoweserve");
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -82,18 +81,23 @@ export default function EditCategory() {
 
       <div className="bg-white  py-4 m-8 rounded-3xl">
         <div className="border-b px-8 py-2">
-          <h1 className="font-semibold text-xl">Edit Who We Serve</h1>
+          <h1 className="font-semibold text-xl">Add Who We Serve</h1>
         </div>
         <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-          <div className="md:space-x-44  text-lg space-y-6 md:space-y-0">
+          <div className="space-x-44  text-lg">
             <label className="text-[#186ad2]">
               Title <span className="text-red-500 text-lg">*</span>
             </label>
             <input
-              className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               type="text"
-              value={id}
-              placeholder={id}
+              value={form.Title}
+              onChange={(e) => {
+                setForm({
+                  ...form,
+                  Title: e.target.value,
+                });
+              }}
             />
           </div>
           <div className=" pt-5 space-y-4">
@@ -121,12 +125,12 @@ export default function EditCategory() {
               onChange={(value) => handleQuillChange("How", value)}
             />
           </div>
-          <div className=" md:space-x-44 space-y-6 ">
+          <div className="space-y-4 space-x-60 ">
             <label className="text-[#186ad2] text-lg">Image</label>
             <input
               type="file"
               onChange={handleImageChange}
-              className="border border-[#eb5f0f] w-64 md:w-80 lg:w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
+              className="border border-[#eb5f0f] w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
             />
           </div>
           <div className="space-y-4">

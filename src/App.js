@@ -16,6 +16,8 @@ import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import EditCompany from "./pages/EditCompany";
 import EditTrucks from "./pages/EditTrucks";
+import NewServe from "./pages/AddNew/NewServe";
+import NewKey from "./pages/AddNew/NewKey";
 function App() {
   return (
     <Routes>
@@ -32,6 +34,8 @@ function App() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/products" element={<Products />} />
       <Route path="/orders" element={<Orders />} />
+      <Route path="/addnewserve" element={<NewServe />} />
+      <Route path="/addnewkey" element={<NewKey />} />
       <Route path="/:id" element={<EditCategory />} />
       <Route path="/key/:keyid" element={<EditKey />} />
       <Route path="/edit/:editid" element={<EditCompany />} />

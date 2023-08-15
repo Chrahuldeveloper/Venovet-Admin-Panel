@@ -23,7 +23,7 @@ function Sidebar() {
 
   return (
     <aside className="fixed overflow-scroll top-2 bottom-10">
-      <div className="shadow-sm">
+      <div className="shadow-lg">
         {/* <div className="px-5 mt-10">
           <img
             src="https://venovet.com/cw_admin/images/logo-full.png"

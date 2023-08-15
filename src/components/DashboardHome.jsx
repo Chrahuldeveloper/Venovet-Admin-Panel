@@ -5,7 +5,7 @@ import Orders from "./Orders";
 
 function DashboardHome() {
   return (
-    <div className=" p-6  w-full md:p-12 lg:px-4">
+    <div className=" p-6   md:p-12 lg:px-4">
       <DbCards />
       <div className="lg:flex">
         <Enquiries />

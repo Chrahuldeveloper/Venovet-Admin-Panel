@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { db } from "../Firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import { db } from "../../Firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
-export default function EditKey() {
-  const { keyid } = useParams();
-  const cat = ["Fast Moving Consumer Goods (FMCG)"];
+export default function NewKey() {
+  const navigate = useNavigate();
+  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
   const [form, setForm] = useState({
     Category: "",
     Title: "",
     Text: "",
   });
 
+  console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const docRef = doc(db, "KEY-BENEFITS", keyid);
-      await updateDoc(docRef, form);
+      await setDoc(doc(db, "KEY-BENEFITS", form.Category), form);
+      navigate("/key-benefits");
     } catch (error) {
       console.log(error);
     }
@@ -29,14 +30,15 @@ export default function EditKey() {
       <Navbar />
       <div className="bg-white  py-4 m-8 rounded-3xl">
         <div className="border-b font-semibold text-xl px-8 py-2">
-          <h1>Edit Key Benefits</h1>
+          <h1>Add Key Benefits</h1>
         </div>
         <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-          <div className="md:space-x-44 space-y-5 md:space-y-0  text-lg">
+          <div className="space-x-44 text-lg">
             <label className="text-[#186ad2] text-lg">
               Category <span className="text-red-500 text-lg">*</span>
             </label>
             <select
+              defaultValue={cat[0]}
               value={form.Category}
               onChange={(e) => {
                 setForm({
@@ -44,18 +46,18 @@ export default function EditKey() {
                   Category: e.target.value,
                 });
               }}
-              className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
             >
               {cat.map((item, index) => {
                 return (
-                  <React.Fragment key={index}>
-                    <option>{item}</option>
-                  </React.Fragment>
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
                 );
               })}
             </select>
           </div>
-          <div className="md:space-x-44 space-y-5 md:space-y-0  text-lg">
+          <div className="space-x-44 text-lg">
             <label className="text-[#186ad2] text-lg">
               Title <span className="text-red-500 text-lg">*</span>
             </label>
@@ -68,7 +70,7 @@ export default function EditKey() {
                 });
               }}
               placeholder="Which Plan Is Right For Me?"
-              className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
             />
           </div>
           <div className="flex flex-col space-y-4">
@@ -81,7 +83,7 @@ export default function EditKey() {
                   Text: e.target.value,
                 });
               }}
-              className="outline-none border w-64 md:w-96 lg:w-[50rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
+              className="outline-none border w-[50rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
             />
           </div>
           <div className="flex items-center justify-center pt-10">
