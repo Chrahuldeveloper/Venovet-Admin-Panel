@@ -11,6 +11,9 @@ import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import EditCategory from "./pages/EditCategory";
 import EditKey from "./pages/EditKey";
+import Categories from "./pages/Categories";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
 function App() {
   return (
     <Routes>
@@ -24,6 +27,9 @@ function App() {
       <Route path="/nature-of-enquiry" element={<Nature />} />
       <Route path="/enquiries" element={<Enquiries />} />
       <Route path="/career" element={<Careers />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/orders" element={<Orders />} />
       <Route path="/:id" element={<EditCategory />} />
       <Route path="/key/:keyid" element={<EditKey />} />
     </Routes>

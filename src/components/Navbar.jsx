@@ -7,7 +7,7 @@ function Navbar() {
       <div className="flex items-center justify-between px-4 md:px-16 md:pl-24 py-8">
         <div>
           <Link
-            to={"/"}
+            to={"/home"}
             onClick={() => {
               window.scrollTo(0, 0);
             }}
