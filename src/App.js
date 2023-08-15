@@ -18,6 +18,9 @@ import EditCompany from "./pages/EditCompany";
 import EditTrucks from "./pages/EditTrucks";
 import NewServe from "./pages/AddNew/NewServe";
 import NewKey from "./pages/AddNew/NewKey";
+import EditWhyUs from "./components/EditWhyUs";
+import EditProduct from "./pages/EditProduct";
+import Profile from "./pages/Profile";
 function App() {
   return (
     <Routes>
@@ -40,6 +43,10 @@ function App() {
       <Route path="/key/:keyid" element={<EditKey />} />
       <Route path="/edit/:editid" element={<EditCompany />} />
       <Route path="truckedit/:truckid" element={<EditTrucks />} />
+      <Route path="/whyusedit/:whyusid" element={<EditWhyUs />} />
+      <Route path="/editcategory/:categoryid" element={<EditCategory />} />
+      <Route path="/editProduct/:Productid" element={<EditProduct />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

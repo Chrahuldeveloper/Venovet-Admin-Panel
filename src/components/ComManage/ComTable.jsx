@@ -1,27 +1,47 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, deleteDoc, doc } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { db } from "./../././../Firebase";
 
 export default function ComTable() {
   const navigate = useNavigate();
 
-  const data = [
-    {
-      id: 1,
-      category: "Lens and Frames",
-      Tittle: "  Fast Moving Consumer Goods (FMCG)",
-      date: "1-01-1970",
-      Venture: "AI SILKS KALAMANDIR LTD",
-      Phone: "9837742555",
-      Name: "PRADEEP",
-      Type: "User",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     category: "Lens and Frames",
+  //     Tittle: "  Fast Moving Consumer Goods (FMCG)",
+  //     date: "1-01-1970",
+  //     Venture: "AI SILKS KALAMANDIR LTD",
+  //     Phone: "9837742555",
+  //     Name: "PRADEEP",
+  //     Type: "User",
+  //   },
+  // ];
+
+  const docref = collection(db, "COLLECTIONNAME"); // just add the collection name
+  const [data, loading, error] = useCollectionData(docref);
+
+  if (error) {
+    console.log(error);
+  }
+
+  const Deletedoc = async (docid) => {
+    try {
+      alert("Are you sure you want to delete?");
+      await deleteDoc(doc(db, "COLLECTIONNAME", docid));
+      alert("Deleted successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
-          <div className="flex justify-between px-6 pt-2 flex-col md:flex-row space-y-5 md:space-y-0">
+          <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
             <h1 className="text-xl font-semibold">List of Companies</h1>
             <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
               Add Company
@@ -46,7 +66,7 @@ export default function ComTable() {
                   </tr>
                 </thead>
                 <tbody className="border-b border-[#EEEEEE] text-sm">
-                  {data.map((item, i) => {
+                  {data?.map((item, i) => {
                     return (
                       <React.Fragment key={i}>
                         <tr>
@@ -70,7 +90,14 @@ export default function ComTable() {
                           >
                             Edit
                           </td>
-                          <td className="py-8 pl-3">Delete</td>
+                          <td
+                            className="py-8 pl-3"
+                            onClick={() => {
+                              Deletedoc(item.id);
+                            }}
+                          >
+                            Delete
+                          </td>
                         </tr>
                       </React.Fragment>
                     );
