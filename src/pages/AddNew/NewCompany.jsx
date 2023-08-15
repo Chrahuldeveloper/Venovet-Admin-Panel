@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Sidebar from "../../components/Sidebar";
 import { useState } from "react";
-import { db, storage } from "../Firebase";
+import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 function UserDetailsField({ label, required, children }) {
   return (
@@ -19,47 +19,8 @@ function UserDetailsField({ label, required, children }) {
   );
 }
 
-export default function EditCompany() {
+export default function NewCompany() {
   const navigate = useNavigate();
-
-  const handleImageChange = (event) => {
-    const imageFile = event.target.files[0];
-    setForm((prevForm) => ({
-      ...prevForm,
-      logo: imageFile,
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const imageRef = ref(storage, `images/${Image.name}`);
-      const uploadTask = uploadBytesResumable(imageRef, Image);
-
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error(error);
-        },
-        async () => {
-          // download url for upload file
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          const formData = {
-            ...form,
-            logo: downloadURL,
-          };
-
-          const docRef = doc(db, "COMPANIES", editid);
-          await updateDoc(docRef, formData);
-          navigate("/companies");
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const [form, setForm] = useState({
     Username: "",
@@ -89,7 +50,43 @@ export default function EditCompany() {
     Pincode: "",
   });
 
-  const { editid } = useParams();
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setForm((prevForm) => ({
+      ...prevForm,
+      logo: imageFile,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const imageRef = ref(storage, `company/${form.logo.name}`);
+      const uploadTask = uploadBytesResumable(imageRef, form.logo.name);
+
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error(error);
+        },
+        async () => {
+          // download url for upload file
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const formData = {
+            ...form,
+            logo: downloadURL,
+          };
+
+          await setDoc(doc(db, "COMPANIES", form.Business), formData);
+          navigate("/companies");
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleInputChange = (field, value) => {
     setForm((prevForm) => ({

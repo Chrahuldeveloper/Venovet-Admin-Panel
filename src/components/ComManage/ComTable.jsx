@@ -1,8 +1,12 @@
 import React from "react";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "./../././../Firebase";
+=======
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 
 export default function ComTable() {
   const navigate = useNavigate();
@@ -43,9 +47,11 @@ export default function ComTable() {
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
             <h1 className="text-xl font-semibold">List of Companies</h1>
-            <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
-              Add Company
-            </button>
+            <Link to={"/addnewcompany"}>
+              <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
+                Add Company
+              </button>
+            </Link>
           </div>
           <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
@@ -60,7 +66,7 @@ export default function ComTable() {
                     <th className="py-2 pl-3">Individual</th>
                     <th className="py-2 pl-3">P Mobile no.</th>
                     <th className="py-2 pl-3">Users</th>
-                    <th className="py-2 pl-3">View</th>
+                    {/* <th className="py-2 pl-3">View</th> */}
                     <th className="py-2 pl-3">Edit</th>
                     <th className="py-2 pl-3">Delete</th>
                   </tr>
@@ -83,13 +89,14 @@ export default function ComTable() {
                           <td className="py-8 pl-3">{item.Phone}</td>
                           <td className="py-8 pl-3">{item.Type}</td>
                           <td
-                            className="py-8 pl-3"
+                            className="py-8 pl-3 cursor-pointer"
                             onClick={() => {
                               navigate(`/edit/${item.id}`);
                             }}
                           >
                             Edit
                           </td>
+<<<<<<< HEAD
                           <td
                             className="py-8 pl-3"
                             onClick={() => {
@@ -98,6 +105,9 @@ export default function ComTable() {
                           >
                             Delete
                           </td>
+=======
+                          <td className="py-8 pl-3 cursor-pointer">Delete</td>
+>>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
                         </tr>
                       </React.Fragment>
                     );

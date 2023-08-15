@@ -1,24 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { db } from "../../Firebase";
+import { useState } from "react";
+import { db, storage } from "../../Firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
-export default function NewKey() {
+export default function NewWhy() {
   const navigate = useNavigate();
-  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
   const [form, setForm] = useState({
     Category: "",
     Title: "",
-    Text: "",
+    Image: "",
   });
+  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
 
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setForm((prevForm) => ({
+      ...prevForm,
+      Image: imageFile,
+    }));
+  };
+
+  console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await setDoc(doc(db, "KEY-BENEFITS", form.Category), form);
-      navigate("/key-benefits");
+      // upload image
+      const imageRef = ref(storage, `images/${Image.name}`);
+      const uploadTask = uploadBytesResumable(imageRef, Image);
+
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error(error);
+        },
+        async () => {
+          // download url for upload file
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const formData = {
+            ...form,
+            Image: downloadURL,
+          };
+
+          await setDoc(doc(db, "WHY-US", formData.Category), formData);
+          navigate("/why-us");
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -29,10 +60,10 @@ export default function NewKey() {
       <Navbar />
       <div className="bg-white  py-4 m-8 rounded-3xl">
         <div className="border-b font-semibold text-xl px-8 py-2">
-          <h1>Add Key Benefits</h1>
+          <h1>Add Why Us</h1>
         </div>
         <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-          <div className="space-x-44 text-lg">
+          <div className="space-y-6 md:space-y-0 md:space-x-44 text-lg">
             <label className="text-[#186ad2] text-lg">
               Category <span className="text-red-500 text-lg">*</span>
             </label>
@@ -45,7 +76,7 @@ export default function NewKey() {
                   Category: e.target.value,
                 });
               }}
-              className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
             >
               {cat.map((item, index) => {
                 return (
@@ -56,7 +87,7 @@ export default function NewKey() {
               })}
             </select>
           </div>
-          <div className="space-x-44 text-lg">
+          <div className="space-y-6 md:space-y-0 md:space-x-44 text-lg">
             <label className="text-[#186ad2] text-lg">
               Title <span className="text-red-500 text-lg">*</span>
             </label>
@@ -68,21 +99,16 @@ export default function NewKey() {
                   Title: e.target.value,
                 });
               }}
-              placeholder="Which Plan Is Right For Me?"
-              className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              placeholder="Title"
+              className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
             />
           </div>
           <div className="flex flex-col space-y-4">
-            <label className="text-[#186ad2] text-lg">Text</label>
-            <textarea
-              value={form.Text}
-              onChange={(e) => {
-                setForm({
-                  ...form,
-                  Text: e.target.value,
-                });
-              }}
-              className="outline-none border w-[50rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
+            <label className="text-[#186ad2] text-lg">Image</label>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
             />
           </div>
           <div className="flex items-center justify-center pt-10">

@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
+=======
+import { Link } from "react-router-dom";
+>>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 
 export default function WhyTable() {
 
@@ -12,9 +16,11 @@ export default function WhyTable() {
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
           <h1 className="text-xl font-semibold">Why Us</h1>
-          <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
-            Add New Why Us
-          </button>
+          <Link to={"/addnewwhy"}>
+            <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
+              Add New Why Us
+            </button>
+          </Link>
         </div>
         <div className="w-full py-8 pt-14">
           <div className="overflow-x-auto">

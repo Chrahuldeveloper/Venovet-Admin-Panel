@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { useState } from "react";
-import { db, storage } from "../Firebase";
+import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const indianStates = [
   "Andhra Pradesh",
@@ -73,9 +73,8 @@ function SelectField({ label, options, defaultValue }) {
   );
 }
 
-export default function EditTrucks() {
+export default function NewTruck() {
   const navigate = useNavigate();
-  const { truckid } = useParams();
 
   const [form, setForm] = useState({
     vendor: "",
@@ -145,9 +144,8 @@ export default function EditTrucks() {
         vehiclePhoto2: downloadURL2,
       };
 
-      console.log(formData);
-      const docRef = doc(db, "TRUCKS", truckid);
-      await updateDoc(docRef, formData);
+      await setDoc(doc(db, "TRUCKS", form.vendor), formData);
+
       navigate("/trucks");
     } catch (error) {
       console.log(error);
