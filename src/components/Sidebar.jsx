@@ -23,24 +23,24 @@ function Sidebar() {
   return (
     <aside className="fixed overflow-scroll top-2 bottom-10">
       <div className="shadow-sm">
-        <div className="px-5 mt-10">
+        {/* <div className="px-5 mt-10">
           <img
             src="https://venovet.com/cw_admin/images/logo-full.png"
             className="md:w-[20vw] lg:w-[10vw] mx-auto"
             alt=""
           />
-        </div>
-        <div className="mt-16 ml-10 space-y-5 ">
+        </div> */}
+        <div className="mt-24 space-y-5 ">
           <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
             <CgDatabase size={32} />
-            <h1 className="font-semibold">Dashboard</h1>
+            {/* <h1 className="font-semibold">Dashboard</h1> */}
           </div>
           <div
             className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
             onClick={() => ToogleDropdown("dropdown1")}
           >
             <TbDatabaseImport size={32} />
-            <h1 className="font-semibold">who we server</h1>
+            {/* <h1 className="font-semibold">who we server</h1> */}
           </div>
           {dropdown.dropdown1 && (
             <ul className="text-center ">
@@ -60,7 +60,7 @@ function Sidebar() {
             onClick={() => ToogleDropdown("dropdown2")}
           >
             <CgDatabase size={32} />
-            <h1 className="font-semibold">Acess</h1>
+            {/* <h1 className="font-semibold">Acess</h1> */}
           </div>
           {dropdown.dropdown2 && (
             <ul className="text-center ">
@@ -83,7 +83,7 @@ function Sidebar() {
             className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
           >
             <MdOutlineWifiCalling3 size={32} />
-            <h1 className="font-semibold">Call/Enquires</h1>
+            {/* <h1 className="font-semibold">Call/Enquires</h1> */}
           </div>
           {dropdown.dropdown3 && (
             <ul className="text-center">
@@ -103,7 +103,7 @@ function Sidebar() {
             className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
           >
             <FaShoppingCart size={32} />
-            <h1 className="font-semibold">Shop</h1>
+            {/* <h1 className="font-semibold">Shop</h1> */}
           </div>
           {dropdown.dropdown4 && (
             <ul className="text-center ">
@@ -120,11 +120,11 @@ function Sidebar() {
           )}
           <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
             <CgProfile size={32} />
-            <h1 className="font-semibold">Dashboard</h1>
+            {/* <h1 className="font-semibold">Dashboard</h1> */}
           </div>
           <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
             <PiLockBold size={32} />
-            <h1 className="font-semibold">Logout</h1>
+            {/* <h1 className="font-semibold">Logout</h1> */}
           </div>
         </div>
       </div>

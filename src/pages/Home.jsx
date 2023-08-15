@@ -10,7 +10,7 @@ function Home() {
       <div className="hidden md:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] md:ml-72">
+      <div className="bg-[#F9F9F9] lg:ml-24">
         <Navbar />
         <DashboardHome />
         <Footer />
