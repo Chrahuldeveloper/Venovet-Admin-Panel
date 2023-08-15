@@ -4,6 +4,7 @@ import { TbDatabaseImport } from "react-icons/tb";
 import { MdOutlineWifiCalling3 } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { PiLockBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   const [dropdown, setdropdown] = useState({
@@ -45,13 +46,13 @@ function Sidebar() {
           {dropdown.dropdown1 && (
             <ul className="text-center ">
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                who we server
+                <Link to={"/whoweserve"}> who we serve</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Why us
+                <Link to={"/why-us"}> Why us</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Key Benifits
+                <Link to={"/key-benefits"}> Key Benifits</Link>
               </li>
             </ul>
           )}
@@ -65,16 +66,16 @@ function Sidebar() {
           {dropdown.dropdown2 && (
             <ul className="text-center ">
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Companies
+                <Link to={"/companies"}>Companies</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Trucks
+                <Link to={"/trucks"}> Trucks</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Properties
+                <Link> Properties</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Others
+                <Link> Others</Link>
               </li>
             </ul>
           )}
@@ -88,13 +89,16 @@ function Sidebar() {
           {dropdown.dropdown3 && (
             <ul className="text-center">
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Enquires
+                <Link to={"/nature-of-enquiry"}>Nature of Enquiry</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Careers
+                <Link to={"/enquiries"}>Enquires</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                News Letter
+                <Link to={"/career"}>Careers</Link>
+              </li>
+              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
+                <Link>News Letter</Link>
               </li>
             </ul>
           )}
@@ -108,13 +112,13 @@ function Sidebar() {
           {dropdown.dropdown4 && (
             <ul className="text-center ">
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Categories
+                <Link to={"/categories"}>Categories</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Products
+                <Link to={"/products"}> Products</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                Orders
+                <Link to={"/orders"}>Orders</Link>
               </li>
             </ul>
           )}

@@ -7,7 +7,7 @@ import Sidebar from "../components/Sidebar";
 function Home() {
   return (
     <body className="flex ">
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Sidebar />
       </div>
       <div className="bg-[#F9F9F9] lg:ml-24">
