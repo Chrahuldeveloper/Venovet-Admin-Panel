@@ -14,6 +14,8 @@ import EditKey from "./pages/EditKey";
 import Categories from "./pages/Categories";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
+import EditCompany from "./pages/EditCompany";
+import EditTrucks from "./pages/EditTrucks";
 function App() {
   return (
     <Routes>
@@ -32,6 +34,8 @@ function App() {
       <Route path="/orders" element={<Orders />} />
       <Route path="/:id" element={<EditCategory />} />
       <Route path="/key/:keyid" element={<EditKey />} />
+      <Route path="/edit/:editid" element={<EditCompany />} />
+      <Route path="truckedit/:truckid" element={<EditTrucks />} />
     </Routes>
   );
 }
