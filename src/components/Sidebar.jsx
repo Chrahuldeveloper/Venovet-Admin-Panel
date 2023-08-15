@@ -71,12 +71,12 @@ function Sidebar() {
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
                 <Link to={"/trucks"}> Trucks</Link>
               </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
+              {/* <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
                 <Link> Properties</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
                 <Link> Others</Link>
-              </li>
+              </li> */}
             </ul>
           )}
           <div
@@ -88,9 +88,9 @@ function Sidebar() {
           </div>
           {dropdown.dropdown3 && (
             <ul className="text-center">
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
+              {/* <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
                 <Link to={"/nature-of-enquiry"}>Nature of Enquiry</Link>
-              </li>
+              </li> */}
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
                 <Link to={"/enquiries"}>Enquires</Link>
               </li>
@@ -98,7 +98,7 @@ function Sidebar() {
                 <Link to={"/career"}>Careers</Link>
               </li>
               <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link>News Letter</Link>
+                <Link to={"/news-letters"}>News Letter</Link>
               </li>
             </ul>
           )}

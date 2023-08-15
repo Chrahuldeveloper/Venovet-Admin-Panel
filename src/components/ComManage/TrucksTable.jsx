@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TrucksTable() {
   const data = [
@@ -22,9 +22,11 @@ export default function TrucksTable() {
         <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
             <h1 className="text-xl font-semibold">List of Companies</h1>
-            <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
-              Add Company
-            </button>
+            <Link to={"/addnewtruck"}>
+              <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
+                Add Company
+              </button>
+            </Link>
           </div>
           <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
@@ -39,7 +41,6 @@ export default function TrucksTable() {
                     <th className="py-2 pl-3">State</th>
                     <th className="py-2 pl-3">Multi Point Delivery</th>
                     <th className="py-2 pl-3">Status</th>
-                    <th className="py-2 pl-3">View</th>
                     <th className="py-2 pl-3">Edit</th>
                     <th className="py-2 pl-3">Delete</th>
                   </tr>
@@ -71,14 +72,14 @@ export default function TrucksTable() {
                             </select>
                           </td>
                           <td
-                            className="py-8 pl-3"
+                            className="py-8 pl-3 cursor-pointer"
                             onClick={() => {
                               navigate(`/truckedit/${item.id}`);
                             }}
                           >
                             Edit
                           </td>
-                          <td className="py-8 pl-3">Delete</td>
+                          <td className="py-8 pl-3 cursor-pointer">Delete</td>
                         </tr>
                       </>
                     );

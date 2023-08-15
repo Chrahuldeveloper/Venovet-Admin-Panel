@@ -1,5 +1,20 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar";
+import CatTable from "../components/CartManage/CatTable";
 
 export default function Categories() {
-  return <div>Categories</div>;
+  return (
+    <body className="flex">
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="bg-[#F9F9F9]  w-full  lg:ml-24">
+        <Navbar />
+        <CatTable />
+        <Footer />
+      </div>
+    </body>
+  );
 }

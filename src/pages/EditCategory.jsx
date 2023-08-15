@@ -38,37 +38,35 @@ export default function EditCategory() {
     event.preventDefault();
 
     try {
-      if (Image) {
-        const imageRef = ref(storage, `images/${Image.name}`);
-        const uploadTask = uploadBytesResumable(imageRef, Image);
+      const imageRef = ref(storage, `images/${Image.name}`);
+      const uploadTask = uploadBytesResumable(imageRef, Image);
 
-        uploadTask.on(
-          "state_changed",
-          null,
-          (error) => {
-            console.error(error);
-          },
-          async () => {
-            // download url for upload file
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            const formData = {
-              ...form,
-              Image: downloadURL,
-            };
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error(error);
+        },
+        async () => {
+          // download url for upload file
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const formData = {
+            ...form,
+            Image: downloadURL,
+          };
 
-            const formDataPlainText = {
-              ...formData,
-              Overview: convert(formData.Overview),
-              Stats: convert(formData.Stats),
-              How: convert(formData.How),
-              Why: convert(formData.Why),
-            };
+          const formDataPlainText = {
+            ...formData,
+            Overview: convert(formData.Overview),
+            Stats: convert(formData.Stats),
+            How: convert(formData.How),
+            Why: convert(formData.Why),
+          };
 
-            const docRef = doc(db, "WHO-WE-SERVE", id);
-            await updateDoc(docRef, formDataPlainText);
-          }
-        );
-      }
+          const docRef = doc(db, "WHO-WE-SERVE", id);
+          await updateDoc(docRef, formDataPlainText);
+        }
+      );
     } catch (error) {
       console.log(error);
     }

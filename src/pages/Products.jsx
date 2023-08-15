@@ -1,5 +1,21 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
+import ProductsTable from "../components/CartManage/ProductTable";
 
 export default function Products() {
-  return <div>Products</div>;
+  return (
+    <body className="flex">
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+
+      <div className="bg-[#F9F9F9] w-full lg:ml-24">
+        <Navbar />
+        <ProductsTable />
+        <Footer />
+      </div>
+    </body>
+  );
 }

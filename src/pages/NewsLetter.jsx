@@ -1,10 +1,10 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import CareerTable from "../components/ContactMan/CareerTable";
-import Sidebar from "../components/Sidebar";
+import NewsTable from "../components/ContactMan/NewsTable";
 
-export default function Careers() {
+export default function NewsLetter() {
   return (
     <body className="flex">
       <div className="hidden lg:block">
@@ -12,7 +12,7 @@ export default function Careers() {
       </div>
       <div className="bg-[#F9F9F9]  w-full  lg:ml-24">
         <Navbar />
-        <CareerTable />
+        <NewsTable />
         <Footer />
       </div>
     </body>

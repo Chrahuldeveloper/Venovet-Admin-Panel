@@ -18,6 +18,12 @@ import EditCompany from "./pages/EditCompany";
 import EditTrucks from "./pages/EditTrucks";
 import NewServe from "./pages/AddNew/NewServe";
 import NewKey from "./pages/AddNew/NewKey";
+import NewWhy from "./pages/AddNew/NewWhy";
+import NewCompany from "./pages/AddNew/NewCompany";
+import NewTruck from "./pages/AddNew/NewTruck";
+import NewsLetter from "./pages/NewsLetter";
+import NewCategory from "./pages/AddNew/NewCategory";
+import NewProduct from "./pages/AddNew/NewProduct";
 function App() {
   return (
     <Routes>
@@ -31,11 +37,17 @@ function App() {
       <Route path="/nature-of-enquiry" element={<Nature />} />
       <Route path="/enquiries" element={<Enquiries />} />
       <Route path="/career" element={<Careers />} />
+      <Route path="/news-letters" element={<NewsLetter />} />
       <Route path="/categories" element={<Categories />} />
       <Route path="/products" element={<Products />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/addnewserve" element={<NewServe />} />
       <Route path="/addnewkey" element={<NewKey />} />
+      <Route path="/addnewwhy" element={<NewWhy />} />
+      <Route path="/addnewcompany" element={<NewCompany />} />
+      <Route path="/addnewtruck" element={<NewTruck />} />
+      <Route path="/addnewcategory" element={<NewCategory />} />
+      <Route path="/addnewproduct" element={<NewProduct />} />
       <Route path="/:id" element={<EditCategory />} />
       <Route path="/key/:keyid" element={<EditKey />} />
       <Route path="/edit/:editid" element={<EditCompany />} />
