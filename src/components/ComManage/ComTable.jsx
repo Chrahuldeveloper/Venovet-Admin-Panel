@@ -1,12 +1,8 @@
 import React from "react";
-<<<<<<< HEAD
-import { useNavigate } from "react-router-dom";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "./../././../Firebase";
-=======
 import { Link, useNavigate } from "react-router-dom";
->>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 
 export default function ComTable() {
   const navigate = useNavigate();
@@ -96,7 +92,6 @@ export default function ComTable() {
                           >
                             Edit
                           </td>
-<<<<<<< HEAD
                           <td
                             className="py-8 pl-3"
                             onClick={() => {
@@ -105,9 +100,7 @@ export default function ComTable() {
                           >
                             Delete
                           </td>
-=======
                           <td className="py-8 pl-3 cursor-pointer">Delete</td>
->>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
                         </tr>
                       </React.Fragment>
                     );

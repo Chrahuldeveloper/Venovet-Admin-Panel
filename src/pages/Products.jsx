@@ -5,13 +5,10 @@ import Footer from "../components/Footer";
 import ProductsTable from "../components/CartManage/ProductTable";
 
 export default function Products() {
-<<<<<<< HEAD
   // const navigate  = useNavigate()
   // navigate(`/editProduct/item.id`)
   //add this on onclick
 
-  return <div>Products</div>;
-=======
   return (
     <body className="flex">
       <div className="hidden lg:block">
@@ -25,5 +22,4 @@ export default function Products() {
       </div>
     </body>
   );
->>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 }

@@ -1,15 +1,9 @@
 import React from "react";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-=======
 import { Link } from "react-router-dom";
->>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 
 export default function WhyTable() {
-
-
-  // const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   return (
     <div className="bg-[#F9F9F9] p-8">
@@ -47,10 +41,15 @@ export default function WhyTable() {
                   <td className="py-8 pl-10">
                     <img src="" alt="img.png" />
                   </td>
-                  <td className="py-8 pl-10" onClick={()=>{
-                    // navigate(`/whyusedit/${_.id}`)
-                  }}>Edit</td>
-                  <td className="py-8 pl-10">Delete</td>
+                  <td
+                    className="py-8 pl-10 cursor-pointer"
+                    onClick={() => {
+                      navigate(`/whyusedit/1`); //put id instead of 1 while fetching
+                    }}
+                  >
+                    Edit
+                  </td>
+                  <td className="py-8 pl-10 cursor-pointer">Delete</td>
                 </tr>
               </tbody>
             </table>

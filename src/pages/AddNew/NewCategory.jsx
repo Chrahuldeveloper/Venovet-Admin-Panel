@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
-export default function NewKey() {
+export default function NewCategory() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     Name: "",

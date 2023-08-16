@@ -1,13 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 
-export default function Categories() {
-  // const navigate  = useNavigate()
-  // navigate(`editcategory/${item.id}`)
-  //add this on onclick
-  return <div>Categories</div>;
-=======
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
@@ -26,5 +19,4 @@ export default function Categories() {
       </div>
     </body>
   );
->>>>>>> 4576403e01fdc4aa95ed96781fcf8c91819fa6d3
 }
