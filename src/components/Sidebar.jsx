@@ -1,136 +1,119 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { CgDatabase, CgProfile } from "react-icons/cg";
 import { TbDatabaseImport } from "react-icons/tb";
-import { MdOutlineWifiCalling3 } from "react-icons/md";
+import { IoIosCall } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { PiLockBold } from "react-icons/pi";
-import { Link } from "react-router-dom";
+
+// Sidebar data
+const sidebarData = [
+  {
+    Icon: CgDatabase,
+    dropdownKey: "db-icon",
+  },
+  {
+    Icon: CgDatabase,
+    dropdownKey: "dropdown1",
+    links: [
+      { to: "/whoweserve", label: "Who We Serve" },
+      { to: "/why-us", label: "Why Us" },
+      { to: "/key-benefits", label: "Key Benefits" },
+    ],
+  },
+  {
+    Icon: TbDatabaseImport,
+    dropdownKey: "dropdown2",
+    links: [
+      { to: "/companies", label: "Companies" },
+      { to: "/trucks", label: "Trucks" },
+      { to: "/properties", label: "Properties" },
+    ],
+  },
+  {
+    Icon: IoIosCall,
+    dropdownKey: "dropdown3",
+    links: [
+      { to: "/enquiries", label: "Enquiries" },
+      { to: "/career", label: "Careers" },
+      { to: "/news-letters", label: "News Letter" },
+    ],
+  },
+  {
+    Icon: FaShoppingCart,
+    dropdownKey: "dropdown4",
+    links: [
+      { to: "/categories", label: "Categories" },
+      { to: "/products", label: "Products" },
+      { to: "/orders", label: "Orders" },
+    ],
+  },
+  // Icons without dropdown links
+  {
+    Icon: CgProfile,
+    dropdownKey: "db-icon1", // Example icon without dropdown
+  },
+  {
+    Icon: PiLockBold,
+    dropdownKey: "db-icon2",
+    // Example icon without dropdown
+  },
+];
 
 function Sidebar() {
-  const [dropdown, setdropdown] = useState({
+  const [dropdown, setDropdown] = useState({
     dropdown1: false,
     dropdown2: false,
     dropdown3: false,
     dropdown4: false,
+    // Add more dropdown states as needed
   });
 
-  const ToogleDropdown = (dropdownname) => {
-    setdropdown((pre) => ({
-      ...pre,
-      [dropdownname]: !pre[dropdownname],
+  const toggleDropdown = (dropdownName) => {
+    setDropdown((prevState) => ({
+      ...prevState,
+      [dropdownName]: !prevState[dropdownName],
     }));
   };
 
+  const DropdownContent = ({ links }) => (
+    <ul className="mt-2 right-full bg-white shadow rounded-lg py-2  z-10">
+      {links.map((link) => (
+        <li
+          key={link.to}
+          className="px-4 py-2  hover:text-[#0B2A97] cursor-pointer text-sm"
+        >
+          <Link to={link.to}>{link.label}</Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
-    <aside className="fixed overflow-scroll top-2 bottom-10">
-      <div className="shadow-lg">
-        {/* <div className="px-5 mt-10">
-          <img
-            src="https://venovet.com/cw_admin/images/logo-full.png"
-            className="md:w-[20vw] lg:w-[10vw] mx-auto"
-            alt=""
-          />
-        </div> */}
-        <div className="mt-24 space-y-5 ">
-          <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-            <CgDatabase size={32} />
-            {/* <h1 className="font-semibold">Dashboard</h1> */}
+    <aside className="fixed overflow-scroll top-2 bottom-10 w-64 h-screen">
+      <div className="mt-32 space-y-4 pl-4">
+        {sidebarData.map(({ Icon, dropdownKey, links }) => (
+          <div className="flex relative" key={dropdownKey}>
+            <div
+              className="flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff] text-gray-500 cursor-pointer rounded-lg"
+              onClick={() => {
+                if (links) {
+                  toggleDropdown(dropdownKey);
+                }
+              }}
+            >
+              <Icon size={28} />
+            </div>
+            {links && dropdown[dropdownKey] && (
+              <div
+              // className="absolute left-16 w-[100%]"
+              // onMouseLeave={() => toggleDropdown(dropdownKey)}
+              >
+                <DropdownContent links={links} style={{ zIndex: 2 }} />
+              </div>
+            )}
           </div>
-          <div
-            className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
-            onClick={() => ToogleDropdown("dropdown1")}
-          >
-            <TbDatabaseImport size={32} />
-            {/* <h1 className="font-semibold">who we server</h1> */}
-          </div>
-          {dropdown.dropdown1 && (
-            <ul className="text-center ">
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/whoweserve"}> who we serve</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/why-us"}> Why us</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/key-benefits"}> Key Benifits</Link>
-              </li>
-            </ul>
-          )}
-          <div
-            className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
-            onClick={() => ToogleDropdown("dropdown2")}
-          >
-            <CgDatabase size={32} />
-            {/* <h1 className="font-semibold">Acess</h1> */}
-          </div>
-          {dropdown.dropdown2 && (
-            <ul className="text-center ">
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/companies"}>Companies</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/trucks"}> Trucks</Link>
-              </li>
-              {/* <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link> Properties</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link> Others</Link>
-              </li> */}
-            </ul>
-          )}
-          <div
-            onClick={() => ToogleDropdown("dropdown3")}
-            className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
-          >
-            <MdOutlineWifiCalling3 size={32} />
-            {/* <h1 className="font-semibold">Call/Enquires</h1> */}
-          </div>
-          {dropdown.dropdown3 && (
-            <ul className="text-center">
-              {/* <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/nature-of-enquiry"}>Nature of Enquiry</Link>
-              </li> */}
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/enquiries"}>Enquires</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/career"}>Careers</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/news-letters"}>News Letter</Link>
-              </li>
-            </ul>
-          )}
-          <div
-            onClick={() => ToogleDropdown("dropdown4")}
-            className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg"
-          >
-            <FaShoppingCart size={32} />
-            {/* <h1 className="font-semibold">Shop</h1> */}
-          </div>
-          {dropdown.dropdown4 && (
-            <ul className="text-center ">
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/categories"}>Categories</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/products"}> Products</Link>
-              </li>
-              <li className="hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-                <Link to={"/orders"}>Orders</Link>
-              </li>
-            </ul>
-          )}
-          <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-            <CgProfile size={32} />
-            {/* <h1 className="font-semibold">Dashboard</h1> */}
-          </div>
-          <div className="flex items-center gap-5 hover:bg-[#e6e9f4] text-gray-500 hover:text-[#0b2a97] px-8 py-3 cursor-pointer rounded-lg">
-            <PiLockBold size={32} />
-            {/* <h1 className="font-semibold">Logout</h1> */}
-          </div>
-        </div>
+        ))}
       </div>
     </aside>
   );

@@ -27,6 +27,7 @@ import NewTruck from "./pages/AddNew/NewTruck";
 import NewsLetter from "./pages/NewsLetter";
 import NewCategory from "./pages/AddNew/NewCategory";
 import NewProduct from "./pages/AddNew/NewProduct";
+import Properties from "./pages/Properties";
 function App() {
   return (
     <Routes>
@@ -37,6 +38,7 @@ function App() {
       <Route path="/key-benefits" element={<Key />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/trucks" element={<Trucks />} />
+      <Route path="/properties" element={<Properties />} />
       <Route path="/nature-of-enquiry" element={<Nature />} />
       <Route path="/enquiries" element={<Enquiries />} />
       <Route path="/career" element={<Careers />} />

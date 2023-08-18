@@ -1,22 +1,20 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import DashboardHome from "../components/DashboardHome";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
+import ProTable from "../components/ComManage/ProTable";
 
-function Home() {
+export default function Properties() {
   return (
-    <body className="flex ">
+    <body className="flex">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] w-full lg:ml-20">
+      <div className="bg-[#F9F9F9] w-full lg:ml-24">
         <Navbar />
-        <DashboardHome />
+        <ProTable />
         <Footer />
       </div>
     </body>
   );
 }
-
-export default Home;
