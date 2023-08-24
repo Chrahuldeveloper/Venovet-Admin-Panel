@@ -51,14 +51,16 @@ export default function KeyTable() {
                         <td className="py-8 text-sm md:pl-6">{item.Title}</td>
                         <td className="py-8 pl-6">{item.Text}</td>
                         <td
-                          className="py-8 pl-6 cursor-pointer"
+                          className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
                             navigate(`/key/${item.ServiceTitle}`);
                           }}
                         >
                           Edit
                         </td>
-                        <td className="py-8 pl-6 cursor-pointer">Delete</td>
+                        <td className="py-8 pl-6 cursor-pointer text-[#7e7e7e]">
+                          Delete
+                        </td>
                       </tr>
                     </tbody>
                   </>

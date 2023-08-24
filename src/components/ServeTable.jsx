@@ -32,7 +32,7 @@ export default function ServeTable() {
           <Link to={"/addnewserve"}>
             {" "}
             <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
-              Add Who We Serve
+              Add New Who We Serve
             </button>
           </Link>
         </div>
@@ -61,7 +61,7 @@ export default function ServeTable() {
                           <img src={item.image} alt="img.png" />
                         </td>
                         <td
-                          className="py-8 pl-10 cursor-pointer"
+                          className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
                             navigate(`/${item.Tittle}`);
                           }}
@@ -69,7 +69,7 @@ export default function ServeTable() {
                           Edit
                         </td>
                         <td
-                          className="py-8 pl-10 cursor-pointer"
+                          className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           // onClick={handleDelete(item.id)}
                         >
                           Delete

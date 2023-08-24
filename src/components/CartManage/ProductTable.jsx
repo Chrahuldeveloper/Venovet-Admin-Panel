@@ -19,7 +19,7 @@ export default function ProductsTable() {
     <div className="bg-[#F9F9F9] p-8">
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 justify-between md:px-6 pt-2">
-          <h1 className="md:text-xl font-semibold">Who We Serve</h1>
+          <h1 className="md:text-xl font-semibold">Products</h1>
           <Link to={"/addnewproduct"}>
             {" "}
             <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
@@ -58,9 +58,11 @@ export default function ProductsTable() {
                         <td className="py-8 pl-10">
                           <img src="" alt="img.png" />
                         </td>
-                        <td className="py-8 pl-10 cursor-pointer">Edit</td>
+                        <td className="py-8 pl-10 cursor-pointer text-[#7e7e7e]">
+                          Edit
+                        </td>
                         <td
-                          className="py-8 pl-10 cursor-pointer"
+                          className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           // onClick={handleDelete(item.id)}
                         >
                           Delete

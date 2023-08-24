@@ -19,7 +19,7 @@ export default function OrdersTable() {
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
-            <h1 className="text-xl font-semibold">List of Companies</h1>
+            <h1 className="text-xl font-semibold">Orders</h1>
           </div>
           <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
@@ -60,14 +60,16 @@ export default function OrdersTable() {
                             </select>
                           </td>
                           <td
-                            className="py-8 pl-3 cursor-pointer"
+                            className="py-8 pl-3 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
                               navigate(`/truckedit/${item.id}`);
                             }}
                           >
                             Edit
                           </td>
-                          <td className="py-8 pl-3 cursor-pointer">Delete</td>
+                          <td className="py-8 pl-3 cursor-pointer text-[#7e7e7e]">
+                            Delete
+                          </td>
                         </tr>
                       </>
                     );

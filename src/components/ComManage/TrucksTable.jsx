@@ -72,14 +72,16 @@ export default function TrucksTable() {
                             </select>
                           </td>
                           <td
-                            className="py-8 pl-3 cursor-pointer"
+                            className="py-8 pl-3 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
                               navigate(`/truckedit/${item.id}`);
                             }}
                           >
                             Edit
                           </td>
-                          <td className="py-8 pl-3 cursor-pointer">Delete</td>
+                          <td className="py-8 pl-3 cursor-pointer text-[#7e7e7e]">
+                            Delete
+                          </td>
                         </tr>
                       </>
                     );

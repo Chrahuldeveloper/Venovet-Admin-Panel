@@ -24,7 +24,7 @@ export default function NewsTable() {
                     <td className="md:pl-10 py-8 ">1.</td>
                     <td className="pl-3 py-8">pradeep.bpc@gmail.com</td>
                     <td className="pl-3 py-8"> 31-03-2022</td>
-                    <td className="pl-3 py-8">Delete</td>
+                    <td className="pl-3 py-8 text-[#7e7e7e]">Delete</td>
                   </tr>
                 </tbody>
               </table>

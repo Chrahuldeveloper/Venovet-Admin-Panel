@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 
 function Home() {
   return (
-    <body className="flex ">
+    <div className="flex ">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -15,7 +15,7 @@ function Home() {
         <DashboardHome />
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function Profile() {
   return (
-    <body className="flex">
+    <div className="flex">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -15,6 +15,6 @@ export default function Profile() {
         <AdminProfile />
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }

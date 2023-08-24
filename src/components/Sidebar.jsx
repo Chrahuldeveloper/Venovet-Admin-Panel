@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgDatabase, CgProfile } from "react-icons/cg";
 import { TbDatabaseImport } from "react-icons/tb";
 import { IoIosCall } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { PiLockBold } from "react-icons/pi";
-
 // Sidebar data
 const sidebarData = [
   {
     Icon: CgDatabase,
     dropdownKey: "db-icon",
+    to: "/home",
   },
   {
     Icon: CgDatabase,
@@ -51,7 +51,8 @@ const sidebarData = [
   // Icons without dropdown links
   {
     Icon: CgProfile,
-    dropdownKey: "db-icon1", // Example icon without dropdown
+    dropdownKey: "db-icon1",
+    to: "/profile", // Example icon without dropdown
   },
   {
     Icon: PiLockBold,
@@ -61,6 +62,8 @@ const sidebarData = [
 ];
 
 function Sidebar() {
+  const location = useLocation();
+
   const [dropdown, setDropdown] = useState({
     dropdown1: false,
     dropdown2: false,
@@ -79,23 +82,32 @@ function Sidebar() {
   const DropdownContent = ({ links }) => (
     <ul className="mt-2 right-full bg-white shadow rounded-lg py-2  z-10">
       {links.map((link) => (
-        <li
-          key={link.to}
-          className="px-4 py-2  hover:text-[#0B2A97] cursor-pointer text-sm"
-        >
-          <Link to={link.to}>{link.label}</Link>
-        </li>
+        <Link to={link.to} key={link.to}>
+          <li className="px-4 py-2  hover:text-[#0B2A97] cursor-pointer text-sm">
+            {link.label}
+          </li>
+        </Link>
       ))}
     </ul>
   );
 
+  const isRouteActive = (route) => {
+    return location.pathname === route;
+  };
+
   return (
     <aside className="fixed overflow-scroll top-2 bottom-10 w-64 h-screen">
       <div className="mt-32 space-y-4 pl-4">
-        {sidebarData.map(({ Icon, dropdownKey, links }) => (
+        {sidebarData.map(({ Icon, to, dropdownKey, links }, index) => (
           <div className="flex relative" key={dropdownKey}>
-            <div
-              className="flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff] text-gray-500 cursor-pointer rounded-lg"
+            <Link
+              to={to}
+              className={`flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff] text-gray-500 cursor-pointer rounded-lg ${
+                isRouteActive(to) ||
+                (links && links.some((link) => isRouteActive(link.to)))
+                  ? "bg-[#0B2A97] text-[#fff]"
+                  : ""
+              }`}
               onClick={() => {
                 if (links) {
                   toggleDropdown(dropdownKey);
@@ -103,7 +115,7 @@ function Sidebar() {
               }}
             >
               <Icon size={28} />
-            </div>
+            </Link>
             {links && dropdown[dropdownKey] && (
               <div
               // className="absolute left-16 w-[100%]"

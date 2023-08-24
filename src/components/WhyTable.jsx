@@ -42,14 +42,16 @@ export default function WhyTable() {
                     <img src="" alt="img.png" />
                   </td>
                   <td
-                    className="py-8 pl-10 cursor-pointer"
+                    className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                     onClick={() => {
                       navigate(`/whyusedit/1`); //put id instead of 1 while fetching
                     }}
                   >
                     Edit
                   </td>
-                  <td className="py-8 pl-10 cursor-pointer">Delete</td>
+                  <td className="py-8 pl-10 cursor-pointer text-[#7e7e7e]">
+                    Delete
+                  </td>
                 </tr>
               </tbody>
             </table>

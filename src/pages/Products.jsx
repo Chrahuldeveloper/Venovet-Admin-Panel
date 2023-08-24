@@ -10,7 +10,7 @@ export default function Products() {
   //add this on onclick
 
   return (
-    <body className="flex">
+    <div className="flex">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -20,6 +20,6 @@ export default function Products() {
         <ProductsTable />
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }

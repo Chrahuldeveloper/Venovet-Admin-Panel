@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function CatTable() {
-  const navigate = useNavigate();
   return (
     <div>
       <div className="bg-[#F9F9F9] p-8">
@@ -24,7 +23,7 @@ export default function CatTable() {
                     <th className="md:pl-3 py-2">S.No</th>
                     <th className="pl-3 py-2">Category Name</th>
                     <th className="pl-3 py-2">Image</th>
-                    <th className="pl-3 py-2">Edit</th>
+                    <th className="pl-3 py-2 ">Edit</th>
                     <th className="pl-3 py-2">Delete</th>
                   </tr>
                 </thead>
@@ -36,14 +35,16 @@ export default function CatTable() {
                       <img src="" alt="img.png" />
                     </td>
                     <td
-                      className="pl-3 py-8 cursor-pointer"
+                      className="pl-3 py-8 cursor-pointer text-[#7e7e7e]"
                       onClick={() => {
                         // navigate(``);
                       }}
                     >
                       Edit
                     </td>
-                    <td className="pl-3 py-8 cursor-pointer">Delete</td>
+                    <td className="pl-3 py-8 cursor-pointer text-[#7e7e7e]">
+                      Delete
+                    </td>
                     {/* <td className="pl-3 py-8">View</td>
                     <td className="pl-3 py-8">Edit</td>
                     <td className="pl-3 py-8">Delete</td> */}

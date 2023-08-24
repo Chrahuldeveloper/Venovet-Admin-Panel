@@ -52,7 +52,7 @@ export default function NewCategory() {
   };
 
   return (
-    <body className="flex">
+    <div className="flex">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -103,6 +103,6 @@ export default function NewCategory() {
         </div>
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }

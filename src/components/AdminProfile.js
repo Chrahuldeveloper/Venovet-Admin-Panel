@@ -23,16 +23,13 @@ export default function AdminProfile() {
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
-            <h1 className="text-xl font-semibold">Why Us</h1>
-            <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
-              Admin Details
-            </button>
+            <h1 className="text-xl font-semibold">Update Profile</h1>
           </div>
           <div className="w-full py-8 pt-14">
-            <form className="pl-20 space-y-10 md:max-w-3xl">
+            <form className="p-8 space-y-4 max-w-4xl">
               <div className="flex items-center justify-between">
-                <h1 className="font-semibold text-blue-500 md:text-lg">
-                  UserName*
+                <h1 className="font- text-[#186ad2] md:text-lg">
+                  UserName <span className="text-red-500 text-lg">*</span>
                 </h1>
                 <input
                   type="text"
@@ -40,37 +37,33 @@ export default function AdminProfile() {
                   onchange={(e) => {
                     setadmin({ ...e, UserName: e.target.value });
                   }}
-                  className="border-[1px] border-orange-500 outline-none px-10 py-2.5 rounded-full"
+                  className="border-[1px] border-orange-500 w-64 md:w-80 lg:w-[30rem] outline-none px-4 py-2 rounded-full"
                 />
               </div>
               <div className="flex items-center justify-between">
-                <h1 className="font-semibold text-blue-500 md:text-lg">
-                  Password
-                </h1>
+                <h1 className="font- text-[#186ad2] md:text-lg">Password</h1>
                 <input
                   type="text"
                   value={admin.Password}
                   onchange={(e) => {
                     setadmin({ ...e, Password: e.target.value });
                   }}
-                  className="border-[1px] border-orange-500 outline-none px-10 py-2.5 rounded-full"
+                  className="border-[1px] border-orange-500 outline-none w-64 md:w-80 lg:w-[30rem]  px-4 py-2 rounded-full"
                 />
               </div>
               <div className="flex items-center justify-between">
-                <h1 className="font-semibold text-blue-500 md:text-lg">
-                  Email*
-                </h1>
+                <h1 className="font- text-[#186ad2] md:text-lg">Email</h1>
                 <input
                   type="email"
                   value={admin.Email}
                   onchange={(e) => {
                     setadmin({ ...e, Email: e.target.value });
                   }}
-                  className="border-[1px] border-orange-500 outline-none px-10 py-2.5 rounded-full"
+                  className="border-[1px] border-orange-500 w-64 md:w-80 lg:w-[30rem] outline-none px-4 py-2 rounded-full"
                 />
               </div>
               <div className="flex justify-center">
-                <button className="bg-[#0b2a97] px-10 p-2 rounded-xl text-white font-semibold ">
+                <button className="bg-[#0b2a97] px-10 p-2 rounded-3xl text-white font-semibold ">
                   Update
                 </button>
               </div>

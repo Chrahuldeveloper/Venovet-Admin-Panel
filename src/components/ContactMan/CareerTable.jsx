@@ -34,7 +34,7 @@ export default function CareerTable() {
                     <td className="pl-3 py-8 cursor-pointer">Download</td>
                     <td className="pl-3 py-8"> hii</td>
                     <td className="pl-3 py-8"> 31-03-2022 04:45 pm</td>
-                    <td className="pl-3 py-8">Delete</td>
+                    <td className="pl-3 py-8 text-[#7e7e7e]">Delete</td>
                     {/* <td className="pl-3 py-8">View</td>
                     <td className="pl-3 py-8">Edit</td>
                     <td className="pl-3 py-8">Delete</td> */}

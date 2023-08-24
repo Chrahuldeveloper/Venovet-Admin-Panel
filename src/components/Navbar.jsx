@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="bg-white">
-      <div className="flex items-center justify-between px-4 md:px-16 md:pl-24 py-8">
+      <div className="flex items-center justify-between px-4 md:px-12 py-8">
         <div>
           <Link
             to={"/home"}
@@ -12,7 +12,7 @@ function Navbar() {
               window.scrollTo(0, 0);
             }}
           >
-            <h1 className="font-bold text-2xl md:text-3xl">Dashboard</h1>
+            <h1 className="font-bold text-2xl md:text-2xl">Dashboard</h1>
           </Link>
         </div>
 
