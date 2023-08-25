@@ -33,6 +33,8 @@ import {
   NewServe,
   NewKey,
 } from "../pages/AddNew/index";
+import SelectCategory from "./WhatwedoEditors/SelectCategory";
+import WhatWeDoEditCategory from "./WhatwedoEditors/WhatWeDoEditCategory";
 
 export default function Routing() {
   return (
@@ -68,6 +70,11 @@ export default function Routing() {
         <Route path="/editcategory/:categoryid" element={<EditCategory />} />
         <Route path="/editProduct/:Productid" element={<EditProduct />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/whatwedo" element={<SelectCategory />} />
+        <Route
+          path="/edit/whatwedo/:category"
+          element={<WhatWeDoEditCategory />}
+        />
       </Routes>
     </>
   );

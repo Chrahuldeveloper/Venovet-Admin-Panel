@@ -63,14 +63,14 @@ export default function EditCategeory() {
       </div>
       <div className="bg-[#F9F9F9] w-full  lg:ml-24">
         <Navbar />
-        <div className="bg-white  py-4 m-8 rounded-3xl">
-          <div className="border-b font-semibold text-xl px-8 py-2">
+        <div className="py-4 m-8 bg-white rounded-3xl">
+          <div className="px-8 py-2 text-xl font-semibold border-b">
             <h1>Edit Category</h1>
           </div>
-          <form className="p-8  pl-14 space-y-4" onSubmit={handleSubmit}>
-            <div className="text-lg grid grid-cols-3">
+          <form className="p-8 space-y-4 pl-14" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-3 text-lg">
               <label className="text-[#186ad2] text-lg">
-                Category Name <span className="text-red-500 text-lg">*</span>
+                Category Name <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Name}
@@ -86,7 +86,7 @@ export default function EditCategeory() {
             </div>
             <div className="grid grid-cols-3 text-lg">
               <label className="text-[#186ad2] text-lg">
-                Category Image <span className="text-red-500 text-lg">*</span>
+                Category Image <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 type="file"
