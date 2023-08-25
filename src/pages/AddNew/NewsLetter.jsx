@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import NewsTable from "../components/ContactMan/NewsTable";
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import NewsTable from "../../components/ContactMan/NewsTable";
 
 export default function NewsLetter() {
   return (
