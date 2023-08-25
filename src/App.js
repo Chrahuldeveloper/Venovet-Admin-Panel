@@ -28,7 +28,6 @@ import NewsLetter from "./pages/NewsLetter";
 import NewCategory from "./pages/AddNew/NewCategory";
 import NewProduct from "./pages/AddNew/NewProduct";
 import Properties from "./pages/Properties";
-import Warehouse from "./pages/WhatWeDoPage/Warehouse";
 function App() {
   return (
     <Routes>
@@ -62,7 +61,6 @@ function App() {
       <Route path="/editcategory/:categoryid" element={<EditCategory />} />
       <Route path="/editProduct/:Productid" element={<EditProduct />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/warehouse" element={<Warehouse />} />
     </Routes>
   );
 }
