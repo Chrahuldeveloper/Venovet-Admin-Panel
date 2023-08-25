@@ -16,7 +16,7 @@ function Enquiries() {
     setData(enquiryData);
   };
   return (
-    <div className="bg-white my-8 lg:mr-4 rounded-xl lg:w-[50%]">
+    <div className="bg-white my-8 rounded-xl lg:w-[50%]">
       <div>
         <h1 className="font-semibold text-xl px-5 py-5">Enquiries</h1>
       </div>

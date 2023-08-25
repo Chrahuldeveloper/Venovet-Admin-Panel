@@ -102,11 +102,11 @@ function Sidebar() {
           <div className="flex relative" key={dropdownKey}>
             <Link
               to={to}
-              className={`flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff] text-gray-500 cursor-pointer rounded-lg ${
+              className={`flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff]  cursor-pointer rounded-lg ${
                 isRouteActive(to) ||
                 (links && links.some((link) => isRouteActive(link.to)))
                   ? "bg-[#0B2A97] text-[#fff]"
-                  : ""
+                  : "text-gray-500"
               }`}
               onClick={() => {
                 if (links) {

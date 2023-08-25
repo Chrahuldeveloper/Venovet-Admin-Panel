@@ -7,7 +7,7 @@ function DashboardHome() {
   return (
     <div className=" p-6   md:p-12 lg:px-4">
       <DbCards />
-      <div className="lg:flex">
+      <div className="lg:flex lg:space-x-[1rem]">
         <Enquiries />
         <Orders />
       </div>

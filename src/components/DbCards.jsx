@@ -35,7 +35,7 @@ function DbCards() {
               index === 1 && "hover:bg-[#6f42c1]"
             } ${index === 2 && "hover:bg-[#e83e8c]"} ${
               index === 3 && "hover:bg-[#ff9900]"
-            } transition ease-in-out duration-500 flex space-x-8 bg-white items-center  lg:w-[35rem] p-4 md:p-8 rounded-3xl`}
+            } transition ease-in-out duration-500 flex space-x-8 bg-white items-center  lg:max-w-2xl p-4 md:p-8 rounded-3xl`}
           >
             <div
               className={` ${index === 0 && "bg-[#e3f9e9]"} ${
