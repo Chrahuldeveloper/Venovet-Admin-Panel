@@ -112,7 +112,12 @@ export default function WhatwedoTable() {
                           </td>
                           <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
-                            // onClick={handleDelete(item.id)}
+                            onClick={() => {
+                              alert(
+                                ` Are you Sure you want to delete ${item.Tittle} `
+                              );
+                            }}
+                            // handleDelete(item.id)
                           >
                             Delete
                           </td>

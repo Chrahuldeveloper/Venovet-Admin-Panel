@@ -3,5 +3,15 @@ import Transpotation from "./Transpotation";
 import ValueAddedServices from "./ValueAddedServices";
 import SCM from "./SCM";
 import InventoryAudits from "./InventoryAudits";
+import Logistics from "./Logistics";
+import InternetSupply from "./InternetSupply";
 
-export { SCM,WareHouseMangement, Transpotation, ValueAddedServices , InventoryAudits};
+export {
+  Logistics,
+  SCM,
+  WareHouseMangement,
+  Transpotation,
+  ValueAddedServices,
+  InventoryAudits,
+  InternetSupply,
+};

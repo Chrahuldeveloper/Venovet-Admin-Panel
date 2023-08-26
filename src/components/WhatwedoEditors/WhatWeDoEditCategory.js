@@ -8,12 +8,13 @@ import {
   ValueAddedServices,
   Transpotation,
   SCM,
-  InventoryAudits
+  InventoryAudits,
+  Logistics,
+  InternetSupply
 } from "./Categories";
 
 export default function WhatWeDoEditCategory() {
   const { category } = useParams();
-
   return (
     <body className="flex">
       <div className="hidden lg:block">
@@ -30,7 +31,9 @@ export default function WhatWeDoEditCategory() {
           {/* <ValueAddedServices category={category} /> */}
           {/* <Transpotation category={category} /> */}
           {/* <SCM category={category} /> */}
-          <InventoryAudits category={category} />
+          {/* <InventoryAudits category={category} /> */}
+          {/* <Logistics category={category} /> */}
+          <InternetSupply category={category} />
         </div>
         <Footer />
       </div>
