@@ -13,6 +13,8 @@ import {
   InternetSupply,
   EPR,
   RealEstate,
+  Facility,
+  IndustrialSerives,
 } from "./Categories";
 
 export default function WhatWeDoEditCategory() {
@@ -38,6 +40,8 @@ export default function WhatWeDoEditCategory() {
           {/* <InternetSupply category={category} /> */}
           {/* <EPR category={category}/> */}
           {/* <RealEstate category={category}/> */}
+          {/* <Facility category={category}/> */}
+          <IndustrialSerives category={category} />
         </div>
         <Footer />
       </div>
