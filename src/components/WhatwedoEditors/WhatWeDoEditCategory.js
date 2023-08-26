@@ -10,7 +10,8 @@ import {
   SCM,
   InventoryAudits,
   Logistics,
-  InternetSupply
+  InternetSupply,
+  EPR,
 } from "./Categories";
 
 export default function WhatWeDoEditCategory() {
@@ -33,7 +34,8 @@ export default function WhatWeDoEditCategory() {
           {/* <SCM category={category} /> */}
           {/* <InventoryAudits category={category} /> */}
           {/* <Logistics category={category} /> */}
-          <InternetSupply category={category} />
+          {/* <InternetSupply category={category} /> */}
+          {/* <EPR category={category}/> */}
         </div>
         <Footer />
       </div>

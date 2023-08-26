@@ -5,7 +5,8 @@ import SCM from "./SCM";
 import InventoryAudits from "./InventoryAudits";
 import Logistics from "./Logistics";
 import InternetSupply from "./InternetSupply";
-
+import EPR from './EPR'
+import RealEstate from './RealEstate'
 export {
   Logistics,
   SCM,
@@ -14,4 +15,6 @@ export {
   ValueAddedServices,
   InventoryAudits,
   InternetSupply,
+  EPR,
+  RealEstate
 };
