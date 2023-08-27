@@ -10,13 +10,13 @@ import {
   SCM,
   InventoryAudits,
   Logistics,
-  InternetSupply
+  InternetSupply,
 } from "./Categories";
 
 export default function WhatWeDoEditCategory() {
   const { category } = useParams();
   return (
-    <body className="flex">
+    <div className="flex">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -27,16 +27,16 @@ export default function WhatWeDoEditCategory() {
             <h1>Edit {category}</h1>
           </div>
           {/* diff  layout for diff category */}
-          {/* <WareHouseMangement  category={category}/> */}
+          {/* <WareHouseMangement category={category} /> */}
           {/* <ValueAddedServices category={category} /> */}
-          {/* <Transpotation category={category} /> */}
+          <Transpotation category={category} />
           {/* <SCM category={category} /> */}
           {/* <InventoryAudits category={category} /> */}
           {/* <Logistics category={category} /> */}
-          <InternetSupply category={category} />
+          {/* <InternetSupply category={category} /> */}
         </div>
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }
