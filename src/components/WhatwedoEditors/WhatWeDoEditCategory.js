@@ -33,15 +33,15 @@ export default function WhatWeDoEditCategory() {
           {/* diff  layout for diff category */}
           {/* <WareHouseMangement category={category} /> */}
           {/* <ValueAddedServices category={category} /> */}
-          <Transpotation category={category} />
+          {/* <Transpotation category={category} /> */}
           {/* <SCM category={category} /> */}
           {/* <InventoryAudits category={category} /> */}
           {/* <Logistics category={category} /> */}
           {/* <InternetSupply category={category} /> */}
-          {/* <EPR category={category}/> */}
-          {/* <RealEstate category={category}/> */}
-          {/* <Facility category={category}/> */}
-          {/* <IndustrialSerives category={category} /> */}
+          {/* <EPR category={category} /> */}
+          {/* <RealEstate category={category} /> */}
+          {/* <Facility category={category} /> */}
+          <IndustrialSerives category={category} />
         </div>
         <Footer />
       </div>

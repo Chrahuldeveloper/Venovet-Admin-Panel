@@ -2,8 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
-import WhatwedoTable from "../components/WhatwedoEditors/WhatwedoTable";
-
+import ServeTable from "../components/ServeTable";
 export default function WhoweServe() {
   return (
     <body className="flex">
@@ -12,7 +11,7 @@ export default function WhoweServe() {
       </div>
       <div className="bg-[#F9F9F9] w-full lg:ml-24">
         <Navbar />
-        <WhatwedoTable />
+        <ServeTable />
         <Footer />
       </div>
     </body>

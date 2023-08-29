@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db, storage } from "../../../Firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -14,7 +14,7 @@ function UserDetailsField({ label, children }) {
   );
 }
 
-export default function WareHouseMangement() {
+export default function WareHouseMangement({ category }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
@@ -41,7 +41,6 @@ export default function WareHouseMangement() {
       Tittle: "VALUEADDEDSERVICES",
       image: "",
       Para: "",
-      List: [""],
     },
     Tittle3: "",
     SubCat5: {
@@ -77,48 +76,30 @@ export default function WareHouseMangement() {
 
     try {
       const uploadTasks = [];
-      const updatedSubCats = {};
+      const updatedLayout = { ...layout };
 
-      for (let i = 1; i <= 4; i++) {
-        const subCatKey = `SubCat${i}`;
-        const image = layout[subCatKey]?.image;
-
-        if (image) {
-          const imageRef = ref(storage, `warehouse/${image.name}`);
-          const uploadTask = uploadBytesResumable(imageRef, image);
+      for (const subCatKey in updatedLayout) {
+        if (updatedLayout[subCatKey].image) {
+          const imageRef = ref(
+            storage,
+            `warehouse/${updatedLayout[subCatKey].image.name}`
+          );
+          const uploadTask = uploadBytesResumable(
+            imageRef,
+            updatedLayout[subCatKey].image.name
+          );
           uploadTasks.push(uploadTask);
 
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          updatedSubCats[subCatKey] = {
-            ...layout[subCatKey],
-            image: downloadURL,
-          };
+          updatedLayout[subCatKey].image = downloadURL;
         }
-      }
-
-      const image9 = layout.Subcat9?.image;
-      if (image9) {
-        const imageRef9 = ref(storage, `warehouse/${image9.name}`);
-        const uploadTask9 = uploadBytesResumable(imageRef9, image9);
-        uploadTasks.push(uploadTask9);
-
-        const downloadURL9 = await getDownloadURL(uploadTask9.snapshot.ref);
-        updatedSubCats.Subcat9 = {
-          ...layout.Subcat9,
-          image: downloadURL9,
-        };
       }
 
       await Promise.all(uploadTasks);
 
-      const updatedLayout = {
-        ...layout,
-        ...updatedSubCats,
-      };
+      const docRef = doc(db, "WHATWEDO", category);
+      await setDoc(docRef, updatedLayout);
 
-      const docRef = doc(db, "WAREHOUSE", "test");
-      await updateDoc(docRef, updatedLayout);
-      // await setDoc(docRef, updatedLayout);
       setIsSubmitting(false);
       navigate("/whatwedo");
     } catch (error) {
@@ -543,3 +524,123 @@ export default function WareHouseMangement() {
     </>
   );
 }
+// const handleSubmit = async (event) => {
+//   event.preventDefault();
+//   setIsSubmitting(true);
+
+//   try {
+//     const imageRef1 = ref(storage, `warehouse/${layout.SubCat1.image.name}`);
+//     const uploadTask1 = uploadBytesResumable(
+//       imageRef1,
+//       layout.SubCat1.image.name
+//     );
+
+//     const imageRef2 = ref(storage, `warehouse/${layout.SubCat2.image.name}`);
+//     const uploadTask2 = uploadBytesResumable(
+//       imageRef2,
+//       layout.SubCat2.image.name
+//     );
+
+//     const imageRef3 = ref(storage, `warehouse/${layout.SubCat3.image.name}`);
+//     const uploadTask3 = uploadBytesResumable(
+//       imageRef3,
+//       layout.SubCat3.image.name
+//     );
+
+//     const imageRef4 = ref(storage, `warehouse/${layout.SubCat4.image.name}`);
+//     const uploadTask4 = uploadBytesResumable(
+//       imageRef4,
+//       layout.SubCat4.image.name
+//     );
+
+//     const imageRef9 = ref(storage, `warehouse/${layout.Subcat9.image.name}`);
+//     const uploadTask9 = uploadBytesResumable(
+//       imageRef9,
+//       layout.Subcat9.image.name
+//     );
+
+//     await Promise.all([
+//       uploadTask1,
+//       uploadTask2,
+//       uploadTask3,
+//       uploadTask4,
+//       uploadTask9,
+//     ]);
+
+//     const downloadURL1 = await getDownloadURL(uploadTask1.snapshot.ref);
+//     const downloadURL2 = await getDownloadURL(uploadTask2.snapshot.ref);
+//     const downloadURL3 = await getDownloadURL(uploadTask3.snapshot.ref);
+//     const downloadURL4 = await getDownloadURL(uploadTask4.snapshot.ref);
+//     const downloadURL9 = await getDownloadURL(uploadTask9.snapshot.ref);
+//     console.log(downloadURL1);
+//     console.log(downloadURL2);
+//     console.log(downloadURL3);
+//     console.log(downloadURL4);
+//     const updatedLayout = {
+//       ...layout,
+//       SubCat1: {
+//         ...layout.SubCat1,
+//         image: downloadURL1,
+//       },
+//       SubCat2: {
+//         ...layout.SubCat2,
+//         image: downloadURL2,
+//       },
+//       SubCat3: {
+//         ...layout.SubCat3,
+//         image: downloadURL3,
+//       },
+//       SubCat4: {
+//         ...layout.SubCat4,
+//         image: downloadURL4,
+//       },
+//       Subcat9: {
+//         ...layout.Subcat9,
+//         image: downloadURL9,
+//       },
+//     };
+//     const docRef = doc(db, "WHATWEDO", category);
+//     await updateDoc(docRef, updatedLayout);
+//     // await setDoc(docRef, updatedLayout);
+//     setIsSubmitting(false);
+//     navigate("/whatwedo");
+//   } catch (error) {
+//     console.log(error);
+//     setIsSubmitting(false);
+//   }
+// };
+
+// const subCatCount = 4; // Adjust this if you have more sub-categories
+// const uploadTasks = [];
+// const downloadURLs = {};
+
+// for (let i = 1; i <= subCatCount; i++) {
+//   const subCatKey = `SubCat${i}`;
+//   const image1 = layout[subCatKey].image;
+//   console.log(image1);
+
+//   if (image1) {
+//     const imageRef = ref(storage, `warehouse/${image1.name}`);
+//     const uploadTask = uploadBytesResumable(imageRef, image1);
+//     uploadTasks.push(uploadTask);
+
+//     downloadURLs[subCatKey] = await getDownloadURL(
+//       uploadTask.snapshot.ref
+//     );
+//   }
+// }
+
+// await Promise.all(uploadTasks);
+
+// const updatedLayout = {
+//   ...layout,
+//   ...Object.keys(downloadURLs).reduce((acc, key) => {
+//     return {
+//       ...acc,
+//       [key]: {
+//         ...layout[key],
+//         image: downloadURLs[key],
+//       },
+//     };
+//   }, {}),
+// };

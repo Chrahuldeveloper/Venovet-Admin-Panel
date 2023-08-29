@@ -47,7 +47,8 @@ export default function NewWhy() {
             Image: downloadURL,
           };
 
-          await setDoc(doc(db, "WHY-US", formData.Category), formData);
+          await setDoc(doc(db, "WHY-US", form.Category), formData);
+
           navigate("/why-us");
         }
       );

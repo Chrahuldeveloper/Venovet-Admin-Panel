@@ -14,7 +14,7 @@ function UserDetailsField({ label, children }) {
   );
 }
 
-export default function ValueAddedServices() {
+export default function ValueAddedServices({ category }) {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -68,35 +68,30 @@ export default function ValueAddedServices() {
 
     try {
       const uploadTasks = [];
-      const updatedSubCats = {};
+      const updatedLayout = { ...layout };
 
-      for (let i = 1; i <= 8; i++) {
-        const subCatKey = `SubCat${i}`;
-        const image = layout[subCatKey].image;
-
-        if (image) {
-          const imageRef = ref(storage, `valueaddedservices/${image.name}`);
-          const uploadTask = uploadBytesResumable(imageRef, image);
+      for (const subCatKey in updatedLayout) {
+        if (updatedLayout[subCatKey].image) {
+          const imageRef = ref(
+            storage,
+            `warehouse/${updatedLayout[subCatKey].image.name}`
+          );
+          const uploadTask = uploadBytesResumable(
+            imageRef,
+            updatedLayout[subCatKey].image.name
+          );
           uploadTasks.push(uploadTask);
 
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          updatedSubCats[subCatKey] = {
-            ...layout[subCatKey],
-            image: downloadURL,
-          };
+          updatedLayout[subCatKey].image = downloadURL;
         }
       }
 
       await Promise.all(uploadTasks);
 
-      const updatedLayout = {
-        ...layout,
-        ...updatedSubCats,
-      };
+      const docRef = doc(db, "WHATWEDO", category);
+      await setDoc(docRef, updatedLayout);
 
-      const docRef = doc(db, "VALUEADDEDSERVICES", "SERVICE");
-      await updateDoc(docRef, updatedLayout);
-      // await setDoc(docRef, updatedLayout);
       setIsSubmitting(false);
       navigate("/whatwedo");
     } catch (error) {
