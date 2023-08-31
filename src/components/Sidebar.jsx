@@ -1,134 +1,129 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { CgDatabase, CgProfile } from "react-icons/cg";
-import { TbDatabaseImport } from "react-icons/tb";
-import { IoIosCall } from "react-icons/io";
-import { FaShoppingCart } from "react-icons/fa";
-import { PiLockBold } from "react-icons/pi";
-// Sidebar data
-const sidebarData = [
-  {
-    Icon: CgDatabase,
-    dropdownKey: "db-icon",
-    to: "/home",
-  },
-  {
-    Icon: CgDatabase,
-    dropdownKey: "dropdown1",
-    links: [
-      { to: "/whoweserve", label: "Who We Serve" },
-      { to: "/why-us", label: "Why Us" },
-      { to: "/key-benefits", label: "Key Benefits" },
-    ],
-  },
-  {
-    Icon: TbDatabaseImport,
-    dropdownKey: "dropdown2",
-    links: [
-      { to: "/companies", label: "Companies" },
-      { to: "/trucks", label: "Trucks" },
-      { to: "/properties", label: "Properties" },
-    ],
-  },
-  {
-    Icon: IoIosCall,
-    dropdownKey: "dropdown3",
-    links: [
-      { to: "/enquiries", label: "Enquiries" },
-      { to: "/career", label: "Careers" },
-      { to: "/news-letters", label: "News Letter" },
-    ],
-  },
-  {
-    Icon: FaShoppingCart,
-    dropdownKey: "dropdown4",
-    links: [
-      { to: "/categories", label: "Categories" },
-      { to: "/products", label: "Products" },
-      { to: "/orders", label: "Orders" },
-    ],
-  },
-  // Icons without dropdown links
-  {
-    Icon: CgProfile,
-    dropdownKey: "db-icon1",
-    to: "/profile", // Example icon without dropdown
-  },
-  {
-    Icon: PiLockBold,
-    dropdownKey: "db-icon2",
-    // Example icon without dropdown
-  },
-];
-
-function Sidebar() {
-  const location = useLocation();
-
-  const [dropdown, setDropdown] = useState({
+import { CgDatabase } from "react-icons/cg";
+import {
+  BsDatabase,
+  BsFillTelephoneFill,
+  BsFillPersonFill,
+} from "react-icons/bs";
+import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
+import { LiaGreaterThanSolid } from "react-icons/lia";
+export default function Sidebar() {
+  const [toogle, settoogle] = useState({
     dropdown1: false,
     dropdown2: false,
     dropdown3: false,
     dropdown4: false,
-    // Add more dropdown states as needed
   });
 
-  const toggleDropdown = (dropdownName) => {
-    setDropdown((prevState) => ({
-      ...prevState,
-      [dropdownName]: !prevState[dropdownName],
+  const ToogleDropdown = (dropdown) => {
+    settoogle((pre) => ({
+      ...pre,
+      [dropdown]: !pre[dropdown],
     }));
   };
 
-  const DropdownContent = ({ links }) => (
-    <ul className="mt-2 right-full bg-white shadow rounded-lg py-2  z-10">
-      {links.map((link) => (
-        <Link to={link.to} key={link.to}>
-          <li className="px-4 py-2  hover:text-[#0B2A97] cursor-pointer text-sm">
-            {link.label}
-          </li>
-        </Link>
-      ))}
-    </ul>
-  );
-
-  const isRouteActive = (route) => {
-    return location.pathname === route;
-  };
-
   return (
-    <aside className="fixed overflow-scroll top-2 bottom-10 w-64 h-screen">
-      <div className="mt-32 space-y-4 pl-4">
-        {sidebarData.map(({ Icon, to, dropdownKey, links }, index) => (
-          <div className="flex relative" key={dropdownKey}>
-            <Link
-              to={to}
-              className={`flex items-center gap-5 hover:bg-[#0B2A97] w-12 h-10 justify-center hover:text-[#fff]  cursor-pointer rounded-lg ${
-                isRouteActive(to) ||
-                (links && links.some((link) => isRouteActive(link.to)))
-                  ? "bg-[#0B2A97] text-[#fff]"
-                  : "text-gray-500"
-              }`}
-              onClick={() => {
-                if (links) {
-                  toggleDropdown(dropdownKey);
-                }
-              }}
-            >
-              <Icon size={28} />
-            </Link>
-            {links && dropdown[dropdownKey] && (
-              <div
-              // className="absolute left-16 w-[100%]"
-              // onMouseLeave={() => toggleDropdown(dropdownKey)}
-              >
-                <DropdownContent links={links} style={{ zIndex: 2 }} />
-              </div>
-            )}
+    <aside className="hidden md:block">
+      <img
+        src="https://venovet.com/cw_admin/images/logo-full.png"
+        className="w-28 mx-auto mt-10"
+        alt=""
+      />
+      <div className="mt-7">
+        <ul className="pt-20 pl-8">
+          <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
+            <CgDatabase size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">DashBoard</li>
           </div>
-        ))}
+          <div
+            className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
+            onClick={() => {
+              ToogleDropdown("dropdown1");
+            }}
+          >
+            <BsDatabase size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">
+              Who We Serve
+            </li>
+            <LiaGreaterThanSolid size="15" color="gray" />
+          </div>
+          <div
+            className={`${
+              toogle.dropdown1 ? "block" : "hidden"
+            } pl-8 space-y-3.5 my-6`}
+          >
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              Who We Serve
+            </li>
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              Why Us
+            </li>
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              Key Benifits
+            </li>
+          </div>
+          <div
+            className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
+            onClick={() => {
+              ToogleDropdown("dropdown2");
+            }}
+          >
+            <BsFillTelephoneFill size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">
+              Enquires/Contacts
+            </li>
+            <LiaGreaterThanSolid size="15" color="gray" />
+          </div>
+          <div
+            className={`${
+              toogle.dropdown2 ? "block" : "hidden"
+            } pl-8 space-y-3.5 my-6`}
+          >
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              Enquire
+            </li>
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              Carrier
+            </li>
+            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              News Letter
+            </li>
+          </div>
+          <div
+            className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
+            onClick={() => {
+              ToogleDropdown("dropdown3");
+            }}
+          >
+            <AiOutlineShoppingCart size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">Shop</li>
+            <LiaGreaterThanSolid size="15" color="gray" />
+          </div>
+          <div
+            className={`${
+              toogle.dropdown3 ? "block" : "hidden"
+            } pl-8 space-y-3.5 my-6`}
+          >
+            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
+              Categeory
+            </li>
+            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
+              Products
+            </li>
+            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
+              Orders
+            </li>
+          </div>
+          <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+            <BsFillPersonFill size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">Profile</li>
+          </div>
+          <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+            <AiFillLock size="25" color="gray" />
+            <li className="text-lg font-semibold text-gray-500">Logout</li>
+          </div>
+        </ul>
       </div>
     </aside>
   );
 }
-
-export default Sidebar;

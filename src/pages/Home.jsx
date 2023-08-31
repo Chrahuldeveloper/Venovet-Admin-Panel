@@ -6,11 +6,9 @@ import Sidebar from "../components/Sidebar";
 
 function Home() {
   return (
-    <div className="flex">
-      {/* <div className="hidden lg:block"> */}
+    <div className="flex gap-20">
       <Sidebar />
-      {/* </div> */}
-      <div className="bg-[#F9F9F9] w-full lg:ml-20">
+      <div className="bg-[#F9F9F9] w-full ">
         <Navbar />
         <DashboardHome />
         <Footer />
