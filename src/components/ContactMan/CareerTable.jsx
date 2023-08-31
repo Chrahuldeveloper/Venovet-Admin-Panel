@@ -1,6 +1,34 @@
-import React from "react";
+import { collection, doc, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../../Firebase";
+import { Link } from "react-router-dom";
 
 export default function CareerTable() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchData = async () => {
+    const querySnapshot = await getDocs(collection(db, "CARIEER"));
+    const CarrierData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setData(CarrierData);
+  };
+
+  const deleteDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "CAREER", id));
+      setData((prevData) => prevData.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="bg-[#F9F9F9] p-8">
@@ -26,18 +54,30 @@ export default function CareerTable() {
                 </thead>
                 <tbody className="border-b border-[#EEEEEE] text-sm">
                   <tr>
-                    <td className="md:pl-10 py-8 ">1.</td>
-                    <td className="pl-3 py-8 text-sm"> VNC4</td>
-                    <td className="pl-3 py-8 text-sm">PRADEEP</td>
-                    <td className="pl-3 py-8">pradeep.bpc@gmail.com</td>
-                    <td className="pl-3 py-8">9837742555</td>
-                    <td className="pl-3 py-8 cursor-pointer">Download</td>
-                    <td className="pl-3 py-8"> hii</td>
-                    <td className="pl-3 py-8"> 31-03-2022 04:45 pm</td>
-                    <td className="pl-3 py-8 text-[#7e7e7e]">Delete</td>
-                    {/* <td className="pl-3 py-8">View</td>
-                    <td className="pl-3 py-8">Edit</td>
-                    <td className="pl-3 py-8">Delete</td> */}
+                    {data.map((_, index) => {
+                      return (
+                        <>
+                          <td className="md:pl-10 py-8 ">{index + 1}</td>
+                          <td className="pl-3 py-8 text-sm">{_.item}</td>
+                          <td className="pl-3 py-8 text-sm">{_.Name}</td>
+                          <td className="pl-3 py-8">{_.Email}</td>
+                          <td className="pl-3 py-8">{_.Mobile}</td>
+                          <td className="pl-3 py-8 cursor-pointer">
+                            <Link to={`${_.Resume}`}>Resume</Link>
+                          </td>
+                          <td className="pl-3 py-8">{_.Skills}</td>
+                          <td className="pl-3 py-8">{_.Date}</td>
+                          <td
+                            className="pl-3 py-8 text-[#7e7e7e]"
+                            onClick={() => {
+                              deleteDoc(_.id);
+                            }}
+                          >
+                            Delete
+                          </td>
+                        </>
+                      );
+                    })}
                   </tr>
                 </tbody>
               </table>
