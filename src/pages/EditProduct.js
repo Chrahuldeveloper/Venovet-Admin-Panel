@@ -12,7 +12,7 @@ import { RotatingLines } from "react-loader-spinner";
 function UserDetailsField({ label, required, children }) {
   return (
     <div className="grid grid-cols-3">
-      <label className="text-[#186ad2] text-lg">
+      <label className="text-[#186ad2] ">
         {label} {required && <span className="text-red-500 text-lg">*</span>}
       </label>
       {children}
@@ -112,118 +112,137 @@ export default function EditProduct() {
   };
 
   return (
-    <div>
-      {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="70"
-            visible={true}
-          />
-        </div>
-      )}
-      <div className="hidden lg:block">
-        <Sidebar />
-      </div>
-      <div className="bg-[#F9F9F9] lg:ml-24">
-        <Navbar />
-
-        <div className="bg-white py-4 m-8 rounded-3xl">
-          <div className="border-b font-semibold text-xl px-8 py-2">
-            <h1>Add Product</h1>
+    <>
+      <div className="flex gap-10">
+        {isSubmitting && ( // Render loader only when isSubmitting is true
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="70"
+              visible={true}
+            />
           </div>
-          <form className="p-8 space-y-4" onSubmit={handleSubmit}>
-            <UserDetailsField label="Category" required>
-              <select
-                value={form.Category}
-                defaultValue={"Electronics"}
-                onChange={(e) => handleInputChange("Category", e.target.value)}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              >
-                <option>Electronics</option>
-                <option>Material Handling Equipments</option>
-                <option>Test Category</option>
-              </select>
-            </UserDetailsField>
+        )}
+        <div className="hidden lg:block">
+          <Sidebar />
+        </div>
+        <div className="bg-[#F9F9F9] lg:ml-24">
+          <Navbar />
 
-            <UserDetailsField label="Product Name" required>
-              <input
-                type="text"
-                value={form.ProductName}
-                onChange={(e) =>
-                  handleInputChange("ProductName", e.target.value)
-                }
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="MRP Price" required>
-              <input
-                type="text"
-                value={form.MRP}
-                onChange={(e) => handleInputChange("MRP", e.target.value)}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Deal Price" required>
-              <input
-                value={form.Dealprice}
-                onChange={(e) => handleInputChange("Dealprice", e.target.value)}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Product Description" required>
-              <textarea
-                type="text"
-                value={form.Description}
-                onChange={(e) =>
-                  handleInputChange("Description", e.target.value)
-                }
-                className="outline-none border font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-3xl"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Product Image 1" required>
-              <input
-                type="file"
-                onChange={handleImageChange1}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Product Image 2" required>
-              <input
-                type="file"
-                onChange={handleImageChange2}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Product Image 3">
-              <input
-                type="file"
-                onChange={handleImageChange3}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-            <UserDetailsField label="Product Image 4">
-              <input
-                type="file"
-                onChange={handleImageChange4}
-                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-              />
-            </UserDetailsField>
-
-            <div className="flex items-center justify-center pt-10">
-              <button
-                className="rounded-full text-white px-4 py-2 bg-[#0B2A97]"
-                type="submit"
-              >
-                Submit
-              </button>
+          <div className="bg-white py-4 m-8 rounded-3xl">
+            <div className="border-b font-semibold text-xl px-8 py-2">
+              <h1>Add Product</h1>
             </div>
-          </form>
+            <form className="p-8 space-y-4" onSubmit={handleSubmit}>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Category" required />
+                <select
+                  value={form.Category}
+                  defaultValue={"Electronics"}
+                  onChange={(e) =>
+                    handleInputChange("Category", e.target.value)
+                  }
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                >
+                  <option>Electronics</option>
+                  <option>Material Handling Equipments</option>
+                  <option>Test Category</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Name" required />
+                <input
+                  type="text"
+                  value={form.ProductName}
+                  onChange={(e) =>
+                    handleInputChange("ProductName", e.target.value)
+                  }
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="MRP Price" required />
+                <input
+                  type="text"
+                  value={form.MRP}
+                  onChange={(e) => handleInputChange("MRP", e.target.value)}
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+
+              <div className="flex flex-col md:flex-row  items-start md:justify-between">
+                <UserDetailsField
+                  label="Deal Price"
+                  required
+                ></UserDetailsField>
+                <input
+                  value={form.Dealprice}
+                  onChange={(e) =>
+                    handleInputChange("Dealprice", e.target.value)
+                  }
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Description" required />
+                <textarea
+                  type="text"
+                  value={form.Description}
+                  onChange={(e) =>
+                    handleInputChange("Description", e.target.value)
+                  }
+                  className="outline-none border font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-3xl"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Image 1" required />
+                <input
+                  type="file"
+                  onChange={handleImageChange1}
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Image 2" required />
+                <input
+                  type="file"
+                  onChange={handleImageChange2}
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Image 3" />
+                <input
+                  type="file"
+                  onChange={handleImageChange3}
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row items-start md:justify-between">
+                <UserDetailsField label="Product Image 4" />
+                <input
+                  type="file"
+                  onChange={handleImageChange4}
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </div>
+              <div className="flex items-start justify-center pt-10">
+                <button
+                  className="rounded-full text-white px-16 py-2 bg-[#0B2A97]"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }

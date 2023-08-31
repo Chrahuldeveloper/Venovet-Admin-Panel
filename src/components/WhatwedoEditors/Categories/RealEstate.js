@@ -82,7 +82,6 @@ export default function RealEstate({ category }) {
     try {
       const uploadTasks = [];
       const updatedLayout = { ...layout };
-
       for (const subCatKey in updatedLayout) {
         if (updatedLayout[subCatKey].image) {
           const imageRef = ref(
@@ -94,17 +93,13 @@ export default function RealEstate({ category }) {
             updatedLayout[subCatKey].image.name
           );
           uploadTasks.push(uploadTask);
-
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           updatedLayout[subCatKey].image = downloadURL;
         }
       }
-
       await Promise.all(uploadTasks);
-
       const docRef = doc(db, "WHATWEDO", category);
       await setDoc(docRef, updatedLayout);
-
       setIsSubmitting(false);
       navigate("/whatwedo");
     } catch (error) {
