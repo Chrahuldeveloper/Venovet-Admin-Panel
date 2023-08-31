@@ -23,19 +23,19 @@ export default function ServeTable() {
     const querySnapshot = await getDocs(collection(db, "WHO-WE-SERVE"));
     const enquiryData = querySnapshot.docs.map((doc) => doc.data());
     setData(enquiryData);
-
     console.log(enquiryData);
     setIsSubmitting(false);
   };
 
-  // const handleDelete = async (itemId) => {
-  //   try {
-  //     // Delete data from Firestore
-  //     await deleteDoc(doc(db, "CATEGORIES", itemId));
-  //   } catch (error) {
-  //     console.error("Error deleting document: ", error);
-  //   }
-  // };
+  const handleDelete = async (itemId) => {
+    try {
+      // Delete data from Firestore
+      await deleteDoc(doc(db, "CATEGORIES", itemId));
+      setData((prevData) => prevData.filter((item) => item.id !== itemId));
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
+  };
 
   return (
     <div className="bg-[#F9F9F9] p-8">
@@ -94,7 +94,9 @@ export default function ServeTable() {
                         </td>
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
-                          // onClick={handleDelete(item.id)}
+                          onClick={() => {
+                            handleDelete(item.id);
+                          }}
                         >
                           Delete
                         </td>
