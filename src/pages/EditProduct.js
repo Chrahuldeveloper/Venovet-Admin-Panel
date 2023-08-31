@@ -80,9 +80,7 @@ export default function EditProduct() {
 
       const imageRef4 = ref(storage, `products/${form.Image4.name}`);
       const uploadTask4 = uploadBytesResumable(imageRef4, form.Image4.name);
-
       await Promise.all([uploadTask1, uploadTask2, uploadTask3, uploadTask4]);
-
       const downloadURL1 = await getDownloadURL(uploadTask1.snapshot.ref);
       const downloadURL2 = await getDownloadURL(uploadTask2.snapshot.ref);
       const downloadURL3 = await getDownloadURL(uploadTask3.snapshot.ref);

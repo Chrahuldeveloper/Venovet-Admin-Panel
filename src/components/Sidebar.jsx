@@ -7,6 +7,7 @@ import {
 } from "react-icons/bs";
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
 export default function Sidebar() {
   const [toogle, settoogle] = useState({
     dropdown1: false,
@@ -29,11 +30,13 @@ export default function Sidebar() {
         className="w-28 mx-auto mt-10"
         alt=""
       />
-      <div className="mt-7">
-        <ul className="pt-20 pl-8">
+      <div className="mt-7 ">
+        <ul className="pt-12 px-5">
           <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
             <CgDatabase size="25" color="gray" />
-            <li className="text-lg font-semibold text-gray-500">DashBoard</li>
+            <Link to="/home">
+              <li className="text-lg font-semibold text-gray-500">DashBoard</li>
+            </Link>
           </div>
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
@@ -50,14 +53,18 @@ export default function Sidebar() {
           <div
             className={`${
               toogle.dropdown1 ? "block" : "hidden"
-            } pl-8 space-y-3.5 my-6`}
+            } pl-8  my-6`}
           >
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              Who We Serve
-            </li>
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              Why Us
-            </li>
+            <Link to={"/whoweserve"}>
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+                Who We Serve
+              </li>
+            </Link>
+            <Link to="/why-us" >
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out my-3.5 duration-300 text-gray-500">
+                Why Us
+              </li>
+            </Link>
             <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
               Key Benifits
             </li>

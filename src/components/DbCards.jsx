@@ -31,11 +31,11 @@ function DbCards() {
         return (
           <div
             key={index}
-            className={` ${index === 0 && "hover:bg-[#297F00]"} ${
-              index === 1 && "hover:bg-[#6f42c1]"
-            } ${index === 2 && "hover:bg-[#e83e8c]"} ${
-              index === 3 && "hover:bg-[#ff9900]"
-            } transition ease-in-out duration-500 flex space-x-8 bg-white items-center  lg:max-w-2xl p-4 md:p-8 rounded-3xl`}
+            className={` ${index === 0 && "hover:bg-[#2bc155]"} ${
+              index === 1 && "hover:bg-[#a02cfa]"
+            } ${index === 2 && "hover:bg-[#f94687]"} ${
+              index === 3 && "hover:bg-[#ffbe1a]"
+            } transition ease-in-out duration-500 flex space-x-8 bg-white items-center shadow-lg cursor-pointer shadow-slate-100 lg:max-w-2xl p-4 md:p-8 rounded-3xl hover:text-white font-semibold`}
           >
             <div
               className={` ${index === 0 && "bg-[#e3f9e9]"} ${
@@ -46,8 +46,8 @@ function DbCards() {
             >
               {item.img}
             </div>
-            <div className="space-y-2  ">
-              <p className="font-semibold">{item.Name}</p>
+            <div className="space-y-2">
+              <p className="font-semibold  ">{item.Name}</p>
               <p className="font-bold text-3xl">{item.Qty}</p>
             </div>
           </div>

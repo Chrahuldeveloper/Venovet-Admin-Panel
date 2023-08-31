@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 import { db } from "../Firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 
 export default function KeyTable() {
-  // const data = [
-  //   {
-  //     ServiceTitle: "Lens and Frames	",
-  //     Title: "Which Plan Is Right For Me?	",
-  //     Text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-  //   },
-  // ];
-
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
@@ -23,12 +16,25 @@ export default function KeyTable() {
   const fetchData = async () => {
     setIsSubmitting(true);
     const querySnapshot = await getDocs(collection(db, "KEY-BENEFITS"));
-    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
     setData(enquiryData);
-
     setIsSubmitting(false);
   };
-  const navigate = useNavigate();
+
+  const DeleteDoc = async (docId) => {
+    try {
+      const docRef = doc(db, "KEY-BENEFITS", docId);
+      await deleteDoc(docRef);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error deleting document:", error);
+    }
+  };
 
   return (
     <div className="bg-[#F9F9F9] p-8">
@@ -87,7 +93,12 @@ export default function KeyTable() {
                         >
                           Edit
                         </td>
-                        <td className="py-8 pl-6 cursor-pointer text-[#7e7e7e]">
+                        <td
+                          onClick={() => {
+                            DeleteDoc(item.id);
+                          }}
+                          className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
+                        >
                           Delete
                         </td>
                       </tr>

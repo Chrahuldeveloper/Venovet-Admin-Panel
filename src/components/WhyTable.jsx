@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 import { db } from "../Firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 export default function WhyTable() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -17,10 +17,25 @@ export default function WhyTable() {
   const fetchData = async () => {
     setIsSubmitting(true);
     const querySnapshot = await getDocs(collection(db, "WHY-US"));
-    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
     setData(enquiryData);
-
     setIsSubmitting(false);
+  };
+
+  const DeleteDoc = async (docId) => {
+    try {
+      const docRef = doc(db, "WHY-US", docId);
+      await deleteDoc(docRef);
+      console.log("Document successfully deleted!");
+      navigate("/home");
+    } catch (error) {
+      console.error("Error deleting document:", error);
+    }
   };
 
   return (
@@ -81,7 +96,12 @@ export default function WhyTable() {
                         >
                           Edit
                         </td>
-                        <td className="py-8 pl-10 cursor-pointer text-[#7e7e7e]">
+                        <td
+                          className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
+                          onClick={() => {
+                            DeleteDoc(item.id);
+                          }}
+                        >
                           Delete
                         </td>
                       </tr>

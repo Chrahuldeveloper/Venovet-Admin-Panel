@@ -10,7 +10,7 @@ export default function WhyUs() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="w-screen bg-[#F9F9F9] lg:ml-24">
+      <div className="w-screen bg-[#F9F9F9] ">
         <Navbar />
         <WhyTable />
         <Footer />
