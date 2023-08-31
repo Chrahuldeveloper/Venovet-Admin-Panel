@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="bg-[#F9F9F9] w-full ">
+      <div className="bg-[#F9F9F9] w-full h-full">
         <Navbar />
         <DashboardHome />
       </div>

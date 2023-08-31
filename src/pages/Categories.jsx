@@ -7,10 +7,8 @@ import CatTable from "../components/CartManage/CatTable";
 export default function Categories() {
   return (
     <body className="flex">
-      <div className="hidden lg:block">
-        <Sidebar />
-      </div>
-      <div className="bg-[#F9F9F9]  w-full  lg:ml-24">
+      <Sidebar />
+      <div className="bg-[#F9F9F9] w-full h-full">
         <Navbar />
         <CatTable />
         <Footer />

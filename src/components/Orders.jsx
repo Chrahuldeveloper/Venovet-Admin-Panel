@@ -2,7 +2,7 @@ import React from "react";
 
 function Orders() {
   return (
-    <div className="bg-white my-8  rounded-xl lg:w-[50%]">
+    <div className="bg-white my-8  rounded-xl lg:w-[50%] shadow-lg shadow-slate-100">
       <div>
         <h1 className="font-semibold text-xl px-5 py-5">Orders</h1>
       </div>

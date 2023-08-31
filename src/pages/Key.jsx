@@ -7,10 +7,8 @@ import Sidebar from "../components/Sidebar";
 export default function Key() {
   return (
     <body className="flex">
-      <div className="hidden lg:block">
-        <Sidebar />
-      </div>
-      <div className="bg-[#F9F9F9] w-full lg:ml-24">
+      <Sidebar />
+      <div className="bg-[#F9F9F9] w-full h-full">
         <Navbar />
         <KeyTable />
         <Footer />

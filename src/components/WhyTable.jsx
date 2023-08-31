@@ -40,7 +40,7 @@ export default function WhyTable() {
 
   return (
     <div className="bg-[#F9F9F9] p-8">
-      {isSubmitting && ( // Render loader only when isSubmitting is true
+      {isSubmitting && ( 
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
           <RotatingLines
             strokeColor="grey"

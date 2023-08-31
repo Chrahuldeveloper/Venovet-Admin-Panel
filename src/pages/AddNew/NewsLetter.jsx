@@ -7,10 +7,8 @@ import NewsTable from "../../components/ContactMan/NewsTable";
 export default function NewsLetter() {
   return (
     <body className="flex">
-      <div className="hidden lg:block">
         <Sidebar />
-      </div>
-      <div className="bg-[#F9F9F9]  w-full  lg:ml-24">
+      <div className="bg-[#F9F9F9]  w-full h-full">
         <Navbar />
         <NewsTable />
         <Footer />

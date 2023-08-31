@@ -24,7 +24,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="hidden md:block">
+    <aside className="hidden md:block ">
       <img
         src="https://venovet.com/cw_admin/images/logo-full.png"
         className="w-28 mx-auto mt-10"
@@ -32,12 +32,12 @@ export default function Sidebar() {
       />
       <div className="mt-7 ">
         <ul className="pt-12 px-5">
-          <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
-            <CgDatabase size="25" color="gray" />
-            <Link to="/home">
+          <Link to="/home">
+            <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
+              <CgDatabase size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">DashBoard</li>
-            </Link>
-          </div>
+            </div>
+          </Link>
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
             onClick={() => {
@@ -51,23 +51,23 @@ export default function Sidebar() {
             <LiaGreaterThanSolid size="15" color="gray" />
           </div>
           <div
-            className={`${
-              toogle.dropdown1 ? "block" : "hidden"
-            } pl-8  my-6`}
+            className={`${toogle.dropdown1 ? "block" : "hidden"} pl-8  my-6`}
           >
             <Link to={"/whoweserve"}>
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
                 Who We Serve
               </li>
             </Link>
-            <Link to="/why-us" >
+            <Link to="/why-us">
               <li className="cursor-pointer hover:text-blue-600 ease-in-out my-3.5 duration-300 text-gray-500">
                 Why Us
               </li>
             </Link>
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              Key Benifits
-            </li>
+            <Link to="/key-benefits">
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+                Key Benifits
+              </li>
+            </Link>
           </div>
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
@@ -82,19 +82,23 @@ export default function Sidebar() {
             <LiaGreaterThanSolid size="15" color="gray" />
           </div>
           <div
-            className={`${
-              toogle.dropdown2 ? "block" : "hidden"
-            } pl-8 space-y-3.5 my-6`}
+            className={`${toogle.dropdown2 ? "block" : "hidden"} pl-8  my-6`}
           >
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              Enquire
-            </li>
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              Carrier
-            </li>
-            <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
-              News Letter
-            </li>
+            <Link to={"/enquiries"}>
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
+                Enquire
+              </li>
+            </Link>
+            <Link to="/career">
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
+                Career
+              </li>
+            </Link>
+            <Link to="/news-letters">
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
+                News Letter
+              </li>
+            </Link>
           </div>
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
@@ -107,28 +111,36 @@ export default function Sidebar() {
             <LiaGreaterThanSolid size="15" color="gray" />
           </div>
           <div
-            className={`${
-              toogle.dropdown3 ? "block" : "hidden"
-            } pl-8 space-y-3.5 my-6`}
+            className={`${toogle.dropdown3 ? "block" : "hidden"} pl-8  my-6`}
           >
-            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
-              Categeory
-            </li>
-            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
-              Products
-            </li>
-            <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300">
-              Orders
-            </li>
+            <Link to={"/categories"}>
+              <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
+                Categeory
+              </li>
+            </Link>
+            <Link to={"/products"}>
+              <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
+                Products
+              </li>
+            </Link>
+            <Link to={"/orders"}>
+              <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
+                Orders
+              </li>
+            </Link>
           </div>
-          <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-            <BsFillPersonFill size="25" color="gray" />
-            <li className="text-lg font-semibold text-gray-500">Profile</li>
-          </div>
-          <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-            <AiFillLock size="25" color="gray" />
-            <li className="text-lg font-semibold text-gray-500">Logout</li>
-          </div>
+          <Link to="/profile">
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsFillPersonFill size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">Profile</li>
+            </div>
+          </Link>
+          <Link to="/">
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <AiFillLock size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">Logout</li>
+            </div>
+          </Link>
         </ul>
       </div>
     </aside>

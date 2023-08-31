@@ -5,9 +5,7 @@ import ServeTable from "../components/ServeTable";
 export default function WhoweServe() {
   return (
     <body className="flex">
-      <div className="hidden lg:block">
-        <Sidebar />
-      </div>
+      <Sidebar />
       <div className="bg-[#F9F9F9] w-full h-screen">
         <Navbar />
         <ServeTable />
