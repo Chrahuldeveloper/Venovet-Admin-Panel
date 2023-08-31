@@ -6,7 +6,8 @@ import Sidebar from "../../components/Sidebar";
 import { useState } from "react";
 import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
   return (
@@ -21,7 +22,7 @@ function UserDetailsField({ label, required, children }) {
 
 export default function NewCompany() {
   const navigate = useNavigate();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     Category: "",
     ProductName: "",
@@ -66,7 +67,7 @@ export default function NewCompany() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     try {
       const imageRef1 = ref(storage, `products/${form.Image1.name}`);
       const uploadTask1 = uploadBytesResumable(imageRef1, form.Image1.name);
@@ -95,8 +96,10 @@ export default function NewCompany() {
       };
 
       await setDoc(doc(db, "PRODUCTS", form.ProductName), formData);
+      setIsSubmitting(false);
       navigate("/products");
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
@@ -110,6 +113,17 @@ export default function NewCompany() {
 
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

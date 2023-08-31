@@ -1,8 +1,9 @@
-import React from "react";
-import { collection, deleteDoc, doc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "./../././../Firebase";
 import { Link, useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function ComTable() {
   const navigate = useNavigate();
@@ -20,12 +21,21 @@ export default function ComTable() {
   //   },
   // ];
 
-  const docref = collection(db, "COLLECTIONNAME"); // just add the collection name
-  const [data, loading, error] = useCollectionData(docref);
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
-  if (error) {
-    console.log(error);
-  }
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "COMPANIES"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    setIsSubmitting(false);
+  };
 
   const Deletedoc = async (docid) => {
     try {
@@ -39,6 +49,17 @@ export default function ComTable() {
 
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
@@ -72,22 +93,20 @@ export default function ComTable() {
                     return (
                       <React.Fragment key={i}>
                         <tr>
-                          <td className="py-8 md:pl-10 ">{item.id}</td>
+                          <td className="py-8 md:pl-10 ">{i + 1}</td>
                           <td className="py-8 text-sm md:pl-3">
                             {item.category}
                           </td>
-                          <td className="py-8 text-sm md:pl-3">
-                            {item.Tittle}
-                          </td>
-                          <td className="py-8 pl-3">{item.date}</td>
-                          <td className="py-8 pl-3">{item.Venture}</td>
+                          <td className="py-8 text-sm md:pl-3">{item.Name}</td>
+                          <td className="py-8 pl-3">{item.DOB}</td>
+                          <td className="py-8 pl-3">{item.Business}</td>
                           <td className="py-8 pl-3">{item.Name}</td>
-                          <td className="py-8 pl-3">{item.Phone}</td>
-                          <td className="py-8 pl-3">{item.Type}</td>
+                          <td className="py-8 pl-3">{item.Mobile}</td>
+                          <td className="py-8 pl-3">{item.Users}</td>
                           <td
                             className="py-8 pl-3 cursor-pointer"
                             onClick={() => {
-                              navigate(`/edit/${item.id}`);
+                              navigate(`/edit/${i + 1}`);
                             }}
                           >
                             Edit

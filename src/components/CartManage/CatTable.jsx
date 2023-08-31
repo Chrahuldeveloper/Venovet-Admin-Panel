@@ -1,9 +1,39 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import { db } from "../../Firebase";
 
 export default function CatTable() {
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "KEY-BENEFITS"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    setIsSubmitting(false);
+  };
+
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="bg-white rounded-xl p-6">
           <div className="flex justify-between px-6 pt-2">

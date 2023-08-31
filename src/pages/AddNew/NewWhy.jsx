@@ -7,15 +7,32 @@ import { doc, setDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function NewWhy() {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     Category: "",
     Title: "",
     Image: "",
   });
-  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
+  const cat = [
+    "Select Category",
+    "Fast Moving Consumer Goods (FMCG)",
+    "Fast Moving Consumer Durables (FMCD)",
+    "Fashion & Lifestyle",
+    "Home & Furniture",
+    "Auto-Mobility",
+    "Telecom",
+    "Fruits & vegetables",
+    "Diary Farm",
+    "Ecommerce Fulfillment",
+    "Chemical",
+    "Pharma",
+    "Lens and Frames",
+  ];
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -28,6 +45,7 @@ export default function NewWhy() {
   console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       // upload image
       const imageRef = ref(storage, `images/${Image.name}`);
@@ -48,17 +66,30 @@ export default function NewWhy() {
           };
 
           await setDoc(doc(db, "WHY-US", form.Category), formData);
+          setIsSubmitting(false);
 
           navigate("/why-us");
         }
       );
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>
@@ -82,11 +113,11 @@ export default function NewWhy() {
                     Category: e.target.value,
                   });
                 }}
-                className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none  border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] text-[#7e7e7e] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
                 {cat.map((item, index) => {
                   return (
-                    <option key={index} value={item}>
+                    <option className="" key={index} value={item}>
                       {item}
                     </option>
                   );

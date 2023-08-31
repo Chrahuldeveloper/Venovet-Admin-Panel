@@ -30,11 +30,6 @@ export default function ProTable() {
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
             <h1 className="text-xl font-semibold">Properties</h1>
-            <Link to={"/addnewcompany"}>
-              <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
-                Add Company
-              </button>
-            </Link>
           </div>
           <div className="w-full py-5 ">
             <div className="overflow-x-auto">

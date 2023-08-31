@@ -8,18 +8,34 @@ import { db, storage } from "../Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function EditWhyUs() {
   const { whyusid } = useParams();
 
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     Category: "",
     Title: "",
     Image: "",
   });
-  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
-
+  const cat = [
+    "Select Category",
+    "Fast Moving Consumer Goods (FMCG)",
+    "Fast Moving Consumer Durables (FMCD)",
+    "Fashion & Lifestyle",
+    "Home & Furniture",
+    "Auto-Mobility",
+    "Telecom",
+    "Fruits & vegetables",
+    "Diary Farm",
+    "Ecommerce Fulfillment",
+    "Chemical",
+    "Pharma",
+    "Lens and Frames",
+  ];
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     setForm((prevForm) => ({
@@ -31,6 +47,7 @@ export default function EditWhyUs() {
   console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       // upload image
       const imageRef = ref(storage, `whyus/${Image.name}`);
@@ -49,18 +66,31 @@ export default function EditWhyUs() {
             ...form,
             Image: downloadURL,
           };
-          const docRef = doc(db, "WHY-US", whyusid);
+          const docRef = doc(db, "WHY-US", form.Category);
           await updateDoc(docRef, formData);
+          setIsSubmitting(false);
           navigate("/why-us");
         }
       );
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

@@ -5,10 +5,27 @@ import { db } from "../../Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function NewKey() {
   const navigate = useNavigate();
-  const cat = ["Fast Moving Consumer Goods (FMCG)", "FCMG"];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const cat = [
+    "Select Category",
+    "Fast Moving Consumer Goods (FMCG)",
+    "Fast Moving Consumer Durables (FMCD)",
+    "Fashion & Lifestyle",
+    "Home & Furniture",
+    "Auto-Mobility",
+    "Telecom",
+    "Fruits & vegetables",
+    "Diary Farm",
+    "Ecommerce Fulfillment",
+    "Chemical",
+    "Pharma",
+    "Lens and Frames",
+  ];
   const [form, setForm] = useState({
     Category: "",
     Title: "",
@@ -17,16 +34,30 @@ export default function NewKey() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       await setDoc(doc(db, "KEY-BENEFITS", form.Category), form);
+      setIsSubmitting(false);
       navigate("/key-benefits");
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

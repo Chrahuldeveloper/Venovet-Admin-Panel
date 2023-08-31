@@ -7,6 +7,7 @@ import { useState } from "react";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
+import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
   return (
@@ -21,7 +22,7 @@ function UserDetailsField({ label, required, children }) {
 
 export default function EditCompany() {
   const navigate = useNavigate();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     setForm((prevForm) => ({
@@ -32,7 +33,7 @@ export default function EditCompany() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     try {
       const imageRef = ref(storage, `images/${Image.name}`);
       const uploadTask = uploadBytesResumable(imageRef, Image);
@@ -53,10 +54,12 @@ export default function EditCompany() {
 
           const docRef = doc(db, "COMPANIES", editid);
           await updateDoc(docRef, formData);
+          setIsSubmitting(false);
           navigate("/companies");
         }
       );
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
@@ -100,6 +103,17 @@ export default function EditCompany() {
 
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

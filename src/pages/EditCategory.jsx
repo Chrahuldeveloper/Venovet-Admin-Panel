@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { db, storage } from "../Firebase";
@@ -9,9 +9,13 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import { convert } from "html-to-text";
 import Sidebar from "../components/Sidebar";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function EditCategory() {
   const { id } = useParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     Overview: "",
     Stats: "",
@@ -37,7 +41,7 @@ export default function EditCategory() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     try {
       const imageRef = ref(storage, `images/${Image.name}`);
       const uploadTask = uploadBytesResumable(imageRef, Image);
@@ -66,15 +70,29 @@ export default function EditCategory() {
 
           const docRef = doc(db, "WHO-WE-SERVE", id);
           await updateDoc(docRef, formDataPlainText);
+          setIsSubmitting(false);
+          navigate("/whoweserve");
         }
       );
     } catch (error) {
       console.log(error);
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

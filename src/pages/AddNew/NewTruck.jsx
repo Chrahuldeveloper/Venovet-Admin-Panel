@@ -7,6 +7,7 @@ import { useState } from "react";
 import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import { RotatingLines } from "react-loader-spinner";
 
 const indianStates = [
   "Andhra Pradesh",
@@ -75,7 +76,7 @@ function SelectField({ label, options, defaultValue }) {
 
 export default function NewTruck() {
   const navigate = useNavigate();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     vendor: "",
     truckType: "",
@@ -119,7 +120,7 @@ export default function NewTruck() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     try {
       const imageRef = ref(storage, `trucks/${form.vehiclePhoto1.name}`);
       const uploadTask = uploadBytesResumable(
@@ -145,15 +146,27 @@ export default function NewTruck() {
       };
 
       await setDoc(doc(db, "TRUCKS", form.vendor), formData);
-
+      setIsSubmitting(false);
       navigate("/trucks");
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

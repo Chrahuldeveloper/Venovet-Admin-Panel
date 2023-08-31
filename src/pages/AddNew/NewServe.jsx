@@ -9,9 +9,12 @@ import { doc, setDoc } from "firebase/firestore";
 import { convert } from "html-to-text";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function NewServe() {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     Title: "",
     Overview: "",
@@ -38,6 +41,7 @@ export default function NewServe() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const imageRef = ref(storage, `images/${Image.name}`);
@@ -66,16 +70,30 @@ export default function NewServe() {
           };
 
           await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);
+          setIsSubmitting(false);
+
           navigate("/whoweserve");
         }
       );
     } catch (error) {
       console.log(error);
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

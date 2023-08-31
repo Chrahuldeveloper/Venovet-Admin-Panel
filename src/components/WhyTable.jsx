@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { RotatingLines } from "react-loader-spinner";
+import { db } from "../Firebase";
+import { collection, getDocs } from "firebase/firestore";
 export default function WhyTable() {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "WHY-US"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    setIsSubmitting(false);
+  };
 
   return (
     <div className="bg-[#F9F9F9] p-8">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
           <h1 className="text-xl font-semibold">Why Us</h1>
@@ -29,31 +58,37 @@ export default function WhyTable() {
                   <th className="py-2 pl-10">Delete</th>
                 </tr>
               </thead>
-              <tbody className="border-b border-[#EEEEEE]">
-                <tr>
-                  <td className="py-8 pl-5 md:pl-14 ">1.</td>
-                  <td className="py-8 pl-5 text-sm md:pl-10">
-                    Lens and Frames
-                  </td>
-                  <td className="py-8 pl-5 text-sm md:pl-10">
-                    Fast Moving Consumer Goods (FMCG)
-                  </td>
-                  <td className="py-8 pl-10">
-                    <img src="" alt="img.png" />
-                  </td>
-                  <td
-                    className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
-                    onClick={() => {
-                      navigate(`/whyusedit/1`); //put id instead of 1 while fetching
-                    }}
-                  >
-                    Edit
-                  </td>
-                  <td className="py-8 pl-10 cursor-pointer text-[#7e7e7e]">
-                    Delete
-                  </td>
-                </tr>
-              </tbody>
+              {data.map((item, i) => {
+                return (
+                  <React.Fragment key={i}>
+                    <tbody className="border-b border-[#EEEEEE]">
+                      <tr>
+                        <td className="py-8 pl-5 md:pl-14 ">{i + 1}</td>
+                        <td className="py-8 pl-5 text-sm md:pl-10">
+                          {item.Category}
+                        </td>
+                        <td className="py-8 pl-5 text-sm md:pl-10">
+                          {item.Title}
+                        </td>
+                        <td className="py-8 pl-10">
+                          <img src={item.Image} alt="img.png" />
+                        </td>
+                        <td
+                          className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
+                          onClick={() => {
+                            navigate(`/whyusedit/${i + 1}`); //put id instead of 1 while fetching
+                          }}
+                        >
+                          Edit
+                        </td>
+                        <td className="py-8 pl-10 cursor-pointer text-[#7e7e7e]">
+                          Delete
+                        </td>
+                      </tr>
+                    </tbody>
+                  </React.Fragment>
+                );
+              })}
             </table>
           </div>
         </div>

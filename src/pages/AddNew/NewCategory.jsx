@@ -6,9 +6,11 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function NewCategory() {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     Name: "",
     Image: null,
@@ -24,6 +26,7 @@ export default function NewCategory() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const imageRef = ref(storage, `images/${Image.name}`);
       const uploadTask = uploadBytesResumable(imageRef, Image);
@@ -43,16 +46,29 @@ export default function NewCategory() {
           };
 
           await setDoc(doc(db, "CATEGORIES", form.Name), formData);
+          setIsSubmitting(false);
           navigate("/categories");
         }
       );
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

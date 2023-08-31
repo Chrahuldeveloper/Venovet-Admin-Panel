@@ -1,14 +1,32 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db } from "../Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import Sidebar from "../components/Sidebar";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function EditKey() {
   const { keyid } = useParams();
-  const cat = ["Fast Moving Consumer Goods (FMCG)"];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
+  const cat = [
+    "Select Category",
+    "Fast Moving Consumer Goods (FMCG)",
+    "Fast Moving Consumer Durables (FMCD)",
+    "Fashion & Lifestyle",
+    "Home & Furniture",
+    "Auto-Mobility",
+    "Telecom",
+    "Fruits & vegetables",
+    "Diary Farm",
+    "Ecommerce Fulfillment",
+    "Chemical",
+    "Pharma",
+    "Lens and Frames",
+  ];
   const [form, setForm] = useState({
     Category: "",
     Title: "",
@@ -17,16 +35,31 @@ export default function EditKey() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
-      const docRef = doc(db, "KEY-BENEFITS", keyid);
+      const docRef = doc(db, "KEY-BENEFITS", form.Category);
       await updateDoc(docRef, form);
+      setIsSubmitting(false);
+      navigate("/key-benefits");
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div className="flex">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="hidden lg:block">
         <Sidebar />
       </div>

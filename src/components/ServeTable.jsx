@@ -1,32 +1,55 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { RotatingLines } from "react-loader-spinner";
+
 // import { db } from "../Firebase";
 // import { doc, deleteDoc } from "firebase/firestore";
 export default function ServeTable() {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const data = [
-    {
-      id: 1,
-      Tittle: "Fast Moving Consumer Goods (FMCG)	",
-      image: "",
-    },
-  ];
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleDelete = async (itemId) => {
-    try {
-      // Delete data from Firestore
-      await deleteDoc(doc(db, "CATEGORIES", itemId));
-    } catch (error) {
-      console.error("Error deleting document: ", error);
-    }
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "WHO-WE-SERVE"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    console.log(enquiryData);
+    setIsSubmitting(false);
   };
+
+  // const handleDelete = async (itemId) => {
+  //   try {
+  //     // Delete data from Firestore
+  //     await deleteDoc(doc(db, "CATEGORIES", itemId));
+  //   } catch (error) {
+  //     console.error("Error deleting document: ", error);
+  //   }
+  // };
 
   return (
     <div className="bg-[#F9F9F9] p-8">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col justify-between pt-2 space-y-5 md:flex-row md:space-y-0 md:px-6">
           <h1 className="font-semibold md:text-xl">Who We Serve</h1>
@@ -54,17 +77,17 @@ export default function ServeTable() {
                   <React.Fragment key={i}>
                     <tbody className="border-b border-[#EEEEEE]">
                       <tr>
-                        <td className="py-8 pl-4 md:pl-14 ">{item.id}</td>
+                        <td className="py-8 pl-4 md:pl-14 ">{i + 1}</td>
                         <td className="py-8 pl-5 text-sm md:pl-10">
-                          {item.Tittle}
+                          {item.Title}
                         </td>
                         <td className="py-8 pl-10">
-                          <img src={item.image} alt="img.png" />
+                          <img src={item.Image} alt="img.png" />
                         </td>
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/${item.Tittle}`);
+                            navigate(`/${item.Title}`);
                           }}
                         >
                           Edit

@@ -1,32 +1,55 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
+import { db } from "../../Firebase";
 
 export default function TrucksTable() {
-  const data = [
-    {
-      id: 1,
-      Vendorid: "30001",
-      Vendor: "  Fast Moving Consumer Goods (FMCG)",
-      TruckType: "Tata Zip",
-      LoadType: "Part",
-      State: "Andhra Pradesh	",
-      MultiPointDelivery: "yes",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     Vendorid: "30001",
+  //     Vendor: "  Fast Moving Consumer Goods (FMCG)",
+  //     TruckType: "Tata Zip",
+  //     LoadType: "Part",
+  //     State: "Andhra Pradesh	",
+  //     MultiPointDelivery: "yes",
+  //   },
+  // ];
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "TRUCKS"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    setIsSubmitting(false);
+  };
   const navigate = useNavigate();
 
   return (
     <div>
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
-            <h1 className="text-xl font-semibold">List of Companies</h1>
-            <Link to={"/addnewtruck"}>
-              <button className="bg-[#0B2A97] px-3 py-3 text-white rounded-3xl text-sm font-semibold">
-                Add Company
-              </button>
-            </Link>
+            <h1 className="text-xl font-semibold">Trucks</h1>
           </div>
           <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
@@ -50,18 +73,16 @@ export default function TrucksTable() {
                     return (
                       <>
                         <tr>
-                          <td className="py-8 md:pl-10 ">{item.id}</td>
+                          <td className="py-8 md:pl-10 ">{i + 1}</td>
+                          <td className="py-8 text-sm md:pl-3">3000{i + 1}</td>
                           <td className="py-8 text-sm md:pl-3">
-                            {item.Vendorid}
+                            {item.vendor}
                           </td>
-                          <td className="py-8 text-sm md:pl-3">
-                            {item.Vendor}
-                          </td>
-                          <td className="py-8 pl-3">{item.TruckType}</td>
-                          <td className="py-8 pl-3">{item.LoadType}</td>
-                          <td className="py-8 pl-3">{item.State}</td>
+                          <td className="py-8 pl-3">{item.truckType}</td>
+                          <td className="py-8 pl-3">{item.loadType}</td>
+                          <td className="py-8 pl-3">{item.serviceState}</td>
                           <td className="py-8 pl-10">
-                            {item.MultiPointDelivery}
+                            {item.multiPointDelivery}
                           </td>
                           <td className="py-8 pl-3">
                             <select className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md">
@@ -74,7 +95,7 @@ export default function TrucksTable() {
                           <td
                             className="py-8 pl-3 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/truckedit/${item.id}`);
+                              navigate(`/truckedit/${i + 1}`);
                             }}
                           >
                             Edit

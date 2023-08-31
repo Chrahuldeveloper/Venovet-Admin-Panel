@@ -1,19 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
+import { db } from "../Firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function KeyTable() {
-  const data = [
-    {
-      ServiceTitle: "Lens and Frames	",
-      Title: "Which Plan Is Right For Me?	",
-      Text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-    },
-  ];
+  // const data = [
+  //   {
+  //     ServiceTitle: "Lens and Frames	",
+  //     Title: "Which Plan Is Right For Me?	",
+  //     Text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  //   },
+  // ];
 
+  const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "KEY-BENEFITS"));
+    const enquiryData = querySnapshot.docs.map((doc) => doc.data());
+    setData(enquiryData);
+
+    setIsSubmitting(false);
+  };
   const navigate = useNavigate();
 
   return (
     <div className="bg-[#F9F9F9] p-8">
+      {isSubmitting && ( // Render loader only when isSubmitting is true
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="p-6 bg-white rounded-xl">
         <div className="flex justify-between px-6 pt-2 flex-col md:flex-row space-y-5 md:space-y-0">
           <h1 className="text-xl font-semibold">Key Benefits</h1>
@@ -46,14 +75,14 @@ export default function KeyTable() {
                       <tr>
                         <td className="py-8 md:pl-14 ">{i + 1}</td>
                         <td className="py-8 text-sm md:pl-6">
-                          {item.ServiceTitle}
+                          {item.Category}
                         </td>
                         <td className="py-8 text-sm md:pl-6">{item.Title}</td>
                         <td className="py-8 pl-6">{item.Text}</td>
                         <td
                           className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/key/${item.ServiceTitle}`);
+                            navigate(`/key/${item.Category}`);
                           }}
                         >
                           Edit
