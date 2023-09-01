@@ -25,7 +25,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="hidden md:block ">
+    <aside className="hidden lg:block ">
       <img
         src="https://venovet.com/cw_admin/images/logo-full.png"
         className="mx-auto mt-10 w-28"
