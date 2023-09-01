@@ -7,6 +7,7 @@ import {
 } from "react-icons/bs";
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
+import { AiOutlineDatabase } from "react-icons/ai";
 import { Link } from "react-router-dom";
 export default function Sidebar() {
   const [toogle, settoogle] = useState({
@@ -27,11 +28,11 @@ export default function Sidebar() {
     <aside className="hidden md:block ">
       <img
         src="https://venovet.com/cw_admin/images/logo-full.png"
-        className="w-28 mx-auto mt-10"
+        className="mx-auto mt-10 w-28"
         alt=""
       />
       <div className="mt-7 ">
-        <ul className="pt-12 px-5">
+        <ul className="px-5 pt-12">
           <Link to="/home">
             <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
               <CgDatabase size="25" color="gray" />
@@ -54,7 +55,7 @@ export default function Sidebar() {
             className={`${toogle.dropdown1 ? "block" : "hidden"} pl-8  my-6`}
           >
             <Link to={"/whoweserve"}>
-              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              <li className="text-gray-500 duration-300 ease-in-out cursor-pointer hover:text-blue-600">
                 Who We Serve
               </li>
             </Link>
@@ -64,11 +65,22 @@ export default function Sidebar() {
               </li>
             </Link>
             <Link to="/key-benefits">
-              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500">
+              <li className="text-gray-500 duration-300 ease-in-out cursor-pointer hover:text-blue-600">
                 Key Benifits
               </li>
             </Link>
           </div>
+
+          <Link to={"/whatwedo"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <AiOutlineDatabase size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">
+                what we do
+              </li>
+              <LiaGreaterThanSolid size="15" color="gray" />
+            </div>
+          </Link>
+
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
             onClick={() => {

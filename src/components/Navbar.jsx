@@ -1,34 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { AiOutlineMenu } from "react-icons/ai";
+import MobileSidebar from "./MobileSidebar";
 function Navbar() {
-  return (
-    <nav className="bg-white">
-      <div className="flex items-center justify-between px-4 md:px-12 py-8">
-        <div>
-          <Link
-            to={"/home"}
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
-          >
-            <h1 className="font-bold text-2xl md:text-2xl">Dashboard</h1>
-          </Link>
-        </div>
+  const [toogle, settoogle] = useState(false);
 
-        <div className="flex space-x-4 cursor-pointer">
-          <img
-            className="w-10 h-10"
-            src="https://venovet.com/cw_admin/images/favicon.png"
-            alt=""
-          />
-          <div>
-            <p className="font-semibold text-lg"> superadmin</p>
-            <p className="text-sm text-[#777777]">admin</p>
+  return (
+    <>
+      <nav className="bg-white">
+        <div className="flex items-center justify-between px-4 py-8 md:px-12">
+          <div className="flex items-center gap-8">
+            <AiOutlineMenu
+              size={25}
+              color="gray"
+              className="md:hidden"
+              onClick={() => {
+                settoogle(true);
+              }}
+            />
+            <Link
+              to={"/home"}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              <h1 className="text-2xl font-bold md:text-2xl">Dashboard</h1>
+            </Link>
+          </div>
+
+          <div className="flex space-x-4 cursor-pointer">
+            <img
+              className="w-10 h-10"
+              src="https://venovet.com/cw_admin/images/favicon.png"
+              alt=""
+            />
+            <div>
+              <p className="text-lg font-semibold"> superadmin</p>
+              <p className="text-sm text-[#777777]">admin</p>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      {toogle ? <MobileSidebar settoogles={settoogle}/> : null}
+    </>
   );
 }
 
