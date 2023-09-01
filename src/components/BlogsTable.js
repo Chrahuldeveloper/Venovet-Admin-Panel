@@ -82,7 +82,7 @@ export default function BlogsTable() {
                           <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/edit/whatwedo/${item.Tittle}`);
+                              navigate(`/edit/Blog/${item.Tittle}`);
                             }}
                           >
                             Edit

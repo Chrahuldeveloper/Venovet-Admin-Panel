@@ -7,7 +7,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, children }) {
   return (
-    <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
+    <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
       {children}
     </div>
@@ -89,14 +89,12 @@ export default function WareHouseMangement({ category }) {
             updatedLayout[subCatKey].image.name
           );
           uploadTasks.push(uploadTask);
-
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           updatedLayout[subCatKey].image = downloadURL;
         }
       }
 
       await Promise.all(uploadTasks);
-
       const docRef = doc(db, "WHATWEDO", category);
       await setDoc(docRef, updatedLayout);
 
@@ -143,7 +141,7 @@ export default function WareHouseMangement({ category }) {
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"

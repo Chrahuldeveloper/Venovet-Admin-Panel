@@ -36,6 +36,7 @@ import {
 } from "../pages/AddNew/index";
 import SelectCategory from "./WhatwedoEditors/SelectCategory";
 import WhatWeDoEditCategory from "./WhatwedoEditors/WhatWeDoEditCategory";
+import EditingPage from "./EditingPage";
 
 export default function Routing() {
   return (
@@ -73,6 +74,7 @@ export default function Routing() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/whatwedo" element={<SelectCategory />} />
         <Route path="/EditBlog" element={<EditBlog />} />
+        <Route path="/EditBlog/edit" element={<EditingPage/>} />
         <Route
           path="/edit/whatwedo/:category"
           element={<WhatWeDoEditCategory />}
