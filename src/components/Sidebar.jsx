@@ -94,12 +94,7 @@ export default function Sidebar() {
             </li>
             <LiaGreaterThanSolid size="15" color="gray" />
           </div>
-          <Link to={"/EditBlog"}>
-            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-              <BsPencilSquare size="25" color="gray" />
-              <li className="text-lg font-semibold text-gray-500">Blogs</li>
-            </div>
-          </Link>
+
           <div
             className={`${toogle.dropdown2 ? "block" : "hidden"} pl-8  my-6`}
           >
@@ -119,6 +114,12 @@ export default function Sidebar() {
               </li>
             </Link>
           </div>
+          <Link to={"/EditBlog"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsPencilSquare size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">Blogs</li>
+            </div>
+          </Link>
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
             onClick={() => {

@@ -37,6 +37,7 @@ import {
 import SelectCategory from "./WhatwedoEditors/SelectCategory";
 import WhatWeDoEditCategory from "./WhatwedoEditors/WhatWeDoEditCategory";
 import EditingPage from "./EditingPage";
+import NewBlog from "../pages/AddNew/NewBlog";
 
 export default function Routing() {
   return (
@@ -64,6 +65,7 @@ export default function Routing() {
         <Route path="/addnewtruck" element={<NewTruck />} />
         <Route path="/addnewcategory" element={<NewCategory />} />
         <Route path="/addnewproduct" element={<NewProduct />} />
+        <Route path="/addnewblog" element={<NewBlog />} />
         <Route path="/:id" element={<EditCategory />} />
         <Route path="/key/:keyid" element={<EditKey />} />
         <Route path="/edit/:editid" element={<EditCompany />} />
@@ -74,7 +76,7 @@ export default function Routing() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/whatwedo" element={<SelectCategory />} />
         <Route path="/EditBlog" element={<EditBlog />} />
-        <Route path="/EditBlog/edit" element={<EditingPage/>} />
+        <Route path="/EditBlog/edit" element={<EditingPage />} />
         <Route
           path="/edit/whatwedo/:category"
           element={<WhatWeDoEditCategory />}

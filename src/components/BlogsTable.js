@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../Firebase";
 import { RotatingLines } from "react-loader-spinner";
 
@@ -16,7 +16,7 @@ export default function BlogsTable() {
 
   const fetchData = async () => {
     setIsSubmitting(true);
-    const querySnapshot = await getDocs(collection(db, "WHY-US"));
+    const querySnapshot = await getDocs(collection(db, "BLOGS"));
     const enquiryData = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
@@ -43,13 +43,13 @@ export default function BlogsTable() {
         )}
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between pt-2 space-y-5 md:flex-row md:space-y-0 md:px-6">
-            <h1 className="font-semibold md:text-xl">What we do</h1>
-            {/* <Link to={"/addnewserve"}>
+            <h1 className="font-semibold md:text-xl">Blogs</h1>
+            <Link to={"/addnewblog"}>
               {" "}
               <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
-                Add New 
+                Add New Blog
               </button>
-            </Link> */}
+            </Link>
           </div>
           <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
@@ -70,7 +70,7 @@ export default function BlogsTable() {
                         <tr>
                           <td className="py-8 pl-4 md:pl-14 ">{i + 1}</td>
                           <td className="py-8 pl-5 text-sm md:pl-10">
-                            {item.Tittle}
+                            {item.Tittle1}
                           </td>
                           <td className="py-8 pl-10">
                             <img

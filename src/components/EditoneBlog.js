@@ -99,7 +99,7 @@ export default function EditoneBlog({ category }) {
         if (updatedLayout[subCatKey].image) {
           const imageRef = ref(
             storage,
-            `warehouse/${updatedLayout[subCatKey].image.name}`
+            `Blog/${updatedLayout[subCatKey].image.name}`
           );
           const uploadTask = uploadBytesResumable(
             imageRef,
@@ -112,11 +112,11 @@ export default function EditoneBlog({ category }) {
       }
 
       await Promise.all(uploadTasks);
-      const docRef = doc(db, "WHATWEDO", category);
+      const docRef = doc(db, "BLOGS", category);
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/EditBlog");
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);
