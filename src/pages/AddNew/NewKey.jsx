@@ -68,7 +68,7 @@ export default function NewKey() {
             <h1>Add Key Benefits</h1>
           </div>
           <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-            <div className="space-x-44 text-lg">
+            <div className="lg:space-x-44 text-lg">
               <label className="text-[#186ad2] text-lg">
                 Category <span className="text-red-500 text-lg">*</span>
               </label>

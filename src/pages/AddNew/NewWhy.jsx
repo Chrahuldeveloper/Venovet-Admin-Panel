@@ -113,7 +113,7 @@ export default function NewWhy() {
                     Category: e.target.value,
                   });
                 }}
-                className="outline-none  border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] text-[#7e7e7e] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none  border w-64 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] text-[#7e7e7e] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
                 {cat.map((item, index) => {
                   return (
@@ -137,7 +137,7 @@ export default function NewWhy() {
                   });
                 }}
                 placeholder="Title"
-                className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none border w-64 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="flex flex-col space-y-4">
@@ -145,7 +145,7 @@ export default function NewWhy() {
               <input
                 type="file"
                 onChange={handleImageChange}
-                className="outline-none border w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none border w-64 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="flex items-center justify-center pt-10">

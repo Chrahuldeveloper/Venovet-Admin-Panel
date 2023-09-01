@@ -26,12 +26,15 @@ export default function KeyTable() {
     setIsSubmitting(false);
   };
 
-  const DeleteDoc = async (docId) => {
+  const DeleteDoc = async (docId, e) => {
+    setIsSubmitting(true);
     try {
       const docRef = doc(db, "KEY-BENEFITS", docId);
       await deleteDoc(docRef);
+      setIsSubmitting(false);
       navigate("/home");
     } catch (error) {
+      setIsSubmitting(false);
       console.error("Error deleting document:", error);
     }
   };
@@ -66,7 +69,7 @@ export default function KeyTable() {
             <table className="w-full text-left">
               <thead className="border-y border-[#EEEEEE]">
                 <tr>
-                  <th className="py-2 pl-6">S.No</th>
+                  <th className="py-2 md:pl-6">S.No</th>
                   <th className="py-2 pl-6">Service Title</th>
                   <th className="py-2 pl-6">Title</th>
                   <th className="py-2 pl-6">Text</th>

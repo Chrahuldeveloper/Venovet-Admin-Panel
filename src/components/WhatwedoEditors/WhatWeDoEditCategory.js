@@ -37,11 +37,11 @@ export default function WhatWeDoEditCategory() {
           {/* <SCM category={category} /> */}
           {/* <InventoryAudits category={category} /> */}
           {/* <Logistics category={category} /> */}
-          {/* <InternetSupply category={category} /> */}
-          {/* <EPR category={category} /> */}
-          {/* <RealEstate category={category} /> */}
-          {/* <Facility category={category} /> */}
-          <IndustrialSerives category={category} />
+          {/* <InternetSupply category={category} />
+          <EPR category={category} />
+          <RealEstate category={category} />
+          <Facility category={category} />
+          <IndustrialSerives category={category} /> */}
         </div>
         <Footer />
       </div>

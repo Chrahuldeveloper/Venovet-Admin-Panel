@@ -107,12 +107,12 @@ export default function NewServe() {
             <h1 className="font-semibold text-xl">Add Who We Serve</h1>
           </div>
           <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-            <div className="space-x-44  text-lg">
+            <div className="md:space-x-44 space-y-4 md:space-y-0 text-lg">
               <label className="text-[#186ad2]">
                 Title <span className="text-red-500 text-lg">*</span>
               </label>
               <input
-                className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none border w-64 md:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
                 type="text"
                 value={form.Title}
                 onChange={(e) => {
@@ -152,12 +152,12 @@ export default function NewServe() {
                 onChange={(value) => handleQuillChange("How", value)}
               />
             </div>
-            <div className="space-y-4 space-x-60 ">
+            <div className=" md:space-x-44 space-y-4 lg:space-y-0 ">
               <label className="text-[#186ad2] text-lg">Image</label>
               <input
                 type="file"
                 onChange={handleImageChange}
-                className="border border-[#eb5f0f] w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
+                className="border border-[#eb5f0f] w-64 md:w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
               />
             </div>
             <div className="space-y-4">

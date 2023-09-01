@@ -28,19 +28,23 @@ export default function WhyTable() {
   };
 
   const DeleteDoc = async (docId) => {
+    setIsSubmitting(true);
+
     try {
       const docRef = doc(db, "WHY-US", docId);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
+      setIsSubmitting(false);
       navigate("/home");
     } catch (error) {
+      setIsSubmitting(false);
       console.error("Error deleting document:", error);
     }
   };
 
   return (
     <div className="bg-[#F9F9F9] p-8">
-      {isSubmitting && ( 
+      {isSubmitting && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
           <RotatingLines
             strokeColor="grey"
