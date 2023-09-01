@@ -29,7 +29,6 @@ export default function WhatWeDoEditCategory() {
             <h1>Edit {category}</h1>
           </div>
           {/* diff  layout for diff category */}
-<<<<<<< HEAD
           {category === "Warehouse Management (2PL & 3PL)" ? (
             <WareHouseMangement category={category} />
           ) : category === "Transportation Fleet" ? (
@@ -53,19 +52,6 @@ export default function WhatWeDoEditCategory() {
           ) : category === "Industrial Security Services" ? (
             <IndustrialSerives category={category} />
           ) : null}
-=======
-          {/* <WareHouseMangement category={category} /> */}
-          {/* <ValueAddedServices category={category} /> */}
-          {/* <Transpotation category={category} /> */}
-          {/* <SCM category={category} /> */}
-          {/* <InventoryAudits category={category} /> */}
-          {/* <Logistics category={category} /> */}
-          {/* <InternetSupply category={category} />
-          <EPR category={category} />
-          <RealEstate category={category} />
-          <Facility category={category} />
-          <IndustrialSerives category={category} /> */}
->>>>>>> 87cb0aaa134432b741762a54e473929988ea2c7c
         </div>
         <Footer />
       </div>

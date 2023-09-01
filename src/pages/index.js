@@ -18,7 +18,7 @@ import EditProduct from "./EditProduct";
 import Profile from "./Profile";
 import Properties from "./Properties";
 import Home from "./Home";
-
+import EditBlog from "./EditBlog";
 export {
   Home,
   WhoweServe,
@@ -40,4 +40,5 @@ export {
   Products,
   Login,
   Careers,
+  EditBlog
 };

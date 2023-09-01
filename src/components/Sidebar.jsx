@@ -8,6 +8,7 @@ import {
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
 import { AiOutlineDatabase } from "react-icons/ai";
+import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
 export default function Sidebar() {
   const [toogle, settoogle] = useState({
@@ -31,8 +32,8 @@ export default function Sidebar() {
         className="mx-auto mt-10 w-28"
         alt=""
       />
-      <div className="mt-7 ">
-        <ul className="px-5 pt-12">
+      <div className="mt-5 ">
+        <ul className="px-5 pt-8">
           <Link to="/home">
             <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
               <CgDatabase size="25" color="gray" />
@@ -93,6 +94,12 @@ export default function Sidebar() {
             </li>
             <LiaGreaterThanSolid size="15" color="gray" />
           </div>
+          <Link to={"/EditBlog"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsPencilSquare size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">Blogs</li>
+            </div>
+          </Link>
           <div
             className={`${toogle.dropdown2 ? "block" : "hidden"} pl-8  my-6`}
           >

@@ -1,16 +1,16 @@
 import React from "react";
-import Sidebar from "../Sidebar";
-import Navbar from "../Navbar";
-import WhatwedoTable from "./WhatwedoTable";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import BlogsTable from "../components/BlogsTable";
 
-export default function SelectCategory() {
+export default function EditBlog() {
   return (
     <>
       <body className="flex">
         <Sidebar />
         <div className="bg-[#F9F9F9] w-full ">
           <Navbar />
-          <WhatwedoTable />
+          <BlogsTable />
         </div>
       </body>
     </>

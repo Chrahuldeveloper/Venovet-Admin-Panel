@@ -1,7 +1,6 @@
 import React from "react";
 import WhyTable from "../components/WhyTable";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 
 export default function WhyUs() {
@@ -13,7 +12,6 @@ export default function WhyUs() {
       <div className="w-screen bg-[#F9F9F9] ">
         <Navbar />
         <WhyTable />
-        <Footer />
       </div>
     </div>
   );

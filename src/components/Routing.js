@@ -22,6 +22,7 @@ import {
   Login,
   Careers,
   Home,
+  EditBlog,
 } from "../pages/index";
 import {
   NewProduct,
@@ -71,6 +72,7 @@ export default function Routing() {
         <Route path="/editProduct/:Productid" element={<EditProduct />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/whatwedo" element={<SelectCategory />} />
+        <Route path="/EditBlog" element={<EditBlog />} />
         <Route
           path="/edit/whatwedo/:category"
           element={<WhatWeDoEditCategory />}
