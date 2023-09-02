@@ -21,7 +21,6 @@ export default function NewBlog() {
     Blogimage: "",
     Tittle1: "",
     Para1: "",
-    // Para2: "",
     Tittle2: "",
     Para2: "",
     SubCat1: {
@@ -120,6 +119,7 @@ export default function NewBlog() {
       setIsSubmitting(false);
       navigate("/EditBlog");
     } catch (error) {
+      alert("Enter Tittle 1 field");
       console.log(error);
       setIsSubmitting(false);
     }
@@ -141,7 +141,7 @@ export default function NewBlog() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] w-full lg:ml-24">
+      <div className="bg-[#F9F9F9] w-full">
         <Navbar />
         <div className="bg-white  py-4 m-8 rounded-3xl">
           <div className="border-b font-semibold text-xl px-8 py-2">
@@ -279,7 +279,7 @@ export default function NewBlog() {
                 onChange={(e) =>
                   setlayout({
                     ...layout,
-                    Para2: e.target.value,
+                    Para3: e.target.value,
                   })
                 }
                 cols={8}
@@ -303,7 +303,7 @@ export default function NewBlog() {
                 type="text"
                 value={layout.SubCat2.ListPara2}
                 onChange={(e) =>
-                  handleFieldChange("SubCat1", "ListPara2", e.target.value)
+                  handleFieldChange("SubCat2", "ListPara2", e.target.value)
                 }
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
@@ -313,7 +313,7 @@ export default function NewBlog() {
                 type="text"
                 value={layout.SubCat2.ListPara3}
                 onChange={(e) =>
-                  handleFieldChange("SubCat1", "ListPara3", e.target.value)
+                  handleFieldChange("SubCat2", "ListPara3", e.target.value)
                 }
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
@@ -323,7 +323,7 @@ export default function NewBlog() {
                 type="text"
                 value={layout.SubCat2.ListPara4}
                 onChange={(e) =>
-                  handleFieldChange("SubCat1", "ListPara4", e.target.value)
+                  handleFieldChange("SubCat2", "ListPara4", e.target.value)
                 }
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
@@ -387,7 +387,7 @@ export default function NewBlog() {
             <UserDetailsField label="Tittle5">
               <input
                 type="text"
-                value={layout.Tittle2}
+                value={layout.Tittle5}
                 onChange={(e) =>
                   setlayout({
                     ...layout,

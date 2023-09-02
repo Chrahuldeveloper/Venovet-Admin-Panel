@@ -76,7 +76,7 @@ export default function Routing() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/whatwedo" element={<SelectCategory />} />
         <Route path="/EditBlog" element={<EditBlog />} />
-        <Route path="/EditBlog/edit" element={<EditingPage />} />
+        <Route path="/EditBlog/edit/:id" element={<EditingPage />} />
         <Route
           path="/edit/whatwedo/:category"
           element={<WhatWeDoEditCategory />}

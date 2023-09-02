@@ -2,9 +2,11 @@ import { collection, doc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../Firebase";
 import { Link } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function CareerTable() {
   const [data, setData] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -12,25 +14,41 @@ export default function CareerTable() {
   }, []);
 
   const fetchData = async () => {
-    const querySnapshot = await getDocs(collection(db, "CARIEER"));
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "RESUMES"));
     const CarrierData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
     setData(CarrierData);
+    setIsSubmitting(false);
   };
 
   const deleteDoc = async (id) => {
+    setIsSubmitting(true);
     try {
-      await deleteDoc(doc(db, "CAREER", id));
+      await deleteDoc(doc(db, "RESUMES", id));
       setData((prevData) => prevData.filter((item) => item.id !== id));
+      setIsSubmitting(false);
     } catch (error) {
+      setIsSubmitting(false);
       console.log(error);
     }
   };
 
   return (
     <div>
+      {isSubmitting && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="bg-white rounded-xl p-6">
           <div className="flex justify-between px-6 pt-2">
@@ -48,38 +66,36 @@ export default function CareerTable() {
                     <th className="pl-3 py-2">Mobile</th>
                     <th className="pl-3 py-2">Resume</th>
                     <th className="pl-3 py-2">Skills</th>
-                    <th className="pl-3 py-2">Date</th>
+                    {/* <th className="pl-3 py-2">Date</th> */}
                     <th className="pl-3 py-2">Delete</th>
                   </tr>
                 </thead>
-                <tbody className="border-b border-[#EEEEEE] text-sm">
-                  <tr>
-                    {data.map((_, index) => {
-                      return (
-                        <>
-                          <td className="md:pl-10 py-8 ">{index + 1}</td>
-                          <td className="pl-3 py-8 text-sm">{_.item}</td>
-                          <td className="pl-3 py-8 text-sm">{_.Name}</td>
-                          <td className="pl-3 py-8">{_.Email}</td>
-                          <td className="pl-3 py-8">{_.Mobile}</td>
-                          <td className="pl-3 py-8 cursor-pointer">
-                            <Link to={`${_.Resume}`}>Resume</Link>
-                          </td>
-                          <td className="pl-3 py-8">{_.Skills}</td>
-                          <td className="pl-3 py-8">{_.Date}</td>
-                          <td
-                            className="pl-3 py-8 text-[#7e7e7e]"
-                            onClick={() => {
-                              deleteDoc(_.id);
-                            }}
-                          >
-                            Delete
-                          </td>
-                        </>
-                      );
-                    })}
-                  </tr>
-                </tbody>
+                {data.map((_, index) => {
+                  return (
+                    <tbody className="border-b border-[#EEEEEE] text-sm">
+                      <tr>
+                        <td className="md:pl-10 py-8 ">{index + 1}</td>
+                        <td className="pl-3 py-8 text-sm">VNC{index + 1}</td>
+                        <td className="pl-3 py-8 text-sm">{_.Name}</td>
+                        <td className="pl-3 py-8">{_.Email}</td>
+                        <td className="pl-3 py-8">{_.Phone}</td>
+                        <td className="pl-3 py-8 cursor-pointer">
+                          <Link to={`${_.FileUrl}`}>Resume</Link>
+                        </td>
+                        <td className="pl-3 py-8">{_.Skills}</td>
+                        {/* <td className="pl-3 py-8">{_.Date}</td> */}
+                        <td
+                          className="pl-3 py-8 text-[#7e7e7e] cursor-pointer"
+                          onClick={() => {
+                            deleteDoc(_.id);
+                          }}
+                        >
+                          Delete
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
               </table>
             </div>
           </div>

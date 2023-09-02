@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../Firebase";
@@ -26,7 +26,20 @@ export default function BlogsTable() {
     setData(enquiryData);
     setIsSubmitting(false);
   };
-
+  const Deletedoc = async (docid) => {
+    setIsSubmitting(true);
+    try {
+      const docRef = doc(db, "BLOGS", docid);
+      await deleteDoc(docRef);
+      console.log("Document successfully deleted!");
+      setIsSubmitting(false);
+      navigate("/home");
+    } catch (error) {
+      setIsSubmitting(false);
+      alert("Sorry! Couldn't delete document");
+      console.error("Error deleting document:", error);
+    }
+  };
   return (
     <>
       <div className="bg-[#F9F9F9] p-8">
@@ -82,7 +95,7 @@ export default function BlogsTable() {
                           <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/edit/Blog/${item.Tittle}`);
+                              navigate(`/EditBlog/edit/${item.id}`);
                             }}
                           >
                             Edit
@@ -93,8 +106,8 @@ export default function BlogsTable() {
                               alert(
                                 ` Are you Sure you want to delete ${item.Tittle} `
                               );
+                              Deletedoc(item.id);
                             }}
-                            // handleDelete(item.id)
                           >
                             Delete
                           </td>

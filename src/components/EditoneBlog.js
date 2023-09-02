@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { db, storage } from "../Firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, children }) {
@@ -14,12 +14,12 @@ function UserDetailsField({ label, children }) {
   );
 }
 
-export default function EditoneBlog({ category }) {
+export default function EditoneBlog() {
+  const { id } = useParams();
   const [layout, setlayout] = useState({
     Blogimage: "",
     Tittle1: "",
     Para1: "",
-    Para2: "",
     Tittle2: "",
     Para2: "",
     SubCat1: {
@@ -112,8 +112,9 @@ export default function EditoneBlog({ category }) {
       }
 
       await Promise.all(uploadTasks);
-      const docRef = doc(db, "BLOGS", category);
-      await setDoc(docRef, updatedLayout);
+      const docRef = doc(db, "BLOGS", id);
+      // await setDoc(docRef, updatedLayout);
+      await updateDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
       navigate("/EditBlog");
@@ -140,7 +141,6 @@ export default function EditoneBlog({ category }) {
         <UserDetailsField label="Blogimage">
           <input
             type="file"
-            value={layout.Blogimage}
             onChange={(event) => handleImageChange(event, "1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -267,7 +267,7 @@ export default function EditoneBlog({ category }) {
             onChange={(e) =>
               setlayout({
                 ...layout,
-                Para2: e.target.value,
+                Para3: e.target.value,
               })
             }
             cols={8}
@@ -291,7 +291,7 @@ export default function EditoneBlog({ category }) {
             type="text"
             value={layout.SubCat2.ListPara2}
             onChange={(e) =>
-              handleFieldChange("SubCat1", "ListPara2", e.target.value)
+              handleFieldChange("SubCat2", "ListPara2", e.target.value)
             }
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -301,7 +301,7 @@ export default function EditoneBlog({ category }) {
             type="text"
             value={layout.SubCat2.ListPara3}
             onChange={(e) =>
-              handleFieldChange("SubCat1", "ListPara3", e.target.value)
+              handleFieldChange("SubCat2", "ListPara3", e.target.value)
             }
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -311,7 +311,7 @@ export default function EditoneBlog({ category }) {
             type="text"
             value={layout.SubCat2.ListPara4}
             onChange={(e) =>
-              handleFieldChange("SubCat1", "ListPara4", e.target.value)
+              handleFieldChange("SubCat2", "ListPara4", e.target.value)
             }
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -375,7 +375,7 @@ export default function EditoneBlog({ category }) {
         <UserDetailsField label="Tittle5">
           <input
             type="text"
-            value={layout.Tittle2}
+            value={layout.Tittle5}
             onChange={(e) =>
               setlayout({
                 ...layout,

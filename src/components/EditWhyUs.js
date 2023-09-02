@@ -94,7 +94,7 @@ export default function EditWhyUs() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] w-full lg:ml-24">
+      <div className="bg-[#F9F9F9] w-full">
         <Navbar />
         <div className="bg-white  py-4 m-8 rounded-3xl">
           <div className="border-b font-semibold text-xl px-8 py-2">
