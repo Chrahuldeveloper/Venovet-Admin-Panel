@@ -13,7 +13,7 @@ function Navbar() {
             <AiOutlineMenu
               size={25}
               color="gray"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => {
                 settoogle(true);
               }}
@@ -41,7 +41,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
-      {toogle ? <MobileSidebar settoogles={settoogle}/> : null}
+      {toogle ? <MobileSidebar settoogles={settoogle} /> : null}
     </>
   );
 }

@@ -83,7 +83,7 @@ export default function WhatwedoTable() {
                     <th className="py-2 pl-5 md:pl-10">Title</th>
                     <th className="py-2 pl-10">Image</th>
                     <th className="py-2 pl-10">Edit</th>
-                    <th className="py-2 pl-10">Delete</th>
+                    {/* <th className="py-2 pl-10">Delete</th> */}
                   </tr>
                 </thead>
                 {data.map((item, i) => {
@@ -110,7 +110,7 @@ export default function WhatwedoTable() {
                           >
                             Edit
                           </td>
-                          <td
+                          {/* <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
                               alert(
@@ -120,7 +120,7 @@ export default function WhatwedoTable() {
                             // handleDelete(item.id)
                           >
                             Delete
-                          </td>
+                          </td> */}
                         </tr>
                       </tbody>
                     </React.Fragment>

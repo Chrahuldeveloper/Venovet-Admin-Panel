@@ -26,14 +26,17 @@ export default function EnquiryTable() {
     window.scrollTo(0, 0);
   }, []);
 
-  
   const Deletedoc = async (docid) => {
+    setIsSubmitting(true);
     try {
       const docRef = doc(db, "ENQUIRY", docid);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
+      setIsSubmitting(false);
       navigate("/home");
     } catch (error) {
+      setIsSubmitting(false);
+      alert("Sorry! Couldn't delete document");
       console.error("Error deleting document:", error);
     }
   };
@@ -65,31 +68,33 @@ export default function EnquiryTable() {
                     <th className="py-2 pl-3">Enq ID</th>
                     <th className="py-2 pl-3">Customer Name</th>
                     <th className="py-2 pl-3">Email</th>
-                    <th className="py-2 pl-3">Mobile</th>
+                    <th className="py-2 pl-5">Mobile</th>
                     <th className="py-2 pl-3">Subject</th>
-                    <th className="py-2 pl-3">Message</th>
-                    <th className="py-2 pl-3">Delete</th>
+                    <th className="py-2 pl-5">Message</th>
+                    <th className="py-2 pl-5">Delete</th>
                   </tr>
                 </thead>
                 <tbody className="border-b border-[#EEEEEE] text-sm">
                   {data?.map((_, i) => {
-                    <tr>
-                      <td className="py-8 md:pl-10 ">{i + 1}</td>
-                      <td className="py-8 text-sm md:pl-3">{i + 1}</td>
-                      <td className="py-8 text-sm md:pl-3">{_.Name}</td>
-                      <td className="py-8 pl-3">{_.Email}</td>
-                      <td className="py-8 pl-3">{_.Phone}</td>
-                      <td className="py-8 pl-3">{_.Nature}</td>
-                      <td className="py-8 pl-3">{_.Message}</td>
-                      <td
-                        className="py-8 pl-3"
-                        onClick={() => {
-                          Deletedoc(_.id);
-                        }}
-                      >
-                        Delete
-                      </td>
-                    </tr>;
+                    return (
+                      <tr>
+                        <td className="py-8 md:pl-8 ">{i + 1}</td>
+                        <td className="py-8 text-sm md:pl-3">1000000{i + 1}</td>
+                        <td className="py-8 text-sm md:pl-5">{_.Name}</td>
+                        <td className="py-8 pl-3">{_.Email}</td>
+                        <td className="py-8 pl-5">{_.Mobile}</td>
+                        <td className="py-8 pl-3">{_.Nature}</td>
+                        <td className="py-8 pl-5">{_.Message}</td>
+                        <td
+                          className="py-8 pl-5 cursor-pointer"
+                          onClick={() => {
+                            Deletedoc(_.id);
+                          }}
+                        >
+                          Delete
+                        </td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>

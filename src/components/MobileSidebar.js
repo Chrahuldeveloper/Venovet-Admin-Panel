@@ -27,9 +27,9 @@ export default function MobileSidebar({ settoogles }) {
   };
 
   return (
-    <div className=" md:hidden fixed top-0 bottom-0 z-50  bg-black w-[100vw] bg-opacity-60 ">
-      <div className="py-7 bg-white w-[60vw] h-full">
-        <aside className="md:hidden">
+    <div className=" lg:hidden fixed top-0 bottom-0 z-50  bg-black w-[100vw]  bg-opacity-60 ">
+      <div className="py-7 bg-white w-[70vw] md:w-[40vw] h-full">
+        <aside className="lg:hidden">
           <div className="flex items-center justify-between pr-14">
             <img
               src="https://venovet.com/cw_admin/images/logo-full.png"
