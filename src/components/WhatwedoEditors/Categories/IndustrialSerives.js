@@ -124,7 +124,7 @@ export default function IndustrialSerives({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -450,8 +450,7 @@ export default function IndustrialSerives({ category }) {
         <UserDetailsField label="SubCat11image">
           <input
             type="file"
-            // value={layout.SubCat11.image}
-            onChange={(e) => handleImageChange(e, "11")}
+            onChange={(e) => handleImageChange(e, "SubCat11")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -481,8 +480,7 @@ export default function IndustrialSerives({ category }) {
         <UserDetailsField label="SubCat12image">
           <input
             type="file"
-            // value={layout.SubCat12.image}
-            onChange={(e) => handleImageChange(e, "12")}
+            onChange={(e) => handleImageChange(e, "SubCat12")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -512,8 +510,7 @@ export default function IndustrialSerives({ category }) {
         <UserDetailsField label="SubCat13image">
           <input
             type="file"
-            // value={layout.SubCat13.image}
-            onChange={(e) => handleImageChange(e, "13")}
+            onChange={(e) => handleImageChange(e, "SubCat13")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>

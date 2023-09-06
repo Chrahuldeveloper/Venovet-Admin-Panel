@@ -107,7 +107,7 @@ export default function InventoryAudits({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -142,7 +142,7 @@ export default function InventoryAudits({ category }) {
           <input
             type="file"
             // value={layout.SubCat1.image}
-            onChange={(e) => handleImageChange(e, "1")}
+            onChange={(e) => handleImageChange(e, "SubCat1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -172,7 +172,7 @@ export default function InventoryAudits({ category }) {
           <input
             type="file"
             // value={layout.SubCat2.image}
-            onChange={(e) => handleImageChange(e, "2")}
+            onChange={(e) => handleImageChange(e, "SubCat2")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>

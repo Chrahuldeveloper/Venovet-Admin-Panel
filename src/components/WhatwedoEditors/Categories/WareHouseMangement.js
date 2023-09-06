@@ -23,22 +23,22 @@ export default function WareHouseMangement({ category }) {
     Para1: "",
     Para2: "",
     SubCat1: {
-      Tittle: "DistributionWarehousing",
+      Tittle: "",
       image: "",
       Para: "",
     },
     SubCat2: {
-      Tittle: "ConsolidationWarehousing",
+      Tittle: "",
       image: "",
       Para: "",
     },
     SubCat3: {
-      Tittle: "InPlantWarehousing",
+      Tittle: "",
       image: "",
       Para: "",
     },
     SubCat4: {
-      Tittle: "VALUEADDEDSERVICES",
+      Tittle: "",
       image: "",
       Para: "",
     },
@@ -61,9 +61,9 @@ export default function WareHouseMangement({ category }) {
     },
     Tittle4: "",
     Subcat9: {
-      Tittle: "wlkewe",
-      SubTittle: "pek",
-      Para: "kwelkw",
+      Tittle: "",
+      SubTittle: "",
+      Para: "",
       image: "",
     },
     Tittle5: "",
@@ -111,7 +111,7 @@ export default function WareHouseMangement({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -200,7 +200,7 @@ export default function WareHouseMangement({ category }) {
           <input
             type="file"
             // value={layout.SubCat1.image}
-            onChange={(event) => handleImageChange(event, "1")}
+            onChange={(event) => handleImageChange(event, "SubCat1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -229,8 +229,7 @@ export default function WareHouseMangement({ category }) {
         <UserDetailsField label="SubCat2image">
           <input
             type="file"
-            // value={layout.SubCat2.image}
-            onChange={(event) => handleImageChange(event, "2")}
+            onChange={(event) => handleImageChange(event, "SubCat2")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -260,7 +259,7 @@ export default function WareHouseMangement({ category }) {
           <input
             type="file"
             // value={layout.SubCat3.image}
-            onChange={(event) => handleImageChange(event, "3")}
+            onChange={(event) => handleImageChange(event, "SubCat3")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -291,7 +290,7 @@ export default function WareHouseMangement({ category }) {
           <input
             type="file"
             // value={layout.SubCat4.image}
-            onChange={(event) => handleImageChange(event, "4")}
+            onChange={(event) => handleImageChange(event, "SubCat4")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -453,7 +452,7 @@ export default function WareHouseMangement({ category }) {
             type="text"
             value={layout.Subcat9.Tittle}
             onChange={(e) =>
-              handleFieldChange("SubCat9", "Tittle", e.target.value)
+              handleFieldChange("Subcat9", "Tittle", e.target.value)
             }
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -463,7 +462,7 @@ export default function WareHouseMangement({ category }) {
             type="text"
             value={layout.Subcat9.SubTittle}
             onChange={(e) =>
-              handleFieldChange("SubCat9", "SubTittle", e.target.value)
+              handleFieldChange("Subcat9", "SubTittle", e.target.value)
             }
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -473,7 +472,7 @@ export default function WareHouseMangement({ category }) {
             type="text"
             value={layout.Subcat9.Para}
             onChange={(e) =>
-              handleFieldChange("SubCat9", "Para", e.target.value)
+              handleFieldChange("Subcat9", "Para", e.target.value)
             }
             cols={8}
             rows={8}
@@ -522,123 +521,3 @@ export default function WareHouseMangement({ category }) {
     </>
   );
 }
-// const handleSubmit = async (event) => {
-//   event.preventDefault();
-//   setIsSubmitting(true);
-
-//   try {
-//     const imageRef1 = ref(storage, `warehouse/${layout.SubCat1.image.name}`);
-//     const uploadTask1 = uploadBytesResumable(
-//       imageRef1,
-//       layout.SubCat1.image.name
-//     );
-
-//     const imageRef2 = ref(storage, `warehouse/${layout.SubCat2.image.name}`);
-//     const uploadTask2 = uploadBytesResumable(
-//       imageRef2,
-//       layout.SubCat2.image.name
-//     );
-
-//     const imageRef3 = ref(storage, `warehouse/${layout.SubCat3.image.name}`);
-//     const uploadTask3 = uploadBytesResumable(
-//       imageRef3,
-//       layout.SubCat3.image.name
-//     );
-
-//     const imageRef4 = ref(storage, `warehouse/${layout.SubCat4.image.name}`);
-//     const uploadTask4 = uploadBytesResumable(
-//       imageRef4,
-//       layout.SubCat4.image.name
-//     );
-
-//     const imageRef9 = ref(storage, `warehouse/${layout.Subcat9.image.name}`);
-//     const uploadTask9 = uploadBytesResumable(
-//       imageRef9,
-//       layout.Subcat9.image.name
-//     );
-
-//     await Promise.all([
-//       uploadTask1,
-//       uploadTask2,
-//       uploadTask3,
-//       uploadTask4,
-//       uploadTask9,
-//     ]);
-
-//     const downloadURL1 = await getDownloadURL(uploadTask1.snapshot.ref);
-//     const downloadURL2 = await getDownloadURL(uploadTask2.snapshot.ref);
-//     const downloadURL3 = await getDownloadURL(uploadTask3.snapshot.ref);
-//     const downloadURL4 = await getDownloadURL(uploadTask4.snapshot.ref);
-//     const downloadURL9 = await getDownloadURL(uploadTask9.snapshot.ref);
-//     console.log(downloadURL1);
-//     console.log(downloadURL2);
-//     console.log(downloadURL3);
-//     console.log(downloadURL4);
-//     const updatedLayout = {
-//       ...layout,
-//       SubCat1: {
-//         ...layout.SubCat1,
-//         image: downloadURL1,
-//       },
-//       SubCat2: {
-//         ...layout.SubCat2,
-//         image: downloadURL2,
-//       },
-//       SubCat3: {
-//         ...layout.SubCat3,
-//         image: downloadURL3,
-//       },
-//       SubCat4: {
-//         ...layout.SubCat4,
-//         image: downloadURL4,
-//       },
-//       Subcat9: {
-//         ...layout.Subcat9,
-//         image: downloadURL9,
-//       },
-//     };
-//     const docRef = doc(db, "WHATWEDO", category);
-//     await updateDoc(docRef, updatedLayout);
-//     // await setDoc(docRef, updatedLayout);
-//     setIsSubmitting(false);
-//     navigate("/whatwedo");
-//   } catch (error) {
-//     console.log(error);
-//     setIsSubmitting(false);
-//   }
-// };
-
-// const subCatCount = 4; // Adjust this if you have more sub-categories
-// const uploadTasks = [];
-// const downloadURLs = {};
-
-// for (let i = 1; i <= subCatCount; i++) {
-//   const subCatKey = `SubCat${i}`;
-//   const image1 = layout[subCatKey].image;
-//   console.log(image1);
-
-//   if (image1) {
-//     const imageRef = ref(storage, `warehouse/${image1.name}`);
-//     const uploadTask = uploadBytesResumable(imageRef, image1);
-//     uploadTasks.push(uploadTask);
-
-//     downloadURLs[subCatKey] = await getDownloadURL(
-//       uploadTask.snapshot.ref
-//     );
-//   }
-// }
-
-// await Promise.all(uploadTasks);
-
-// const updatedLayout = {
-//   ...layout,
-//   ...Object.keys(downloadURLs).reduce((acc, key) => {
-//     return {
-//       ...acc,
-//       [key]: {
-//         ...layout[key],
-//         image: downloadURLs[key],
-//       },
-//     };
-//   }, {}),
-// };

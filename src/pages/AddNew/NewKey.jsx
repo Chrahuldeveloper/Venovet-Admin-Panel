@@ -67,8 +67,8 @@ export default function NewKey() {
           <div className="border-b font-semibold text-xl px-8 py-2">
             <h1>Add Key Benefits</h1>
           </div>
-          <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-            <div className="lg:space-x-44 text-lg">
+          <form className="p-8  space-x-6  space-y-4" onSubmit={handleSubmit}>
+            <div className="md:space-x-44 md:grid-cols-6 md:grid space-y-4 md:space-y-0 text-lg">
               <label className="text-[#186ad2] text-lg">
                 Category <span className="text-red-500 text-lg">*</span>
               </label>
@@ -81,7 +81,7 @@ export default function NewKey() {
                     Category: e.target.value,
                   });
                 }}
-                className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
                 {cat.map((item, index) => {
                   return (
@@ -92,7 +92,7 @@ export default function NewKey() {
                 })}
               </select>
             </div>
-            <div className="space-x-44 text-lg">
+            <div className="md:space-x-44 space-y-4 md:space-y-0 text-lg">
               <label className="text-[#186ad2] text-lg">
                 Title <span className="text-red-500 text-lg">*</span>
               </label>
@@ -105,10 +105,10 @@ export default function NewKey() {
                   });
                 }}
                 placeholder="Which Plan Is Right For Me?"
-                className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="flex flex-col space-y-4">
+            <div className=" flex flex-col space-y-4 md:space-y-10 text-lg">
               <label className="text-[#186ad2] text-lg">Text</label>
               <textarea
                 value={form.Text}
@@ -118,7 +118,7 @@ export default function NewKey() {
                     Text: e.target.value,
                   });
                 }}
-                className="outline-none border w-[50rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
+                className="outline-none border w-64  md:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="flex items-center justify-center pt-10">

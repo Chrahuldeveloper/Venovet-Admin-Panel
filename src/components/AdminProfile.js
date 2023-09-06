@@ -27,7 +27,7 @@ export default function AdminProfile() {
           </div>
           <div className="w-full py-8 pt-14">
             <form className="p-8 space-y-4 max-w-4xl">
-              <div className="flex items-center justify-between">
+              <div className="md:flex space-y-4 md:space-y-0 items-center justify-between">
                 <h1 className="font- text-[#186ad2] md:text-lg">
                   UserName <span className="text-red-500 text-lg">*</span>
                 </h1>
@@ -37,10 +37,10 @@ export default function AdminProfile() {
                   onchange={(e) => {
                     setadmin({ ...e, UserName: e.target.value });
                   }}
-                  className="border-[1px] border-orange-500 w-64 md:w-80 lg:w-[30rem] outline-none px-4 py-2 rounded-full"
+                  className="border-[1px] border-orange-500 w-64  md:w-80 lg:w-[30rem] outline-none px-4 py-2 rounded-full"
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="md:flex space-y-4 md:space-y-0 items-center justify-between">
                 <h1 className="font- text-[#186ad2] md:text-lg">Password</h1>
                 <input
                   type="text"
@@ -51,7 +51,7 @@ export default function AdminProfile() {
                   className="border-[1px] border-orange-500 outline-none w-64 md:w-80 lg:w-[30rem]  px-4 py-2 rounded-full"
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="md:flex space-y-4 md:space-y-0 items-center justify-between">
                 <h1 className="font- text-[#186ad2] md:text-lg">Email</h1>
                 <input
                   type="email"

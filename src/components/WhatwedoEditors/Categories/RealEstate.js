@@ -25,7 +25,9 @@ export default function RealEstate({ category }) {
     },
 
     Tittle1: "",
-    image1: "",
+    image1: {
+      image: "",
+    },
 
     SubCat2: {
       Tittle: "",
@@ -113,7 +115,7 @@ export default function RealEstate({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -147,8 +149,7 @@ export default function RealEstate({ category }) {
         <UserDetailsField label="SubCat1image">
           <input
             type="file"
-            // value={layout.SubCat1.image}
-            onChange={(event) => handleImageChange(event, "1")}
+            onChange={(event) => handleImageChange(event, "SubCat1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -178,14 +179,14 @@ export default function RealEstate({ category }) {
         <UserDetailsField label="image1">
           <input
             type="file"
-            // value={layout.image1}
-            onChange={(e) => {
-              const imageFile = e.target.files[0];
-              setlayout((prevForm) => ({
-                ...prevForm,
-                image1: imageFile,
-              }));
-            }}
+            // onChange={(e) => {
+            //   const imageFile = e.target.files[0];
+            //   setlayout((prevForm) => ({
+            //     ...prevForm,
+            //     image1: imageFile,
+            //   }));
+            // }}
+            onChange={(e) => handleImageChange(e, "image1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>

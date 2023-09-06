@@ -108,7 +108,7 @@ export default function Logistics({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -132,7 +132,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat1.image}
-            onChange={(e) => handleImageChange(e, "1")}
+            onChange={(e) => handleImageChange(e, "SubCat1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -162,7 +162,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat2.image}
-            onChange={(e) => handleImageChange(e, "2")}
+            onChange={(e) => handleImageChange(e, "SubCat2")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -192,7 +192,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat3.image}
-            onChange={(e) => handleImageChange(e, "3")}
+            onChange={(e) => handleImageChange(e, "SubCat3")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -222,7 +222,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat4.image}
-            onChange={(e) => handleImageChange(e, "4")}
+            onChange={(e) => handleImageChange(e, "SubCat4")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -252,7 +252,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat5.image}
-            onChange={(e) => handleImageChange(e, "5")}
+            onChange={(e) => handleImageChange(e, "SubCat5")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -282,7 +282,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat6.image}
-            onChange={(e) => handleImageChange(e, "6")}
+            onChange={(e) => handleImageChange(e, "SubCat6")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -312,7 +312,7 @@ export default function Logistics({ category }) {
           <input
             type="file"
             // value={layout.SubCat7.image}
-            onChange={(e) => handleImageChange(e, "7")}
+            onChange={(e) => handleImageChange(e, "SubCat7")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>

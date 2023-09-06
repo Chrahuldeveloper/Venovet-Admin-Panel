@@ -105,7 +105,7 @@ export default function ValueAddedServices({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout[subCatKey],
+        ...prevLayout.subCatKey,
         image: imageFile,
       },
     }));
@@ -153,7 +153,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat1.image}
-            onChange={(event) => handleImageChange(event, "1")}
+            onChange={(event) => handleImageChange(event, "SubCat1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -183,7 +183,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat2.image}
-            onChange={(event) => handleImageChange(event, "2")}
+            onChange={(event) => handleImageChange(event, "SubCat2")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -213,7 +213,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat3.image}
-            onChange={(event) => handleImageChange(event, "3")}
+            onChange={(event) => handleImageChange(event, "SubCat3")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -243,7 +243,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat4.image}
-            onChange={(event) => handleImageChange(event, "4")}
+            onChange={(event) => handleImageChange(event, "SubCat4")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -273,7 +273,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat5.image}
-            onChange={(event) => handleImageChange(event, "5")}
+            onChange={(event) => handleImageChange(event, "SubCat5")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -303,7 +303,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat6.image}
-            onChange={(event) => handleImageChange(event, "6")}
+            onChange={(event) => handleImageChange(event, "SubCat6")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -333,7 +333,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat7.image}
-            onChange={(event) => handleImageChange(event, "7")}
+            onChange={(event) => handleImageChange(event, "SubCat7")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
@@ -363,7 +363,7 @@ export default function ValueAddedServices({ category }) {
           <input
             type="file"
             // value={layout.SubCat8.image}
-            onChange={(event) => handleImageChange(event, "8")}
+            onChange={(event) => handleImageChange(event, "SubCat8")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
