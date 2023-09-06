@@ -133,7 +133,7 @@ export default function Facility({ category }) {
           />
         </div>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="pl-10 space-y-4 pt-7" onSubmit={handleSubmit}>
         <UserDetailsField label="Tittle1">
           <input
             type="text"
