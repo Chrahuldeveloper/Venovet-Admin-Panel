@@ -4,6 +4,7 @@ import {
   BsDatabase,
   BsFillTelephoneFill,
   BsFillPersonFill,
+  BsPencilSquare,
 } from "react-icons/bs";
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
@@ -129,6 +130,12 @@ export default function MobileSidebar({ settoogles }) {
                   </li>
                 </Link>
               </div>
+              <Link to={"/EditBlog"}>
+                <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+                  <BsPencilSquare size="25" color="gray" />
+                  <li className=" font-semibold text-gray-500">Blogs</li>
+                </div>
+              </Link>
               <div
                 className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
                 onClick={() => {
