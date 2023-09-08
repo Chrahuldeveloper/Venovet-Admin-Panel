@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "../Firebase";
 
 export default function Login() {
   const [user, setuser] = useState({
@@ -7,21 +9,36 @@ export default function Login() {
     Name: "",
     Password: "",
   });
+  const [data, setData] = useState();
 
+  const fetchData = async () => {
+    const querySnapshot = await getDocs(collection(db, "ADMIN_LOGIN"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setData(enquiryData);
+  };
+
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
 
   const Login = (e) => {
     e.preventDefault();
     if (
       user.Role === "Superadmin" &&
-      user.Name === "admin" &&
-      user.Password === "venovet"
+      user.Name === data[0].UserName &&
+      user.Password === data[0].Password
     ) {
       navigate("/home");
     } else {
       alert("Please enter");
     }
-    console.log(user.Role, user.Name, user.Password);
   };
 
   return (
