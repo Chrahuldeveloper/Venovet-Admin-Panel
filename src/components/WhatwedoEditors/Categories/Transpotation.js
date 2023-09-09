@@ -18,23 +18,23 @@ export default function Transpotation({ category }) {
   const navigate = useNavigate();
 
   const [layout, setlayout] = useState({
-    Tittle1: "",
+ 
     image1: "",
     Para1: "",
 
-    Tittle2: "",
+ 
     image2: "",
     Para2: "",
 
-    Tittle3: "",
+
     image3: "",
     Para3: "",
 
-    Tittle4: "",
+    
     image4: "",
     Para4: "",
 
-    Tittle5: "",
+ 
     image5: "",
     Para5: "",
 
