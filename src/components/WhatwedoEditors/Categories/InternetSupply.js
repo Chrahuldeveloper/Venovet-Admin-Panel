@@ -44,10 +44,10 @@ export default function InternetSupply({ category }) {
       Tittle: "",
       Para: "",
     },
-    // SubCat7: {
-    //   Tittle: "",
-    //   Para: "",
-    // },
+     SubCat7: {
+       Tittle: "",
+       Para: "",
+     },
     SubCat8: {
       image: "",
       Tittle: "",
