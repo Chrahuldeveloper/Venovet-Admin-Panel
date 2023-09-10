@@ -50,10 +50,6 @@ export default function EPR({ category }) {
       Tittle: "",
       Para: "",
     },
-    // SubCat7: {
-    //   Tittle: "",
-    //   Para: "",
-    // },
     SubCat8: {
       Tittle: "",
       Para: "",
