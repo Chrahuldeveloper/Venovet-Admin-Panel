@@ -38,6 +38,10 @@ import SelectCategory from "./WhatwedoEditors/SelectCategory";
 import WhatWeDoEditCategory from "./WhatwedoEditors/WhatWeDoEditCategory";
 import EditingPage from "./EditingPage";
 import NewBlog from "../pages/AddNew/NewBlog";
+import NewNature from "../pages/AddNew/NewNature";
+import Brochure from "../pages/Brochure";
+import EditCategeory from "../pages/EditCategeory";
+import SocialMedia from "../pages/SocialMedia";
 
 export default function Routing() {
   return (
@@ -58,6 +62,7 @@ export default function Routing() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/products" element={<Products />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/brochure" element={<Brochure />} />
         <Route path="/addnewserve" element={<NewServe />} />
         <Route path="/addnewkey" element={<NewKey />} />
         <Route path="/addnewwhy" element={<NewWhy />} />
@@ -66,13 +71,15 @@ export default function Routing() {
         <Route path="/addnewcategory" element={<NewCategory />} />
         <Route path="/addnewproduct" element={<NewProduct />} />
         <Route path="/addnewblog" element={<NewBlog />} />
+        <Route path="/addnewnatureenq" element={<NewNature />} />
         <Route path="/:id" element={<EditCategory />} />
         <Route path="/key/:keyid" element={<EditKey />} />
         <Route path="/edit/:editid" element={<EditCompany />} />
         <Route path="truckedit/:truckid" element={<EditTrucks />} />
         <Route path="/whyusedit/:whyusid" element={<EditWhyUs />} />
-        <Route path="/editcategory/:categoryid" element={<EditCategory />} />
+        <Route path="/editcategory/:categoryid" element={<EditCategeory />} />
         <Route path="/editProduct/:Productid" element={<EditProduct />} />
+        <Route path="/social-media" element={<SocialMedia />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/whatwedo" element={<SelectCategory />} />
         <Route path="/EditBlog" element={<EditBlog />} />

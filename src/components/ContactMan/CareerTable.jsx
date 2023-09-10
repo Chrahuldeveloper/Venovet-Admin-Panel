@@ -24,18 +24,19 @@ export default function CareerTable() {
     setIsSubmitting(false);
   };
 
-  const deleteDoc = async (id) => {
+  const deleteDoc = async (docId) => {
     setIsSubmitting(true);
+
     try {
-      await deleteDoc(doc(db, "RESUMES", id));
-      setData((prevData) => prevData.filter((item) => item.id !== id));
+      const docRef = doc(db, "RESUMES", docId);
+      await deleteDoc(docRef);
+      console.log("Document successfully deleted!");
       setIsSubmitting(false);
     } catch (error) {
       setIsSubmitting(false);
-      console.log(error);
+      console.error("Error deleting document:", error);
     }
   };
-
   return (
     <div>
       {isSubmitting && (
@@ -72,28 +73,30 @@ export default function CareerTable() {
                 </thead>
                 {data.map((_, index) => {
                   return (
-                    <tbody className="border-b border-[#EEEEEE] text-sm">
-                      <tr>
-                        <td className="md:pl-10 py-8 ">{index + 1}</td>
-                        <td className="pl-3 py-8 text-sm">VNC{index + 1}</td>
-                        <td className="pl-3 py-8 text-sm">{_.Name}</td>
-                        <td className="pl-3 py-8">{_.Email}</td>
-                        <td className="pl-3 py-8">{_.Phone}</td>
-                        <td className="pl-3 py-8 cursor-pointer">
-                          <Link to={`${_.FileUrl}`}>Resume</Link>
-                        </td>
-                        <td className="pl-3 py-8">{_.Skills}</td>
-                        {/* <td className="pl-3 py-8">{_.Date}</td> */}
-                        <td
-                          className="pl-3 py-8 text-[#7e7e7e] cursor-pointer"
-                          onClick={() => {
-                            deleteDoc(_.id);
-                          }}
-                        >
-                          Delete
-                        </td>
-                      </tr>
-                    </tbody>
+                    <React.Fragment key={index}>
+                      <tbody className="border-b border-[#EEEEEE] text-sm">
+                        <tr>
+                          <td className="md:pl-10 py-8 ">{index + 1}</td>
+                          <td className="pl-3 py-8 text-sm">VNC{index + 1}</td>
+                          <td className="pl-3 py-8 text-sm">{_.Name}</td>
+                          <td className="pl-3 py-8">{_.Email}</td>
+                          <td className="pl-3 py-8">{_.Phone}</td>
+                          <td className="pl-3 py-8 cursor-pointer">
+                            <Link to={`${_.FileUrl}`}>Resume</Link>
+                          </td>
+                          <td className="pl-3 py-8">{_.Skills}</td>
+                          {/* <td className="pl-3 py-8">{_.Date}</td> */}
+                          <td
+                            className="pl-3 py-8 text-[#7e7e7e] cursor-pointer"
+                            onClick={() => {
+                              deleteDoc(_.id);
+                            }}
+                          >
+                            Delete
+                          </td>
+                        </tr>
+                      </tbody>
+                    </React.Fragment>
                   );
                 })}
               </table>

@@ -9,18 +9,18 @@ const data = [
   },
   {
     img: <FaTruck size={22} />,
-    Name: "Vendors",
+    Name: "Trucks",
     Qty: "3",
   },
   {
     img: <FaHome size={22} />,
-    Name: "Vendors",
-    Qty: "3",
+    Name: "Properties",
+    Qty: "1",
   },
   {
     img: <FaRupeeSign size={22} />,
-    Name: "Vendors",
-    Qty: "3",
+    Name: "Others",
+    Qty: "0",
   },
 ];
 

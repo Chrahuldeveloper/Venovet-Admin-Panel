@@ -42,38 +42,30 @@ export default function NewWhy() {
     }));
   };
 
-  console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+
     try {
-      // upload image
-      const imageRef = ref(storage, `images/${Image.name}`);
-      const uploadTask = uploadBytesResumable(imageRef, Image);
+      setIsSubmitting(true);
 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error(error);
-        },
-        async () => {
-          // download url for upload file
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          const formData = {
-            ...form,
-            Image: downloadURL,
-          };
-
-          await setDoc(doc(db, "WHY-US", form.Category), formData);
-          setIsSubmitting(false);
-
-          navigate("/why-us");
-        }
+      // Upload the image to Firebase Storage
+      const imageRef = ref(
+        storage,
+        `images/${form.Category}/${form.Image.name}`
       );
-    } catch (error) {
+      await uploadBytesResumable(imageRef, form.Image);
+      const url = await getDownloadURL(imageRef);
+      const formData = {
+        ...form,
+        Image: url,
+      };
+      const docRef = doc(db, "WHY-US", form.Category);
+      await setDoc(docRef, formData);
       setIsSubmitting(false);
-      console.log(error);
+      navigate(`/why-us`);
+    } catch (error) {
+      console.error("Error submitting data: ", error);
+      setIsSubmitting(false);
     }
   };
 

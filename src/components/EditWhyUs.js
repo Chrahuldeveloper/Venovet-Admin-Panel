@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
@@ -17,7 +17,7 @@ export default function EditWhyUs() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState({
-    Category: "",
+    Category: whyusid,
     Title: "",
     Image: "",
   });
@@ -44,40 +44,32 @@ export default function EditWhyUs() {
     }));
   };
 
-  console.log(form);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      // upload image
-      const imageRef = ref(storage, `whyus/${Image.name}`);
-      const uploadTask = uploadBytesResumable(imageRef, Image);
 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error(error);
-        },
-        async () => {
-          // download url for upload file
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          const formData = {
-            ...form,
-            Image: downloadURL,
-          };
-          const docRef = doc(db, "WHY-US", form.Category);
-          await updateDoc(docRef, formData);
-          setIsSubmitting(false);
-          navigate("/why-us");
-        }
+    try {
+      setIsSubmitting(true);
+
+      // Upload the image to Firebase Storage
+      const imageRef = ref(
+        storage,
+        `images/${form.Category}/${form.Image.name}`
       );
-    } catch (error) {
+      await uploadBytesResumable(imageRef, form.Image);
+      const url = await getDownloadURL(imageRef);
+      const formData = {
+        ...form,
+        Image: url,
+      };
+      const docRef = doc(db, "WHY-US", form.Category);
+      await updateDoc(docRef, formData);
       setIsSubmitting(false);
-      console.log(error);
+      navigate(`/why-us`);
+    } catch (error) {
+      console.error("Error submitting data: ", error);
+      setIsSubmitting(false);
     }
   };
-
   return (
     <div className="flex">
       {isSubmitting && ( // Render loader only when isSubmitting is true
@@ -106,7 +98,6 @@ export default function EditWhyUs() {
                 Category <span className="text-red-500 text-lg">*</span>
               </label>
               <select
-                defaultValue={cat[0]}
                 value={form.Category}
                 onChange={(e) => {
                   setForm({
@@ -164,3 +155,36 @@ export default function EditWhyUs() {
     </div>
   );
 }
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setIsSubmitting(true);
+//   try {
+//     // upload image
+//     const imageRef = ref(storage, `whyus/${Image.name}`);
+//     const uploadTask = uploadBytes(imageRef, Image);
+//     uploadTask.snapshot.ref.on(
+//       "state_changed",
+//       null,
+//       (error) => {
+//         setIsSubmitting(false);
+//         alert("Upload Image Again...!");
+//         console.error(error);
+//       },
+//       async () => {
+//         // get download url for upload file
+//         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+//         const formData = {
+//           ...form,
+//           Image: downloadURL,
+//         };
+//         const docRef = doc(db, "WHY-US", form.Category);
+//         await updateDoc(docRef, formData);
+//         setIsSubmitting(false);
+//         navigate("/why-us");
+//       }
+//     );
+//   } catch (error) {
+//     setIsSubmitting(false);
+//     console.log(error);
+//   }
+// };

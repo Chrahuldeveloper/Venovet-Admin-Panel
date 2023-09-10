@@ -79,7 +79,7 @@ export default function KeyTable() {
               </thead>
               {data.map((item, i) => {
                 return (
-                  <>
+                  <React.Fragment key={i}>
                     <tbody className="border-b border-[#EEEEEE]">
                       <tr>
                         <td className="py-8 md:pl-14 ">{i + 1}</td>
@@ -106,7 +106,7 @@ export default function KeyTable() {
                         </td>
                       </tr>
                     </tbody>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </table>

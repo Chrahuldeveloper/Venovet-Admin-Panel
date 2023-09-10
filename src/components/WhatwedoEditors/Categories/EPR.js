@@ -77,30 +77,30 @@ export default function EPR({ category }) {
     setIsSubmitting(true);
 
     try {
-      const uploadTasks = [];
-      const updatedLayout = { ...layout };
+      // const uploadTasks = [];
+      // const updatedLayout = { ...layout };
 
-      for (const subCatKey in updatedLayout) {
-        if (updatedLayout[subCatKey].image) {
-          const imageRef = ref(
-            storage,
-            `warehouse/${updatedLayout[subCatKey].image.name}`
-          );
-          const uploadTask = uploadBytesResumable(
-            imageRef,
-            updatedLayout[subCatKey].image.name
-          );
-          uploadTasks.push(uploadTask);
+      // for (const subCatKey in updatedLayout) {
+      //   if (updatedLayout[subCatKey].image) {
+      //     const imageRef = ref(
+      //       storage,
+      //       `warehouse/${updatedLayout[subCatKey].image.name}`
+      //     );
+      //     const uploadTask = uploadBytesResumable(
+      //       imageRef,
+      //       updatedLayout[subCatKey].image.name
+      //     );
+      //     uploadTasks.push(uploadTask);
 
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          updatedLayout[subCatKey].image = downloadURL;
-        }
-      }
+      //     const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+      //     updatedLayout[subCatKey].image = downloadURL;
+      //   }
+      // }
 
-      await Promise.all(uploadTasks);
+      // await Promise.all(uploadTasks);
 
       const docRef = doc(db, "WHATWEDO", category);
-      await setDoc(docRef, updatedLayout);
+      await setDoc(docRef, layout);
 
       setIsSubmitting(false);
       navigate("/whatwedo");

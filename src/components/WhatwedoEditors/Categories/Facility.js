@@ -43,57 +43,95 @@ export default function Facility({ category }) {
       Tittle: "",
       Para: "",
     },
-    SubCat5: {
-      image: "",
-      Tittle1: "",
-      Para1: "",
-      Tittle2: "",
-      Para2: "",
-      Tittle3: "",
-      Para3: "",
-      Tittle4: "",
-      Para4: "",
-      Tittle5: "",
-      Para5: "",
-      Tittle6: "",
-      Para6: "",
-    },
+    // SubCat5: {
+    //   image: "",
+    //   Tittle1: "",
+    //   Para1: "",
+    //   Tittle2: "",
+    //   Para2: "",
+    //   Tittle3: "",
+    //   Para3: "",
+    //   Tittle4: "",
+    //   Para4: "",
+    //   Tittle5: "",
+    //   Para5: "",
+    //   Tittle6: "",
+    //   Para6: "",
+    // },
   });
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     // const uploadTasks = [];
+  //     const updatedLayout = { ...layout };
+
+  //     for (const subCatKey in updatedLayout) {
+  //       if (updatedLayout[subCatKey].image) {
+  //         const imageRef = ref(
+  //           storage,
+  //           `warehouse/${updatedLayout[subCatKey].image.name}`
+  //         );
+  //         await uploadBytesResumable(
+  //           imageRef,
+  //           updatedLayout[subCatKey].image.name
+  //         );
+  //         // uploadTasks.push(uploadTask);
+
+  //         const downloadURL = await getDownloadURL(imageRef);
+  //         updatedLayout[subCatKey].image = downloadURL;
+  //       }
+  //     }
+
+  //     // await Promise.all(uploadTasks);
+
+  //     const docRef = doc(db, "WHATWEDO", category);
+  //     await setDoc(docRef, updatedLayout);
+
+  //     setIsSubmitting(false);
+  //     navigate("/whatwedo");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const uploadTasks = [];
       const updatedLayout = { ...layout };
 
       for (const subCatKey in updatedLayout) {
         if (updatedLayout[subCatKey].image) {
-          const imageRef = ref(
-            storage,
-            `warehouse/${updatedLayout[subCatKey].image.name}`
-          );
-          const uploadTask = uploadBytesResumable(
-            imageRef,
-            updatedLayout[subCatKey].image.name
-          );
-          uploadTasks.push(uploadTask);
+          const imageFile = updatedLayout[subCatKey].image;
 
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          // Create a reference to the image file in Firebase Storage
+          const storageRef = ref(storage, `warehouse/${imageFile.name}`);
+
+          // Upload the image file to Firebase Storage
+          await uploadBytesResumable(storageRef, imageFile);
+
+          // Wait for the upload to complete and get the download URL
+          const snapshot = await getDownloadURL(storageRef);
+          const downloadURL = snapshot;
+
+          // Update the layout object with the download URL
           updatedLayout[subCatKey].image = downloadURL;
         }
       }
 
-      await Promise.all(uploadTasks);
-
+      // Update the Firestore document with the updated layout
       const docRef = doc(db, "WHATWEDO", category);
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
       navigate("/whatwedo");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsSubmitting(false);
     }
   };
@@ -103,7 +141,7 @@ export default function Facility({ category }) {
     setlayout((prevLayout) => ({
       ...prevLayout,
       [subCatKey]: {
-        ...prevLayout.subCatKey,
+        ...prevLayout[subCatKey],
         image: imageFile,
       },
     }));

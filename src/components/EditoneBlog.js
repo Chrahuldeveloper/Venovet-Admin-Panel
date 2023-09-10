@@ -65,14 +65,11 @@ export default function EditoneBlog() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageChange = (event, subCatKey) => {
+  const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    setlayout((prevLayout) => ({
-      ...prevLayout,
-      [subCatKey]: {
-        ...prevLayout[subCatKey],
-        image: imageFile,
-      },
+    setlayout((prevForm) => ({
+      ...prevForm,
+      Blogimage: imageFile,
     }));
   };
 
@@ -92,26 +89,13 @@ export default function EditoneBlog() {
     setIsSubmitting(true);
 
     try {
-      const uploadTasks = [];
-      const updatedLayout = { ...layout };
-
-      for (const subCatKey in updatedLayout) {
-        if (updatedLayout[subCatKey].image) {
-          const imageRef = ref(
-            storage,
-            `Blog/${updatedLayout[subCatKey].image.name}`
-          );
-          const uploadTask = uploadBytesResumable(
-            imageRef,
-            updatedLayout[subCatKey].image.name
-          );
-          uploadTasks.push(uploadTask);
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          updatedLayout[subCatKey].image = downloadURL;
-        }
-      }
-
-      await Promise.all(uploadTasks);
+      const imageRef = ref(storage, `Blog/${layout.Blogimage.name}`);
+      await uploadBytesResumable(imageRef, layout.Blogimage);
+      const url = await getDownloadURL(imageRef);
+      const updatedLayout = {
+        ...layout,
+        Blogimage: url,
+      };
       const docRef = doc(db, "BLOGS", id);
       // await setDoc(docRef, updatedLayout);
       await updateDoc(docRef, updatedLayout);
@@ -123,7 +107,6 @@ export default function EditoneBlog() {
       setIsSubmitting(false);
     }
   };
-
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true
@@ -141,7 +124,7 @@ export default function EditoneBlog() {
         <UserDetailsField label="Blogimage">
           <input
             type="file"
-            onChange={(event) => handleImageChange(event, "1")}
+            onChange={handleImageChange}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>

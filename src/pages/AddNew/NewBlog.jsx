@@ -66,17 +66,13 @@ export default function NewBlog() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageChange = (event, subCatKey) => {
+  const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    setlayout((prevLayout) => ({
-      ...prevLayout,
-      [subCatKey]: {
-        ...prevLayout[subCatKey],
-        image: imageFile,
-      },
+    setlayout((prevForm) => ({
+      ...prevForm,
+      Blogimage: imageFile,
     }));
   };
-
   const handleFieldChange = (section, field, value) => {
     // console.log("Field changed:", field, "New value:", value);
     setlayout((prevLayout) => ({
@@ -87,39 +83,24 @@ export default function NewBlog() {
       },
     }));
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const uploadTasks = [];
-      const updatedLayout = { ...layout };
-
-      for (const subCatKey in updatedLayout) {
-        if (updatedLayout[subCatKey].image) {
-          const imageRef = ref(
-            storage,
-            `Blog/${updatedLayout[subCatKey].image.name}`
-          );
-          const uploadTask = uploadBytesResumable(
-            imageRef,
-            updatedLayout[subCatKey].image.name
-          );
-          uploadTasks.push(uploadTask);
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          updatedLayout[subCatKey].image = downloadURL;
-        }
-      }
-
-      await Promise.all(uploadTasks);
+      const imageRef = ref(storage, `Blog/${layout.Blogimage.name}`);
+      await uploadBytesResumable(imageRef, layout.Blogimage);
+      const url = await getDownloadURL(imageRef);
+      const updatedLayout = {
+        ...layout,
+        Blogimage: url,
+      };
       const docRef = doc(db, "BLOGS", layout.Tittle1);
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
       navigate("/EditBlog");
     } catch (error) {
-      alert("Enter Tittle 1 field");
       console.log(error);
       setIsSubmitting(false);
     }

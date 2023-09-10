@@ -1,47 +1,49 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { db, storage } from "../../Firebase";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { db, storage } from "../Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-export default function NewCategory() {
+export default function Brochure() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
-    Name: "",
-    Image: null,
+    Pdf: "",
+    Link: "",
   });
 
-  const handleImageChange = (event) => {
+  const handleFileChange = (event) => {
     const imageFile = event.target.files[0];
     setForm((prevForm) => ({
       ...prevForm,
-      Image: imageFile,
+      Pdf: imageFile,
     }));
   };
 
-  const handleSubmit = async (e, i) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setIsSubmitting(true);
 
       // Upload the image to Firebase Storage
-      const imageRef = ref(storage, `images/${form.Name}/${form.Image.name}`);
-      await uploadBytesResumable(imageRef, form.Image);
+      const imageRef = ref(storage, `images/${form.Pdf.name}`);
+      await uploadBytesResumable(imageRef, form.Pdf);
       const url = await getDownloadURL(imageRef);
+
       const formData = {
         ...form,
-        Image: url,
+        Pdf: url,
       };
-      const docRef = doc(db, "CATEGORIES", form.Name);
+      const docRef = doc(db, "BROCHURE", "LINKS");
       await setDoc(docRef, formData);
       setIsSubmitting(false);
-      navigate(`/categories`);
+      navigate(`/home`);
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);
@@ -64,42 +66,40 @@ export default function NewCategory() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] w-full  lg:ml-24">
+      <div className="bg-[#F9F9F9] w-full ">
         <Navbar />
         <div className="bg-white  py-4 m-8 rounded-3xl">
           <div className="border-b font-semibold text-xl px-8 py-2">
-            <h1>Add Category</h1>
+            <h1>Add LINKS</h1>
           </div>
-          <form className="p-8  pl-14 space-y-4" onSubmit={handleSubmit}>
-            <div className="text-lg grid grid-cols-3">
+          <form className="p-8 space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-3 text-lg">
               <label className="text-[#186ad2] text-lg">
-                Category Name <span className="text-red-500 text-lg">*</span>
+                Video Link <span className="text-red-500 text-lg">*</span>
               </label>
               <input
-                value={form.Name}
+                value={form.Link}
                 onChange={(e) => {
                   setForm({
                     ...form,
-                    Name: e.target.value,
+                    Link: e.target.value,
                   });
                 }}
-                placeholder="Which Plan Is Right For Me?"
-                className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                placeholder="Insert Your Video Link"
+                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="grid grid-cols-3 text-lg">
               <label className="text-[#186ad2] text-lg">
-                Category Image <span className="text-red-500 text-lg">*</span>
+                Brochure<span className="text-red-500 text-lg">*</span>
               </label>
               <input
                 type="file"
-                onChange={handleImageChange}
-                placeholder="Which Plan Is Right For Me?"
-                className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                onChange={handleFileChange}
+                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-
-            <div className="flex items-center justify-center pt-10">
+            <div className="flex items-center justify-center pt-5">
               <button
                 className="rounded-full text-white px-4 py-2 bg-[#0B2A97]"
                 type="submit"

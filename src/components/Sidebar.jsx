@@ -120,6 +120,29 @@ export default function Sidebar() {
               <li className="text-lg font-semibold text-gray-500">Blogs</li>
             </div>
           </Link>
+          <Link to={"/nature-of-enquiry"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsPencilSquare size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">
+                Nature of Enquiry
+              </li>
+            </div>
+          </Link>
+          <Link to={"/brochure"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsPencilSquare size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">Brochure</li>
+            </div>
+          </Link>
+          <Link to={"/social-media"}>
+            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
+              <BsPencilSquare size="25" color="gray" />
+              <li className="text-lg font-semibold text-gray-500">
+                SocialMedia-Icons
+              </li>
+            </div>
+          </Link>
+
           <div
             className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg"
             onClick={() => {

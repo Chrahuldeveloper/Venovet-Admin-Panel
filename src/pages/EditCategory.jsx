@@ -38,44 +38,38 @@ export default function EditCategory() {
       Image: imageFile,
     }));
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsSubmitting(true);
     try {
-      const imageRef = ref(storage, `images/${Image.name}`);
-      const uploadTask = uploadBytesResumable(imageRef, Image);
+      setIsSubmitting(true);
 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error(error);
-        },
-        async () => {
-          // download url for upload file
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          const formData = {
-            ...form,
-            Image: downloadURL,
-          };
-
-          const formDataPlainText = {
-            ...formData,
-            Overview: convert(formData.Overview),
-            Stats: convert(formData.Stats),
-            How: convert(formData.How),
-            Why: convert(formData.Why),
-          };
-
-          const docRef = doc(db, "WHO-WE-SERVE", id);
-          await updateDoc(docRef, formDataPlainText);
-          setIsSubmitting(false);
-          navigate("/whoweserve");
-        }
+      // Upload the image to Firebase Storage
+      const imageRef = ref(
+        storage,
+        `images/${form.Category}/${form.Image.name}`
       );
+      await uploadBytesResumable(imageRef, form.Image);
+      const url = await getDownloadURL(imageRef);
+      const formData = {
+        ...form,
+        Image: url,
+      };
+
+      const formDataPlainText = {
+        ...formData,
+        Overview: convert(formData.Overview),
+        Stats: convert(formData.Stats),
+        How: convert(formData.How),
+        Why: convert(formData.Why),
+      };
+
+      const docRef = doc(db, "WHO-WE-SERVE", id);
+      await updateDoc(docRef, formDataPlainText);
+      setIsSubmitting(false);
+      navigate("/whoweserve");
     } catch (error) {
-      console.log(error);
+      console.error("Error submitting data: ", error);
       setIsSubmitting(false);
     }
   };

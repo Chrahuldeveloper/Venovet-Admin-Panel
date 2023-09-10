@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { db, storage } from "../../Firebase";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { db, storage } from "../Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { RotatingLines } from "react-loader-spinner";
 export default function EditCategeory() {
@@ -78,7 +78,7 @@ export default function EditCategeory() {
         <Navbar />
         <div className="py-4 m-8 bg-white rounded-3xl">
           <div className="px-8 py-2 text-xl font-semibold border-b">
-            <h1>Edit Category</h1>
+            <h1>Edit {categoryid}</h1>
           </div>
           <form className="p-8 space-y-4 pl-14" onSubmit={handleSubmit}>
             <div className="grid grid-cols-3 text-lg">
@@ -86,13 +86,13 @@ export default function EditCategeory() {
                 Category Name <span className="text-lg text-red-500">*</span>
               </label>
               <input
-                value={form.Name}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    Name: e.target.value,
-                  });
-                }}
+                value={categoryid}
+                // onChange={(e) => {
+                //   setForm({
+                //     ...form,
+                //     Name: e.target.value,
+                //   });
+                // }}
                 placeholder="Which Plan Is Right For Me?"
                 className="outline-none border w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />

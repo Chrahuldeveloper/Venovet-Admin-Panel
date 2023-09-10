@@ -82,7 +82,11 @@ export default function ServeTable() {
                           {item.Title}
                         </td>
                         <td className="py-8 pl-10">
-                          <img src={item.Image} alt="img.png" />
+                          <img
+                            className="w-24 rounded md:rounded-lg"
+                            src={item.Image}
+                            alt="img.png"
+                          />
                         </td>
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"

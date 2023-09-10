@@ -27,6 +27,8 @@ export default function WhyTable() {
     setIsSubmitting(false);
   };
 
+  console.log(data);
+
   const DeleteDoc = async (docId) => {
     setIsSubmitting(true);
 
@@ -35,7 +37,6 @@ export default function WhyTable() {
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
-      navigate("/home");
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error deleting document:", error);
@@ -90,12 +91,16 @@ export default function WhyTable() {
                           {item.Title}
                         </td>
                         <td className="py-8 pl-10">
-                          <img src={item.Image} alt="img.png" />
+                          <img
+                            className="w-24 rounded md:rounded-lg"
+                            src={item.Image}
+                            alt="img.png"
+                          />
                         </td>
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/whyusedit/${i + 1}`); //put id instead of 1 while fetching
+                            navigate(`/whyusedit/${item.Category}`); //put id instead of 1 while fetching
                           }}
                         >
                           Edit

@@ -87,9 +87,9 @@ export default function BlogsTable() {
                           </td>
                           <td className="py-8 pl-10">
                             <img
-                              src={item.image}
+                              src={item.Blogimage}
                               alt="img.png"
-                              className="w-14 h-14"
+                              className="w-24 rounded md:rounded-lg"
                             />
                           </td>
                           <td

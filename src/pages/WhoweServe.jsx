@@ -4,12 +4,12 @@ import Sidebar from "../components/Sidebar";
 import ServeTable from "../components/ServeTable";
 export default function WhoweServe() {
   return (
-    <body className="flex">
+    <div className="flex">
       <Sidebar />
       <div className="bg-[#F9F9F9] w-full h-screen">
         <Navbar />
         <ServeTable />
       </div>
-    </body>
+    </div>
   );
 }

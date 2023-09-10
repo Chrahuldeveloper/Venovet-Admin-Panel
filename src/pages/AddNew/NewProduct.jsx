@@ -6,7 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import { useState } from "react";
 import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
@@ -20,7 +20,7 @@ function UserDetailsField({ label, required, children }) {
   );
 }
 
-export default function NewCompany() {
+export default function NewProduct() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -35,73 +35,56 @@ export default function NewCompany() {
     Image4: "",
   });
 
-  const handleImageChange1 = (event) => {
-    const imageFile = event.target.files[0];
-    setForm((prevForm) => ({
-      ...prevForm,
-      Image1: imageFile,
-    }));
-  };
-
-  const handleImageChange2 = (event) => {
-    const imageFile = event.target.files[0];
-    setForm((prevForm) => ({
-      ...prevForm,
-      Image2: imageFile,
-    }));
-  };
-  const handleImageChange3 = (event) => {
-    const imageFile = event.target.files[0];
-    setForm((prevForm) => ({
-      ...prevForm,
-      Image3: imageFile,
-    }));
-  };
-  const handleImageChange4 = (event) => {
-    const imageFile = event.target.files[0];
-    setForm((prevForm) => ({
-      ...prevForm,
-      Image4: imageFile,
-    }));
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
+
     try {
-      const imageRef1 = ref(storage, `products/${form.Image1.name}`);
-      const uploadTask1 = uploadBytesResumable(imageRef1, form.Image1.name);
+      const updatedLayout = { ...form };
 
-      const imageRef2 = ref(storage, `products/${form.Image2.name}`);
-      const uploadTask2 = uploadBytesResumable(imageRef2, form.Image2.name);
+      for (const subCatKey in updatedLayout) {
+        if (updatedLayout[subCatKey].image) {
+          const imageFile = updatedLayout[subCatKey].image;
 
-      const imageRef3 = ref(storage, `products/${form.Image3.name}`);
-      const uploadTask3 = uploadBytesResumable(imageRef3, form.Image3.name);
+          // Create a reference to the image file in Firebase Storage
+          const storageRef = ref(
+            storage,
+            `warehouse/product/${imageFile.name}`
+          );
 
-      const imageRef4 = ref(storage, `products/${form.Image4.name}`);
-      const uploadTask4 = uploadBytesResumable(imageRef4, form.Image4.name);
+          // Upload the image file to Firebase Storage
+          await uploadBytesResumable(storageRef, imageFile);
 
-      await Promise.all([uploadTask1, uploadTask2, uploadTask3, uploadTask4]);
+          // Wait for the upload to complete and get the download URL
+          const snapshot = await getDownloadURL(storageRef);
+          const downloadURL = snapshot;
 
-      const downloadURL1 = await getDownloadURL(uploadTask1.snapshot.ref);
-      const downloadURL2 = await getDownloadURL(uploadTask2.snapshot.ref);
-      const downloadURL3 = await getDownloadURL(uploadTask3.snapshot.ref);
-      const downloadURL4 = await getDownloadURL(uploadTask4.snapshot.ref);
-      const formData = {
-        ...form,
-        Image1: downloadURL1,
-        Image2: downloadURL2,
-        Image3: downloadURL3,
-        Image4: downloadURL4,
-      };
+          // Update the layout object with the download URL
+          updatedLayout[subCatKey].image = downloadURL;
+        }
+      }
 
-      await setDoc(doc(db, "PRODUCTS", form.ProductName), formData);
+      // Update the Firestore document with the updated layout
+      const docRef = doc(db, "PRODUCTS", form.ProductName);
+      await setDoc(docRef, updatedLayout);
+
       setIsSubmitting(false);
       navigate("/products");
     } catch (error) {
+      console.error(error);
       setIsSubmitting(false);
-      console.log(error);
     }
+  };
+
+  const handleImageChange = (event, subCatKey) => {
+    const imageFile = event.target.files[0];
+    setForm((prevLayout) => ({
+      ...prevLayout,
+      [subCatKey]: {
+        ...prevLayout[subCatKey],
+        image: imageFile,
+      },
+    }));
   };
 
   const handleInputChange = (field, value) => {
@@ -112,7 +95,7 @@ export default function NewCompany() {
   };
 
   return (
-    <div>
+    <div className="flex">
       {isSubmitting && ( // Render loader only when isSubmitting is true
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
           <RotatingLines
@@ -127,7 +110,7 @@ export default function NewCompany() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <div className="bg-[#F9F9F9] lg:ml-24">
+      <div className="bg-[#F9F9F9] w-full">
         <Navbar />
 
         <div className="bg-white py-4 m-8 rounded-3xl">
@@ -142,6 +125,7 @@ export default function NewCompany() {
                 onChange={(e) => handleInputChange("Category", e.target.value)}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
+                <option>Choose Category</option>
                 <option>Electronics</option>
                 <option>Material Handling Equipments</option>
                 <option>Test Category</option>
@@ -186,28 +170,36 @@ export default function NewCompany() {
             <UserDetailsField label="Product Image 1" required>
               <input
                 type="file"
-                onChange={handleImageChange1}
+                onChange={(e) => {
+                  handleImageChange(e, "Image1");
+                }}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </UserDetailsField>
             <UserDetailsField label="Product Image 2" required>
               <input
                 type="file"
-                onChange={handleImageChange2}
+                onChange={(e) => {
+                  handleImageChange(e, "Image2");
+                }}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </UserDetailsField>
             <UserDetailsField label="Product Image 3">
               <input
                 type="file"
-                onChange={handleImageChange3}
+                onChange={(e) => {
+                  handleImageChange(e, "Image3");
+                }}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </UserDetailsField>
             <UserDetailsField label="Product Image 4">
               <input
                 type="file"
-                onChange={handleImageChange4}
+                onChange={(e) => {
+                  handleImageChange(e, "Image4");
+                }}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </UserDetailsField>
