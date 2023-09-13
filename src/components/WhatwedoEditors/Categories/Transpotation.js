@@ -18,23 +18,18 @@ export default function Transpotation({ category }) {
   const navigate = useNavigate();
 
   const [layout, setlayout] = useState({
- 
     image1: "",
     Para1: "",
 
- 
     image2: "",
     Para2: "",
-
 
     image3: "",
     Para3: "",
 
-    
     image4: "",
     Para4: "",
 
- 
     image5: "",
     Para5: "",
 
@@ -112,7 +107,7 @@ export default function Transpotation({ category }) {
         </div>
       )}
       <form className="pl-10 space-y-4 pt-7" onSubmit={handleSubmit}>
-        <UserDetailsField label="Tittle1">
+        {/* <UserDetailsField label="Tittle1">
           <input
             type="text"
             value={layout.Tittle1}
@@ -121,7 +116,7 @@ export default function Transpotation({ category }) {
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
-        </UserDetailsField>
+        </UserDetailsField> */}
         <UserDetailsField label="image1">
           <input
             type="file"
@@ -145,7 +140,7 @@ export default function Transpotation({ category }) {
           />
         </UserDetailsField>
 
-        <UserDetailsField label="Tittle2">
+        {/* <UserDetailsField label="Tittle2">
           <input
             type="text"
             value={layout.Tittle2}
@@ -154,7 +149,7 @@ export default function Transpotation({ category }) {
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
-        </UserDetailsField>
+        </UserDetailsField> */}
         <UserDetailsField label="image2">
           <input
             type="file"
@@ -178,7 +173,7 @@ export default function Transpotation({ category }) {
           />
         </UserDetailsField>
 
-        <UserDetailsField label="Tittle3">
+        {/* <UserDetailsField label="Tittle3">
           <input
             type="text"
             value={layout.Tittle3}
@@ -186,8 +181,8 @@ export default function Transpotation({ category }) {
               handleFieldChange("Tittle3", e.target.value);
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
+          /> */}
+        {/* </UserDetailsField> */}
         <UserDetailsField label="image3">
           <input
             type="file"
@@ -210,7 +205,7 @@ export default function Transpotation({ category }) {
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
           />
         </UserDetailsField>
-
+        {/* 
         <UserDetailsField label="Tittle4">
           <input
             type="text"
@@ -219,8 +214,8 @@ export default function Transpotation({ category }) {
               handleFieldChange("Tittle4", e.target.value);
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
+          /> */}
+        {/* </UserDetailsField> */}
         <UserDetailsField label="image4">
           <input
             type="file"
@@ -244,7 +239,7 @@ export default function Transpotation({ category }) {
           />
         </UserDetailsField>
 
-        <UserDetailsField label="Tittle5">
+        {/* <UserDetailsField label="Tittle5">
           <input
             type="text"
             value={layout.Tittle5}
@@ -253,7 +248,7 @@ export default function Transpotation({ category }) {
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
-        </UserDetailsField>
+        </UserDetailsField> */}
         <UserDetailsField label="image5">
           <input
             type="file"

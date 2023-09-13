@@ -1,7 +1,7 @@
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../Firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function CareerTable() {
@@ -23,13 +23,13 @@ export default function CareerTable() {
     setData(CarrierData);
     setIsSubmitting(false);
   };
-
-  const deleteDoc = async (docId) => {
+  const navigate = useNavigate();
+  const DeleteDoc = async (docId) => {
     setIsSubmitting(true);
-
     try {
       const docRef = doc(db, "RESUMES", docId);
       await deleteDoc(docRef);
+      navigate("/home");
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
     } catch (error) {
@@ -81,7 +81,7 @@ export default function CareerTable() {
                           <td className="pl-3 py-8 text-sm">{_.Name}</td>
                           <td className="pl-3 py-8">{_.Email}</td>
                           <td className="pl-3 py-8">{_.Phone}</td>
-                          <td className="pl-3 py-8 cursor-pointer">
+                          <td className="pl-3 py-8 cursor-pointer transition duration-300 ease-in-out hover:text-[#7e7e7e]">
                             <Link to={`${_.FileUrl}`}>Resume</Link>
                           </td>
                           <td className="pl-3 py-8">{_.Skills}</td>
@@ -89,7 +89,7 @@ export default function CareerTable() {
                           <td
                             className="pl-3 py-8 text-[#7e7e7e] cursor-pointer"
                             onClick={() => {
-                              deleteDoc(_.id);
+                              DeleteDoc(_.id);
                             }}
                           >
                             Delete

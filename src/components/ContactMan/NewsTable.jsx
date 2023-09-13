@@ -16,7 +16,7 @@ export default function NewsTable() {
 
   const fetchData = async () => {
     setIsSubmitting(true);
-    const querySnapshot = await getDocs(collection(db, "NEWSLETTER"));
+    const querySnapshot = await getDocs(collection(db, "NEWS-LETTER"));
     const enquiryData = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
@@ -29,7 +29,7 @@ export default function NewsTable() {
 
   const DeleteDoc = async (docId) => {
     try {
-      const docRef = doc(db, "NEWSLETTER", docId);
+      const docRef = doc(db, "NEWS-LETTER", docId);
       await deleteDoc(docRef);
       navigate("/home");
     } catch (error) {
@@ -62,18 +62,18 @@ export default function NewsTable() {
                   <tr>
                     <th className="md:pl-3 py-2">S.No</th>
                     <th className="pl-3 py-2">Email</th>
-                    <th className="pl-3 py-2">Date</th>
+                    {/* <th className="pl-3 py-2">Date</th> */}
                     <th className="pl-3 py-2">Delete</th>
                   </tr>
                 </thead>
-                <tbody className="border-b border-[#EEEEEE] text-sm">
-                  <tr>
-                    {data?.map((_, i) => {
-                      return (
+                {data?.map((_, i) => {
+                  return (
+                    <tbody className="border-b border-[#EEEEEE] text-sm">
+                      <tr>
                         <>
                           <td className="md:pl-10 py-8 ">{i + 1}</td>
-                          <td className="pl-3 py-8">{_.Email}</td>
-                          <td className="pl-3 py-8">{_.date}</td>
+                          <td className="pl-3 py-8">{_.mail}</td>
+                          {/* <td className="pl-3 py-8">{_.date}</td> */}
                           <td
                             className="pl-3 py-8 text-[#7e7e7e] cursor-pointer"
                             onClick={() => {
@@ -83,10 +83,10 @@ export default function NewsTable() {
                             Delete
                           </td>
                         </>
-                      );
-                    })}
-                  </tr>
-                </tbody>
+                      </tr>
+                    </tbody>
+                  );
+                })}
               </table>
             </div>
           </div>

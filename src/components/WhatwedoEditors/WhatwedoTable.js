@@ -41,7 +41,7 @@ export default function WhatwedoTable() {
     },
     {
       id: 1241,
-      Tittle: "Ware ERP Solutions",
+      Tittle: "ERP Solutions",
       image: "https://venovet.com/assets/images/pagetop-bg1.jpg",
     },
     {

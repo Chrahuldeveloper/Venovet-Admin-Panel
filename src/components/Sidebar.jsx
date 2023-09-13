@@ -5,6 +5,8 @@ import {
   BsFillTelephoneFill,
   BsFillPersonFill,
 } from "react-icons/bs";
+import { MdOutlineSocialDistance } from "react-icons/md";
+import { RxButton } from "react-icons/rx";
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
 import { AiOutlineDatabase } from "react-icons/ai";
@@ -98,6 +100,11 @@ export default function Sidebar() {
           <div
             className={`${toogle.dropdown2 ? "block" : "hidden"} pl-8  my-6`}
           >
+            <Link to={"/nature-of-enquiry"}>
+              <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
+                Nature of Enquiry
+              </li>
+            </Link>
             <Link to={"/enquiries"}>
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
                 Enquire
@@ -120,23 +127,16 @@ export default function Sidebar() {
               <li className="text-lg font-semibold text-gray-500">Blogs</li>
             </div>
           </Link>
-          <Link to={"/nature-of-enquiry"}>
-            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-              <BsPencilSquare size="25" color="gray" />
-              <li className="text-lg font-semibold text-gray-500">
-                Nature of Enquiry
-              </li>
-            </div>
-          </Link>
+
           <Link to={"/brochure"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-              <BsPencilSquare size="25" color="gray" />
+              <RxButton size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">Brochure</li>
             </div>
           </Link>
           <Link to={"/social-media"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-              <BsPencilSquare size="25" color="gray" />
+              <MdOutlineSocialDistance size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">
                 SocialMedia-Icons
               </li>

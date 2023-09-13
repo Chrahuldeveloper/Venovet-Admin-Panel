@@ -91,8 +91,8 @@ export default function NewWhy() {
           <div className="border-b font-semibold text-xl px-8 py-2">
             <h1>Add Why Us</h1>
           </div>
-          <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-            <div className="space-y-6 md:space-y-0 md:space-x-44 text-lg">
+          <form className="p-8   space-y-4" onSubmit={handleSubmit}>
+            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
                 Category <span className="text-red-500 text-lg">*</span>
               </label>
@@ -116,7 +116,7 @@ export default function NewWhy() {
                 })}
               </select>
             </div>
-            <div className="space-y-6 md:space-y-0 md:space-x-44 text-lg">
+            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
                 Title <span className="text-red-500 text-lg">*</span>
               </label>
@@ -132,7 +132,7 @@ export default function NewWhy() {
                 className="outline-none border w-64 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="flex flex-col space-y-4">
+            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">Image</label>
               <input
                 type="file"

@@ -69,8 +69,8 @@ export default function EditKey() {
           <div className="border-b font-semibold text-xl px-8 py-2">
             <h1>Edit Key Benefits</h1>
           </div>
-          <form className="p-8  space-x-6 space-y-4" onSubmit={handleSubmit}>
-            <div className="md:space-x-44 space-y-5 md:space-y-0  text-lg">
+          <form className="p-8   space-y-4" onSubmit={handleSubmit}>
+            <div className="grid gap-5 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
                 Category <span className="text-red-500 text-lg">*</span>
               </label>
@@ -93,7 +93,7 @@ export default function EditKey() {
                 })}
               </select>
             </div>
-            <div className="md:space-x-44 space-y-5 md:space-y-0  text-lg">
+            <div className="grid gap-5 pr-5 md:grid-cols-3 md:gap-0 md:pr-0  text-lg">
               <label className="text-[#186ad2] text-lg">
                 Title <span className="text-red-500 text-lg">*</span>
               </label>
@@ -109,7 +109,7 @@ export default function EditKey() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="flex flex-col space-y-4">
+            <div className="grid gap-5 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">Text</label>
               <textarea
                 value={form.Text}
@@ -119,7 +119,7 @@ export default function EditKey() {
                     Text: e.target.value,
                   });
                 }}
-                className="outline-none border w-64 md:w-96 lg:w-[50rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
+                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
               />
             </div>
             <div className="flex items-center justify-center pt-10">

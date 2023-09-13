@@ -43,7 +43,7 @@ export default function WhatWeDoEditCategory() {
             <Logistics category={category} />
           ) : category === "Internet Supply Chain" ? (
             <InternetSupply category={category} />
-          ) : category === "Ware ERP Solutions" ? (
+          ) : category === "ERP Solutions" ? (
             <EPR category={category} />
           ) : category === "Industrial Real States" ? (
             <RealEstate category={category} />

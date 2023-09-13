@@ -11,7 +11,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
       <label className="text-[#186ad2] ">
         {label} {required && <span className="text-red-500 text-lg">*</span>}
       </label>

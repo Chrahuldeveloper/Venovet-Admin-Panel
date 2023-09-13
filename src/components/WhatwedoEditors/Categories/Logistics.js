@@ -241,7 +241,7 @@ export default function Logistics({ category }) {
             type="text"
             value={layout.SubCat4.Para}
             onChange={(e) =>
-              handleFieldChange("SubCat1", "Para", e.target.value)
+              handleFieldChange("SubCat4", "Para", e.target.value)
             }
             cols={8}
             rows={8}

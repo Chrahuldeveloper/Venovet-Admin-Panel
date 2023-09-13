@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { db, storage } from "../../../Firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { db } from "../../../Firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 function UserDetailsField({ label, children }) {
@@ -73,28 +72,6 @@ export default function EPR({ category }) {
     setIsSubmitting(true);
 
     try {
-      // const uploadTasks = [];
-      // const updatedLayout = { ...layout };
-
-      // for (const subCatKey in updatedLayout) {
-      //   if (updatedLayout[subCatKey].image) {
-      //     const imageRef = ref(
-      //       storage,
-      //       `warehouse/${updatedLayout[subCatKey].image.name}`
-      //     );
-      //     const uploadTask = uploadBytesResumable(
-      //       imageRef,
-      //       updatedLayout[subCatKey].image.name
-      //     );
-      //     uploadTasks.push(uploadTask);
-
-      //     const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-      //     updatedLayout[subCatKey].image = downloadURL;
-      //   }
-      // }
-
-      // await Promise.all(uploadTasks);
-
       const docRef = doc(db, "WHATWEDO", category);
       await setDoc(docRef, layout);
 

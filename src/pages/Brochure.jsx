@@ -73,7 +73,7 @@ export default function Brochure() {
             <h1>Add LINKS</h1>
           </div>
           <form className="p-8 space-y-4" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-3 text-lg">
+            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
               <label className="text-[#186ad2] text-lg">
                 Video Link <span className="text-red-500 text-lg">*</span>
               </label>
@@ -89,7 +89,7 @@ export default function Brochure() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid grid-cols-3 text-lg">
+            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
               <label className="text-[#186ad2] text-lg">
                 Brochure<span className="text-red-500 text-lg">*</span>
               </label>
