@@ -31,6 +31,8 @@ export default function ServeTable() {
       // Delete data from Firestore
       await deleteDoc(doc(db, "WHO-WE-SERVE", itemId));
       // setData((prevData) => prevData.filter((item) => item.id !== itemId));
+      setData((prevData) => prevData.filter((item) => item.id !== itemId));
+      navigate("/home");
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
@@ -39,7 +41,7 @@ export default function ServeTable() {
   return (
     <div className="bg-[#F9F9F9] p-8">
       {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -98,7 +100,7 @@ export default function ServeTable() {
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            handleDelete(item.id);
+                            handleDelete(item.Title);
                           }}
                         >
                           Delete

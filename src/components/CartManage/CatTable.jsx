@@ -18,7 +18,6 @@ export default function CatTable() {
     const querySnapshot = await getDocs(collection(db, "CATEGORIES"));
     const enquiryData = querySnapshot.docs.map((doc) => doc.data());
     setData(enquiryData);
-
     setIsSubmitting(false);
   };
 
@@ -36,7 +35,7 @@ export default function CatTable() {
   return (
     <div>
       {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -47,7 +46,7 @@ export default function CatTable() {
         </div>
       )}
       <div className="bg-[#F9F9F9] p-8">
-        <div className="bg-white rounded-xl p-6">
+        <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
             <h1 className="text-xl font-semibold">Categories</h1>
             <Link to={"/addnewcategory"}>
@@ -57,16 +56,16 @@ export default function CatTable() {
               </button>
             </Link>
           </div>
-          <div className="py-8 pt-14 w-full">
+          <div className="w-full py-8 pt-14">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead className="border-y border-[#EEEEEE]">
                   <tr>
-                    <th className="md:pl-3 py-2">S.No</th>
-                    <th className="pl-3 py-2">Category Name</th>
-                    <th className="pl-3 py-2">Image</th>
-                    {/* <th className="pl-3 py-2 ">Edit</th> */}
-                    <th className="pl-3 py-2">Delete</th>
+                    <th className="py-2 md:pl-3">S.No</th>
+                    <th className="py-2 pl-3">Category Name</th>
+                    <th className="py-2 pl-3">Image</th>
+                    {/* <th className="py-2 pl-3 ">Edit</th> */}
+                    <th className="py-2 pl-3">Delete</th>
                   </tr>
                 </thead>
                 {data.map((item, index) => {
@@ -74,9 +73,9 @@ export default function CatTable() {
                     <React.Fragment key={index}>
                       <tbody className="border-b border-[#EEEEEE] text-sm">
                         <tr>
-                          <td className="md:pl-10 py-8 ">{index + 1}</td>
-                          <td className="pl-3 py-8 text-sm"> {item.Name}</td>
-                          <td className="pl-3 py-8 cursor-pointer">
+                          <td className="py-8 md:pl-10 ">{index + 1}</td>
+                          <td className="py-8 pl-3 text-sm"> {item.Name}</td>
+                          <td className="py-8 pl-3 cursor-pointer">
                             <img
                               className="w-24 rounded md:rounded-lg"
                               src={item.Image}
