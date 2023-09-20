@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { CgDatabase } from "react-icons/cg";
 import {
   BsDatabase,
-  BsFillTelephoneFill,
   BsFillPersonFill,
+  BsTelephoneForward,
 } from "react-icons/bs";
 import { MdOutlineSocialDistance } from "react-icons/md";
 import { RxButton } from "react-icons/rx";
@@ -90,7 +90,7 @@ export default function Sidebar() {
               ToogleDropdown("dropdown2");
             }}
           >
-            <BsFillTelephoneFill size="25" color="gray" />
+            <BsTelephoneForward size="25" color="gray" />
             <li className="text-lg font-semibold text-gray-500">
               Enquires/Contacts
             </li>

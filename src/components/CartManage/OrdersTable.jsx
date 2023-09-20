@@ -1,21 +1,60 @@
-import React from "react";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { db } from "../../Firebase";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function OrdersTable() {
-  const data = [
-    {
-      id: 1,
-      Orderid: "100000017",
-      Customer: "  ests",
-      Email: "	tes@gmail.com",
-      Mobile: "	8332829886",
-    },
-  ];
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchData = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "ORDERS"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setData(enquiryData);
+    setIsSubmitting(false);
+  };
+  const DeleteDoc = async (docId) => {
+    try {
+      setIsSubmitting(true);
+
+      const docRef = doc(db, "ORDERS", docId);
+      await deleteDoc(docRef);
+      console.log("Document successfully deleted!");
+      setIsSubmitting(false);
+      navigate("/home");
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error("Error deleting document:", error);
+    }
+  };
 
   return (
     <div>
+      {isSubmitting && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
@@ -28,11 +67,11 @@ export default function OrdersTable() {
                   <tr>
                     <th className="py-2 pl-3">S.No</th>
                     <th className="py-2 pl-3">Order ID</th>
+                    <th className="py-2 pl-3">Quantity</th>
                     <th className="py-2 pl-3">Customer</th>
                     <th className="py-2 pl-3">Email</th>
                     <th className="py-2 pl-3">Mobile No</th>
                     <th className="py-2 pl-3">Status</th>
-                    <th className="py-2 pl-3">view</th>
                     <th className="py-2 pl-3">Delete</th>
                   </tr>
                 </thead>
@@ -41,16 +80,15 @@ export default function OrdersTable() {
                     return (
                       <>
                         <tr>
-                          <td className="py-8 md:pl-10 ">{item.id}</td>
+                          <td className="py-8 md:pl-10 ">{i + 1}</td>
+                          <td className="py-8 text-sm md:pl-3">{item.name}</td>
                           <td className="py-8 text-sm md:pl-3">
-                            {item.Orderid}
+                            {item.quantity}
                           </td>
-                          <td className="py-8 text-sm md:pl-3">
-                            {item.Customer}
-                          </td>
+                          <td className="py-8 text-sm md:pl-3">{item.Name}</td>
 
                           <td className="py-8 pl-3">{item.Email}</td>
-                          <td className="py-8 pl-3">{item.Mobile}</td>
+                          <td className="py-8 pl-3">{item.Phone}</td>
                           <td className="py-8 pl-3">
                             <select className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md">
                               <option>Select Status</option>
@@ -59,15 +97,13 @@ export default function OrdersTable() {
                               <option>Close</option>
                             </select>
                           </td>
+
                           <td
-                            className="py-8 pl-3 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/truckedit/${item.id}`);
+                              DeleteDoc(item.id);
                             }}
+                            className="py-8 pl-3 cursor-pointer text-[#7e7e7e]"
                           >
-                            Edit
-                          </td>
-                          <td className="py-8 pl-3 cursor-pointer text-[#7e7e7e]">
                             Delete
                           </td>
                         </tr>

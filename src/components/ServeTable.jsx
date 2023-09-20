@@ -23,15 +23,14 @@ export default function ServeTable() {
     const querySnapshot = await getDocs(collection(db, "WHO-WE-SERVE"));
     const enquiryData = querySnapshot.docs.map((doc) => doc.data());
     setData(enquiryData);
-    console.log(enquiryData);
     setIsSubmitting(false);
   };
 
   const handleDelete = async (itemId) => {
     try {
       // Delete data from Firestore
-      await deleteDoc(doc(db, "CATEGORIES", itemId));
-      setData((prevData) => prevData.filter((item) => item.id !== itemId));
+      await deleteDoc(doc(db, "WHO-WE-SERVE", itemId));
+      // setData((prevData) => prevData.filter((item) => item.id !== itemId));
     } catch (error) {
       console.error("Error deleting document: ", error);
     }

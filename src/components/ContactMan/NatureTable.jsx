@@ -55,7 +55,7 @@ export default function NatureTable() {
       )}
       <div className="bg-[#F9F9F9] p-8">
         <div className="bg-white rounded-xl p-6">
-          <div className="flex justify-between px-6 pt-2">
+          <div className="flex justify-between md:px-6 pt-2">
             <h1 className="text-xl font-semibold">Nature of Enquiry</h1>
             <Link to={"/addnewnatureenq"}>
               <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">

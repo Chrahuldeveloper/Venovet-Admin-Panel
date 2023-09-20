@@ -27,8 +27,6 @@ export default function WhyTable() {
     setIsSubmitting(false);
   };
 
-  console.log(data);
-
   const DeleteDoc = async (docId) => {
     setIsSubmitting(true);
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CgDatabase } from "react-icons/cg";
 import {
   BsDatabase,
-  BsFillTelephoneFill,
+  BsTelephoneForward,
   BsFillPersonFill,
   BsPencilSquare,
 } from "react-icons/bs";
@@ -105,7 +105,7 @@ export default function MobileSidebar({ settoogles }) {
                   ToogleDropdown("dropdown2");
                 }}
               >
-                <BsFillTelephoneFill size="25" color="gray" />
+                <BsTelephoneForward size="25" color="gray" />
                 <li className="text-sm font-semibold text-gray-500">
                   Enquires/Contacts
                 </li>

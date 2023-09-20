@@ -26,7 +26,7 @@ export default function KeyTable() {
     setIsSubmitting(false);
   };
 
-  const deleteDoc = async (docId, e) => {
+  const DeleteDoc = async (docId, e) => {
     setIsSubmitting(true);
     try {
       const docRef = doc(db, "KEY-BENEFITS", docId);
@@ -98,7 +98,7 @@ export default function KeyTable() {
                         </td>
                         <td
                           onClick={() => {
-                            deleteDoc(item.id);
+                            DeleteDoc(item.id);
                           }}
                           className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
                         >

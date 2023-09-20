@@ -11,7 +11,7 @@ export default function Orders() {
         <div className="hidden lg:block">
           <Sidebar />
         </div>
-        <div className="bg-[#F9F9F9] w-full lg:ml-24">
+        <div className="bg-[#F9F9F9] w-full">
           <Navbar />
           <OrdersTable />
           <Footer />

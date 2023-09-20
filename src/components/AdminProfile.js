@@ -51,7 +51,7 @@ export default function AdminProfile() {
           <div className="w-full py-8 pt-14">
             <form className="p-8 space-y-4 max-w-4xl" onSubmit={update_details}>
               <div className="md:flex space-y-4 md:space-y-0 items-center justify-between">
-                <h1 className="font- text-[#186ad2] md:text-lg">
+                <h1 className=" text-[#186ad2] md:text-lg">
                   UserName <span className="text-red-500 text-lg">*</span>
                 </h1>
                 <input
