@@ -24,6 +24,22 @@ export default function NewServe() {
     Why: "",
   });
 
+  const cat = [
+    "Select Category",
+    "Fast Moving Consumer Goods (FMCG)",
+    "Fast Moving Consumer Durables (FMCD)",
+    "Fashion & Lifestyle",
+    "Home & Furniture",
+    "Auto-Mobility",
+    "Telecom",
+    "Fruits & vegetables",
+    "Diary Farm",
+    "Ecommerce Fulfillment",
+    "Chemical",
+    "Pharma",
+    "Lens and Frames",
+  ];
+
   const handleQuillChange = (field, value) => {
     setForm((prevForm) => ({
       ...prevForm,
@@ -39,44 +55,34 @@ export default function NewServe() {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      const imageRef = ref(storage, `images/${Image.name}`);
-      const uploadTask = uploadBytesResumable(imageRef, Image);
+      setIsSubmitting(true);
 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error(error);
-        },
-        async () => {
-          // download url for upload file
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          const formData = {
-            ...form,
-            Image: downloadURL,
-          };
+      // Upload the image to Firebase Storage
+      const imageRef = ref(storage, `images/${form.Title}/${form.Image.name}`);
+      await uploadBytesResumable(imageRef, form.Image);
+      const url = await getDownloadURL(imageRef);
+      const formData = {
+        ...form,
+        Image: url,
+      };
+      const formDataPlainText = {
+        ...formData,
+        Overview: convert(formData.Overview),
+        Stats: convert(formData.Stats),
+        How: convert(formData.How),
+        Why: convert(formData.Why),
+      };
 
-          const formDataPlainText = {
-            ...formData,
-            Overview: convert(formData.Overview),
-            Stats: convert(formData.Stats),
-            How: convert(formData.How),
-            Why: convert(formData.Why),
-          };
+      await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);
+      setIsSubmitting(false);
 
-          await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);
-          setIsSubmitting(false);
-
-          navigate("/whoweserve");
-        }
-      );
+      navigate("/whoweserve");
     } catch (error) {
-      console.log(error);
+      console.error("Error submitting data: ", error);
       setIsSubmitting(false);
     }
   };
@@ -111,7 +117,7 @@ export default function NewServe() {
               <label className="text-[#186ad2]">
                 Title <span className="text-red-500 text-lg">*</span>
               </label>
-              <input
+              {/* <input
                 className="outline-none border w-64 md:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
                 type="text"
                 value={form.Title}
@@ -121,7 +127,26 @@ export default function NewServe() {
                     Title: e.target.value,
                   });
                 }}
-              />
+              /> */}
+              <select
+                defaultValue={cat[0]}
+                value={form.Title}
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    Title: e.target.value,
+                  });
+                }}
+                className="outline-none  border w-64 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] text-[#7e7e7e] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              >
+                {cat.map((item, index) => {
+                  return (
+                    <option className="" key={index} value={item}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className=" pt-5 space-y-4">
               <label className="text-[#186ad2] text-lg">Overview Text</label>

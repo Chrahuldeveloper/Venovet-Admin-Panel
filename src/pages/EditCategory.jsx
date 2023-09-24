@@ -38,6 +38,7 @@ export default function EditCategory() {
       Image: imageFile,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,17 +46,13 @@ export default function EditCategory() {
       setIsSubmitting(true);
 
       // Upload the image to Firebase Storage
-      const imageRef = ref(
-        storage,
-        `images/${form.Category}/${form.Image.name}`
-      );
+      const imageRef = ref(storage, `images/${form.Title}/${form.Image.name}`);
       await uploadBytesResumable(imageRef, form.Image);
       const url = await getDownloadURL(imageRef);
       const formData = {
         ...form,
         Image: url,
       };
-
       const formDataPlainText = {
         ...formData,
         Overview: convert(formData.Overview),
@@ -63,10 +60,10 @@ export default function EditCategory() {
         How: convert(formData.How),
         Why: convert(formData.Why),
       };
-
       const docRef = doc(db, "WHO-WE-SERVE", id);
       await updateDoc(docRef, formDataPlainText);
       setIsSubmitting(false);
+
       navigate("/whoweserve");
     } catch (error) {
       console.error("Error submitting data: ", error);
