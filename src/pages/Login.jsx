@@ -5,7 +5,7 @@ import { db } from "../Firebase";
 
 export default function Login() {
   const [user, setuser] = useState({
-    Role: "",
+    // Role: "",
     Name: "",
     Password: "",
   });
@@ -31,13 +31,13 @@ export default function Login() {
   const Login = (e) => {
     e.preventDefault();
     if (
-      user.Role === "Superadmin" &&
+      // user.Role === "Superadmin" &&
       user.Name === data[0].UserName &&
       user.Password === data[0].Password
     ) {
       navigate("/home");
     } else {
-      alert("Please enter");
+      alert("Wrong Password. Try Again!!");
     }
   };
 
@@ -53,7 +53,7 @@ export default function Login() {
           <h1 className="text-white md:text-lg">Sign in your account</h1>
         </div>
         <form className="mt-5 flex justify-center flex-col text-white gap-10">
-          <select
+          {/* <select
             name="adminrole"
             value={user.Role}
             onChange={(e) => {
@@ -65,9 +65,9 @@ export default function Login() {
             <option value="Superadmin">Super admin</option>
             <option value="Company">Company</option>
             <option value="User">User</option>
-          </select>
+          </select> */}
 
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-2">
             <label htmlFor="Username">Username</label>
             <input
               type="text"
@@ -80,7 +80,7 @@ export default function Login() {
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-2">
             <label htmlFor="Password">Password</label>
             <input
               type="password"
