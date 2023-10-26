@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db, storage } from "../Firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
@@ -24,18 +24,6 @@ export default function SocialMedia() {
     Email: "",
   });
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
-  //   try {
-  //     await setDoc(doc(db, "SOCIAL-MEDIA-URL", "LINKS"), form);
-  //     setIsSubmitting(false);
-  //     navigate("/");
-  //   } catch (error) {
-  //     setIsSubmitting(false);
-  //     console.log(error);
-  //   }
-  // };
   const handleFileChange = (event) => {
     const imageFile = event.target.files[0];
     setForm((prevForm) => ({
@@ -43,6 +31,28 @@ export default function SocialMedia() {
       Pdf: imageFile,
     }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const docRef = doc(db, "WHATWEDO", category);
+        const docRef = doc(db, "SOCIAL-MEDIA-URL", "LINKS");
+
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setForm(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, "LINKS");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

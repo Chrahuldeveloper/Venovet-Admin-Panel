@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,7 +6,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { convert } from "html-to-text";
 import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
@@ -38,6 +38,28 @@ export default function EditCategory() {
       Image: imageFile,
     }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const docRef = doc(db, "WHATWEDO", category);
+        const docRef = doc(db, "WHO-WE-SERVE", id);
+
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setForm(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

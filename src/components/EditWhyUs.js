@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import { db, storage } from "../Firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -43,6 +43,28 @@ export default function EditWhyUs() {
       Image: imageFile,
     }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const docRef = doc(db, "WHATWEDO", category);
+        const docRef = doc(db, "WHY-US", form.Category);
+
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setForm(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [form.Category]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
