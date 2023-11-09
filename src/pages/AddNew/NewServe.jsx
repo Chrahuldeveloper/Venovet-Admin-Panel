@@ -17,10 +17,14 @@ export default function NewServe() {
 
   const [form, setForm] = useState({
     Title: "",
+    Title1: "",
     Overview: "",
+    Title2: "",
     Stats: "",
+    Title3: "",
     How: "",
     Image: "",
+    Title4: "",
     Why: "",
   });
 
@@ -148,13 +152,43 @@ export default function NewServe() {
                 })}
               </select>
             </div>
-            <div className=" pt-5 space-y-4">
+            <div className=" pt-5 space-y-4 md:space-x-24">
+              <label className="text-[#186ad2] text-lg">Title 1</label>
+
+              <input
+                type="text"
+                value={form.Title1}
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    Title1: e.target.value,
+                  });
+                }}
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              />
+            </div>
+            <div className="  space-y-4">
               <label className="text-[#186ad2] text-lg">Overview Text</label>
               <ReactQuill
                 theme="snow"
                 className=""
                 value={form.Overview}
                 onChange={(value) => handleQuillChange("Overview", value)}
+              />
+            </div>
+            <div className=" pt-5 space-y-4 md:space-x-24">
+              <label className="text-[#186ad2] text-lg">Title 2</label>
+
+              <input
+                type="text"
+                value={form.Title2}
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    Title2: e.target.value,
+                  });
+                }}
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="space-y-4">
@@ -165,6 +199,21 @@ export default function NewServe() {
                 theme="snow"
                 value={form.Stats}
                 onChange={(value) => handleQuillChange("Stats", value)}
+              />
+            </div>
+            <div className=" pt-5 space-y-4 md:space-x-24">
+              <label className="text-[#186ad2] text-lg">Title 3</label>
+
+              <input
+                type="text"
+                value={form.Title3}
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    Title3: e.target.value,
+                  });
+                }}
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="space-y-4">
@@ -183,6 +232,21 @@ export default function NewServe() {
                 type="file"
                 onChange={handleImageChange}
                 className="border border-[#eb5f0f] w-64 md:w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
+              />
+            </div>
+            <div className=" pt-5 space-y-4 md:space-x-24">
+              <label className="text-[#186ad2] text-lg">Title 4</label>
+
+              <input
+                type="text"
+                value={form.Title4}
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    Title4: e.target.value,
+                  });
+                }}
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className="space-y-4">

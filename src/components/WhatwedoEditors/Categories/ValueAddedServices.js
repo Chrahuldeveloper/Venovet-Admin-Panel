@@ -156,7 +156,7 @@ export default function ValueAddedServices({ category }) {
       )}
       <form className="pl-10 space-y-4 pt-7" onSubmit={handleSubmit}>
         <UserDetailsField label="Para">
-          <input
+          <textarea
             type="text"
             value={layout.Para}
             onChange={(e) => {
@@ -165,7 +165,9 @@ export default function ValueAddedServices({ category }) {
                 Para: e.target.value,
               });
             }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            cols={8}
+            rows={8}
+            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1image">

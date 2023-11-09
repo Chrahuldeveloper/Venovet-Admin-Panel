@@ -188,7 +188,7 @@ export default function IndustrialSerives({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="Para1">
-          <input
+          <textarea
             type="text"
             value={layout.Para1}
             onChange={(e) =>
@@ -197,7 +197,9 @@ export default function IndustrialSerives({ category }) {
                 Para1: e.target.value,
               })
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            cols={8}
+            rows={8}
+            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
           />
         </UserDetailsField>
         <UserDetailsField label="Tittle2">

@@ -1,32 +1,72 @@
-import React from "react";
-import { FaUsers, FaTruck, FaHome, FaRupeeSign } from "react-icons/fa";
-
-const data = [
-  {
-    img: <FaUsers size={22} />,
-    Name: "Vendors",
-    Qty: "3",
-  },
-  {
-    img: <FaTruck size={22} />,
-    Name: "Trucks",
-    Qty: "3",
-  },
-  {
-    img: <FaHome size={22} />,
-    Name: "Properties",
-    Qty: "1",
-  },
-  {
-    img: <FaRupeeSign size={22} />,
-    Name: "Others",
-    Qty: "0",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { FaUsers, FaRupeeSign } from "react-icons/fa";
+import { db } from "../Firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { RotatingLines } from "react-loader-spinner";
 
 function DbCards() {
+  const [items, setItems] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const data = [
+    {
+      img: <FaUsers size={22} />,
+      Name: "Enquiries",
+      Qty: items.length,
+    },
+    {
+      img: <FaRupeeSign size={22} />,
+      Name: "Orders",
+      Qty: orders.length,
+    },
+  ];
+
+  // enquiries data
+  const fetchData = async () => {
+    setIsSubmitting(true);
+
+    const querySnapshot = await getDocs(collection(db, "ENQUIRY"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setItems(enquiryData);
+    setIsSubmitting(false);
+  };
+
+  // orders data
+  const fetchOrdersData = async () => {
+    const querySnapshot = await getDocs(collection(db, "ORDERS"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setOrders(enquiryData);
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchOrdersData();
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="grid lg:grid-cols-2 gap-4 md:gap-y-8">
+      {isSubmitting && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="70"
+            visible={true}
+          />
+        </div>
+      )}
       {data.map((item, index) => {
         return (
           <div
