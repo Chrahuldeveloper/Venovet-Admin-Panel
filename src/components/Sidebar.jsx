@@ -6,12 +6,12 @@ import {
   BsTelephoneForward,
 } from "react-icons/bs";
 import { MdOutlineSocialDistance } from "react-icons/md";
-import { RxButton } from "react-icons/rx";
 import { AiOutlineShoppingCart, AiFillLock } from "react-icons/ai";
 import { LiaGreaterThanSolid } from "react-icons/lia";
 import { AiOutlineDatabase } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { vvlogo, logo } from "../assets";
 export default function Sidebar() {
   const [toogle, settoogle] = useState({
     dropdown1: false,
@@ -29,11 +29,7 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden lg:block ">
-      <img
-        src="https://venovet.com/cw_admin/images/logo-full.png"
-        className="mx-auto mt-10 w-28"
-        alt=""
-      />
+      <img src={logo} className="mx-auto mt-10 " alt="" />
       <div className="mt-5 ">
         <ul className="px-5 pt-8">
           <Link to="/home">

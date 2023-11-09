@@ -2,6 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../Firebase";
+import { logo } from "../assets";
 
 export default function Login() {
   const [user, setuser] = useState({
@@ -45,11 +46,7 @@ export default function Login() {
     <body className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div className="bg-[#0b2a97] p-8 rounded-lg w-[80vw] sm:w-[60vw] md:w-[50vw] lg:w-[30vw]">
         <div className="text-center space-y-3.5">
-          <img
-            src="https://venovet.com/cw_admin/images/logo-full.png"
-            className="mx-auto"
-            alt=""
-          />
+          <img src={logo} className="mx-auto" alt="" />
           <h1 className="text-white md:text-lg">Sign in your account</h1>
         </div>
         <form className="mt-5 flex justify-center flex-col text-white gap-10">
