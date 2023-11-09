@@ -1,4 +1,10 @@
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "./../././../Firebase";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +18,20 @@ export default function EnquiryTable() {
     status: "",
     comment: "",
   });
+
+  // const updateData = async (key, value) => {
+  //   // Set the value in the Apollo Client store
+  //   setValues((prevValues) => ({
+  //     ...prevValues,
+  //     [key]: value,
+  //   }));
+
+  //   // Save the data to Firebase Firestore collection
+  //   const dataRef = doc(collection(db, "Enquiry_Status"));
+  //   await setDoc(dataRef, {
+  //     [key]: value,
+  //   });
+  // };
 
   const fetchData = async () => {
     setIsSubmitting(true);
@@ -101,6 +121,9 @@ export default function EnquiryTable() {
                                 status: e.target.value,
                               });
                             }}
+                            // onChange={(e) =>
+                            //   updateData("status", e.target.value)
+                            // }
                             className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md"
                           >
                             <option>Select Status</option>
@@ -119,6 +142,9 @@ export default function EnquiryTable() {
                                 comment: e.target.value,
                               });
                             }}
+                            // onChange={(e) =>
+                            //   updateData("comment", e.target.value)
+                            // }
                             cols={12}
                             rows={3}
                             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"

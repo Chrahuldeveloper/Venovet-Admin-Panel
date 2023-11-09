@@ -11,7 +11,7 @@ import { LiaGreaterThanSolid } from "react-icons/lia";
 import { AiOutlineDatabase } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { vvlogo, logo } from "../assets";
+import { logo } from "../assets";
 export default function Sidebar() {
   const [toogle, settoogle] = useState({
     dropdown1: false,
