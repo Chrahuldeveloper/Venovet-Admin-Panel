@@ -1,13 +1,18 @@
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../Firebase";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function OrdersTable() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,7 +35,6 @@ export default function OrdersTable() {
   const DeleteDoc = async (docId) => {
     try {
       setIsSubmitting(true);
-
       const docRef = doc(db, "ORDERS", docId);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
@@ -45,7 +49,7 @@ export default function OrdersTable() {
   return (
     <div>
       {isSubmitting && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -86,18 +90,18 @@ export default function OrdersTable() {
                             {item.quantity}
                           </td>
                           <td className="py-8 text-sm md:pl-3">{item.Name}</td>
-
                           <td className="py-8 pl-3">{item.Email}</td>
                           <td className="py-8 pl-3">{item.Phone}</td>
                           <td className="py-8 pl-3">
                             <select className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md">
-                              <option>Select Status</option>
-                              <option>Open</option>
-                              <option>Process</option>
-                              <option>Close</option>
+                              <option value="Select Status">
+                                Select Status
+                              </option>
+                              <option value="Open">Open</option>
+                              <option value="Process">Process</option>
+                              <option value="Close">Close</option>
                             </select>
                           </td>
-
                           <td
                             onClick={() => {
                               DeleteDoc(item.id);

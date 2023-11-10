@@ -13,11 +13,13 @@ export default function EnquiryTable() {
   const [data, setData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const [selectedStatus, setSelectedStatus] = useState([]);
 
-  const [values, setValues] = useState({
-    status: "",
-    comment: "",
-  });
+  // const [statusdata, setstatusdata] = useState([]);
+  // const [values, setValues] = useState({
+  //   status: "",
+  //   comment: "",
+  // });
 
   // const updateData = async (key, value) => {
   //   // Set the value in the Apollo Client store
@@ -32,6 +34,41 @@ export default function EnquiryTable() {
   //     [key]: value,
   //   });
   // };
+
+  // save Status
+  const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+      setIsSubmitting(true);
+      const docRef = doc(db, "Enquiry_Status", orderId);
+      await setDoc(docRef, { status: newStatus });
+      console.log("Order status successfully updated!");
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error("Error updating order status:", error);
+    }
+  };
+
+  const fetchOrderStatus = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "Enquiry_Status"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    const initialSelectedStatus = enquiryData.map(
+      (item) => item.status || "Select Status"
+    );
+    setSelectedStatus(initialSelectedStatus);
+    setIsSubmitting(false);
+  };
+
+  useEffect(() => {
+    fetchOrderStatus();
+    window.scrollTo(0, 0);
+  }, []);
 
   const fetchData = async () => {
     setIsSubmitting(true);
@@ -54,7 +91,7 @@ export default function EnquiryTable() {
   const Deletedoc = async (docid) => {
     setIsSubmitting(true);
     try {
-      const docRef = doc(db, "ENQUIRY", docid);
+      const docRef = doc(db, "Enquiry_Status", docid);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
@@ -69,7 +106,7 @@ export default function EnquiryTable() {
   return (
     <div>
       {isSubmitting && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -84,9 +121,9 @@ export default function EnquiryTable() {
           <div className="flex justify-between px-6 pt-2">
             <h1 className="text-xl font-semibold">Enquiries</h1>
           </div>
-          <div className="w-full md:w-[54rem] py-8 pt-14">
+          <div className="py-8 pt-14">
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
+              <table className="w-[100vw] text-left">
                 <thead className="border-y border-[#EEEEEE]">
                   <tr>
                     <th className="py-2 pl-3">S.No</th>
@@ -114,16 +151,16 @@ export default function EnquiryTable() {
                         <td className="py-8 pl-5">{_.Message}</td>
                         <td className="py-8 pl-3">
                           <select
-                            value={values.status}
+                            value={selectedStatus[i]}
                             onChange={(e) => {
-                              setValues({
-                                ...values,
-                                status: e.target.value,
+                              const newStatus = e.target.value;
+                              setSelectedStatus((prevstatus) => {
+                                const updatedStatus = [...prevstatus];
+                                updatedStatus[i] = newStatus;
+                                return updatedStatus;
                               });
+                              updateOrderStatus(_.id, newStatus);
                             }}
-                            // onChange={(e) =>
-                            //   updateData("status", e.target.value)
-                            // }
                             className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md"
                           >
                             <option>Select Status</option>
@@ -135,13 +172,13 @@ export default function EnquiryTable() {
                         <td className="py-8 pl-5">
                           <textarea
                             type="text"
-                            value={values.comment}
-                            onChange={(e) => {
-                              setValues({
-                                ...values,
-                                comment: e.target.value,
-                              });
-                            }}
+                            // value={values.comment}
+                            // onChange={(e) => {
+                            //   setValues({
+                            //     ...values,
+                            //     comment: e.target.value,
+                            //   });
+                            // }}
                             // onChange={(e) =>
                             //   updateData("comment", e.target.value)
                             // }

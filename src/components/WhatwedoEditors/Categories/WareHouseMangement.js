@@ -91,32 +91,24 @@ export default function WareHouseMangement({ category }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-
     try {
       const updatedLayout = { ...layout };
-
       for (const subCatKey in updatedLayout) {
         if (updatedLayout[subCatKey].image) {
           const imageFile = updatedLayout[subCatKey].image;
-          // Create a reference to the image file in Firebase Storage
           const storageRef = ref(
             storage,
             `warehouse/management/${imageFile.name}`
           );
-          // Upload the image file to Firebase Storage
           await uploadBytesResumable(storageRef, imageFile);
-          // Wait for the upload to complete and get the download URL
           const snapshot = await getDownloadURL(storageRef);
           const downloadURL = snapshot;
-          // Update the layout object with the download URL
           updatedLayout[subCatKey].image = downloadURL;
         }
       }
 
-      // Update the Firestore document with the updated layout
       const docRef = doc(db, "WHATWEDO", category);
       await updateDoc(docRef, updatedLayout);
-
       setIsSubmitting(false);
       navigate("/whatwedo");
     } catch (error) {
@@ -155,10 +147,9 @@ export default function WareHouseMangement({ category }) {
         [field]: value,
       },
     }));
-    console.log(layout)
+    console.log(layout);
   };
 
-  
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true

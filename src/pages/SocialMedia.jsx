@@ -37,9 +37,7 @@ export default function SocialMedia() {
       try {
         // const docRef = doc(db, "WHATWEDO", category);
         const docRef = doc(db, "SOCIAL-MEDIA-URL", "LINKS");
-
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           const data = docSnap.data();
           setForm(data);
@@ -52,7 +50,7 @@ export default function SocialMedia() {
     };
 
     fetchData();
-  }, "LINKS");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +80,7 @@ export default function SocialMedia() {
   return (
     <div className="flex">
       {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -97,14 +95,14 @@ export default function SocialMedia() {
       </div>
       <div className="bg-[#F9F9F9] w-full ">
         <Navbar />
-        <div className="bg-white  py-4 m-8 rounded-3xl">
-          <div className="border-b font-semibold text-xl px-8 py-2">
+        <div className="py-4 m-8 bg-white rounded-3xl">
+          <div className="px-8 py-2 text-xl font-semibold border-b">
             <h1>Add URL's</h1>
           </div>
-          <form className="p-8    space-y-4" onSubmit={handleSubmit}>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+          <form className="p-8 space-y-4" onSubmit={handleSubmit}>
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Facebook <span className="text-red-500 text-lg">*</span>
+                Facebook <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Facebook}
@@ -118,9 +116,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Twitter <span className="text-red-500 text-lg">*</span>
+                Twitter <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Twitter}
@@ -134,9 +132,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Instagram <span className="text-red-500 text-lg">*</span>
+                Instagram <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Instagram}
@@ -150,9 +148,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Linkedin <span className="text-red-500 text-lg">*</span>
+                Linkedin <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Linkedin}
@@ -166,9 +164,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Video Link <span className="text-red-500 text-lg">*</span>
+                Video Link <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Link}
@@ -182,9 +180,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Whatsapp <span className="text-red-500 text-lg">*</span>
+                Whatsapp <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Whatsapp}
@@ -198,9 +196,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Phone <span className="text-red-500 text-lg">*</span>
+                Phone <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Phone}
@@ -214,9 +212,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Email <span className="text-red-500 text-lg">*</span>
+                Email <span className="text-lg text-red-500">*</span>
               </label>
               <input
                 value={form.Email}
@@ -230,9 +228,9 @@ export default function SocialMedia() {
                 className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
-            <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0 text-lg">
+            <div className="grid gap-6 pr-5 text-lg md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">
-                Brochure<span className="text-red-500 text-lg">*</span>
+                Brochure<span className="text-lg text-red-500">*</span>
               </label>
               <input
                 type="file"
