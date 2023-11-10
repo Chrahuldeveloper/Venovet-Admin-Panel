@@ -16,7 +16,6 @@ function UserDetailsField({ label, children }) {
 
 export default function WareHouseMangement({ category }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const navigate = useNavigate();
   const [layout, setlayout] = useState({
     Tittle1: "",
@@ -80,20 +79,16 @@ export default function WareHouseMangement({ category }) {
       for (const subCatKey in updatedLayout) {
         if (updatedLayout[subCatKey].image) {
           const imageFile = updatedLayout[subCatKey].image;
-
           // Create a reference to the image file in Firebase Storage
           const storageRef = ref(
             storage,
             `warehouse/management/${imageFile.name}`
           );
-
           // Upload the image file to Firebase Storage
           await uploadBytesResumable(storageRef, imageFile);
-
           // Wait for the upload to complete and get the download URL
           const snapshot = await getDownloadURL(storageRef);
           const downloadURL = snapshot;
-
           // Update the layout object with the download URL
           updatedLayout[subCatKey].image = downloadURL;
         }
@@ -134,7 +129,6 @@ export default function WareHouseMangement({ category }) {
   };
 
   const handleFieldChange = (section, field, value) => {
-    // console.log("Field changed:", field, "New value:", value);
     setlayout((prevLayout) => ({
       ...prevLayout,
       [section]: {
@@ -142,7 +136,10 @@ export default function WareHouseMangement({ category }) {
         [field]: value,
       },
     }));
+    console.log(layout)
   };
+
+  
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true
@@ -160,7 +157,7 @@ export default function WareHouseMangement({ category }) {
         <UserDetailsField label="Tittle1">
           <input
             type="text"
-            value={layout.Tittle1}
+            value={""}
             onChange={(e) =>
               setlayout({
                 ...layout,
