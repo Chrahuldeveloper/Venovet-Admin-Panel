@@ -14,26 +14,7 @@ export default function EnquiryTable() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const [selectedStatus, setSelectedStatus] = useState([]);
-
-  // const [statusdata, setstatusdata] = useState([]);
-  // const [values, setValues] = useState({
-  //   status: "",
-  //   comment: "",
-  // });
-
-  // const updateData = async (key, value) => {
-  //   // Set the value in the Apollo Client store
-  //   setValues((prevValues) => ({
-  //     ...prevValues,
-  //     [key]: value,
-  //   }));
-
-  //   // Save the data to Firebase Firestore collection
-  //   const dataRef = doc(collection(db, "Enquiry_Status"));
-  //   await setDoc(dataRef, {
-  //     [key]: value,
-  //   });
-  // };
+  const [comments, setComments] = useState([]);
 
   // save Status
   const updateOrderStatus = async (orderId, newStatus) => {
@@ -46,6 +27,20 @@ export default function EnquiryTable() {
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error updating order status:", error);
+    }
+  };
+
+  // Save comment
+  const saveComment = async (orderId, comment) => {
+    try {
+      setIsSubmitting(true);
+      const docRef = doc(db, "Enquiry_Status", orderId);
+      await setDoc(docRef, { comment: comment }, { merge: true });
+      console.log("Comment successfully saved!");
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error("Error saving comment:", error);
     }
   };
 
@@ -67,6 +62,25 @@ export default function EnquiryTable() {
 
   useEffect(() => {
     fetchOrderStatus();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fetchComments = async () => {
+    setIsSubmitting(true);
+    const querySnapshot = await getDocs(collection(db, "Enquiry_Status"));
+    const enquiryData = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    const initialComments = enquiryData.map((item) => item.comment || "");
+    setComments(initialComments);
+    setIsSubmitting(false);
+  };
+
+  useEffect(() => {
+    fetchComments();
     window.scrollTo(0, 0);
   }, []);
 
@@ -135,6 +149,7 @@ export default function EnquiryTable() {
                     <th className="py-2 pl-5">Message</th>
                     <th className="py-2 pl-5">Status</th>
                     <th className="py-2 pl-5">Comment</th>
+                    <th className="py-2 pl-5">Save</th>
                     <th className="py-2 pl-5">Delete</th>
                   </tr>
                 </thead>
@@ -172,20 +187,28 @@ export default function EnquiryTable() {
                         <td className="py-8 pl-5">
                           <textarea
                             type="text"
-                            // value={values.comment}
-                            // onChange={(e) => {
-                            //   setValues({
-                            //     ...values,
-                            //     comment: e.target.value,
-                            //   });
-                            // }}
-                            // onChange={(e) =>
-                            //   updateData("comment", e.target.value)
-                            // }
+                            value={comments[i]}
+                            onChange={(e) => {
+                              const newComment = e.target.value;
+                              setComments((prevComments) => {
+                                const updatedComments = [...prevComments];
+                                updatedComments[i] = newComment;
+                                return updatedComments;
+                              });
+                            }}
                             cols={12}
                             rows={3}
                             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
                           />
+                        </td>
+                        <td>
+                        <button
+                          onClick={() => {
+                            saveComment(_.id, comments[i]);
+                          }}
+                        >
+                          Save
+                        </button>
                         </td>
                         <td
                           className="py-8 pl-5 cursor-pointer"
