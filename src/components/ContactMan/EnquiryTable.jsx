@@ -1,4 +1,10 @@
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "./../././../Firebase";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +13,25 @@ export default function EnquiryTable() {
   const [data, setData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const [values, setValues] = useState({
+    status: "",
+    comment: "",
+  });
+
+  // const updateData = async (key, value) => {
+  //   // Set the value in the Apollo Client store
+  //   setValues((prevValues) => ({
+  //     ...prevValues,
+  //     [key]: value,
+  //   }));
+
+  //   // Save the data to Firebase Firestore collection
+  //   const dataRef = doc(collection(db, "Enquiry_Status"));
+  //   await setDoc(dataRef, {
+  //     [key]: value,
+  //   });
+  // };
 
   const fetchData = async () => {
     setIsSubmitting(true);
@@ -59,7 +84,7 @@ export default function EnquiryTable() {
           <div className="flex justify-between px-6 pt-2">
             <h1 className="text-xl font-semibold">Enquiries</h1>
           </div>
-          <div className="w-full py-8 pt-14">
+          <div className="w-full md:w-[54rem] py-8 pt-14">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead className="border-y border-[#EEEEEE]">
@@ -71,6 +96,8 @@ export default function EnquiryTable() {
                     <th className="py-2 pl-5">Mobile</th>
                     <th className="py-2 pl-3">Subject</th>
                     <th className="py-2 pl-5">Message</th>
+                    <th className="py-2 pl-5">Status</th>
+                    <th className="py-2 pl-5">Comment</th>
                     <th className="py-2 pl-5">Delete</th>
                   </tr>
                 </thead>
@@ -85,6 +112,44 @@ export default function EnquiryTable() {
                         <td className="py-8 pl-5">{_.Mobile}</td>
                         <td className="py-8 pl-3">{_.Nature}</td>
                         <td className="py-8 pl-5">{_.Message}</td>
+                        <td className="py-8 pl-3">
+                          <select
+                            value={values.status}
+                            onChange={(e) => {
+                              setValues({
+                                ...values,
+                                status: e.target.value,
+                              });
+                            }}
+                            // onChange={(e) =>
+                            //   updateData("status", e.target.value)
+                            // }
+                            className="px-4 outline-none border border-[#e2e2e2] py-1 text-[#333333] rounded-md"
+                          >
+                            <option>Select Status</option>
+                            <option>Open</option>
+                            <option>Process</option>
+                            <option>Close</option>
+                          </select>
+                        </td>
+                        <td className="py-8 pl-5">
+                          <textarea
+                            type="text"
+                            value={values.comment}
+                            onChange={(e) => {
+                              setValues({
+                                ...values,
+                                comment: e.target.value,
+                              });
+                            }}
+                            // onChange={(e) =>
+                            //   updateData("comment", e.target.value)
+                            // }
+                            cols={12}
+                            rows={3}
+                            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+                          />
+                        </td>
                         <td
                           className="py-8 pl-5 cursor-pointer"
                           onClick={() => {

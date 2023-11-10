@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db, storage } from "../../../Firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -80,6 +80,25 @@ export default function IndustrialSerives({ category }) {
       Para: "",
     },
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "WHATWEDO", category);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setlayout(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -169,7 +188,7 @@ export default function IndustrialSerives({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="Para1">
-          <input
+          <textarea
             type="text"
             value={layout.Para1}
             onChange={(e) =>
@@ -178,7 +197,9 @@ export default function IndustrialSerives({ category }) {
                 Para1: e.target.value,
               })
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            cols={8}
+            rows={8}
+            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
           />
         </UserDetailsField>
         <UserDetailsField label="Tittle2">

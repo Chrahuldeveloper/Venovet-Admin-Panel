@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db, storage } from "../../../Firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -60,43 +60,24 @@ export default function Facility({ category }) {
     // },
   });
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   setIsSubmitting(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "WHATWEDO", category);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setlayout(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   try {
-  //     // const uploadTasks = [];
-  //     const updatedLayout = { ...layout };
-
-  //     for (const subCatKey in updatedLayout) {
-  //       if (updatedLayout[subCatKey].image) {
-  //         const imageRef = ref(
-  //           storage,
-  //           `warehouse/${updatedLayout[subCatKey].image.name}`
-  //         );
-  //         await uploadBytesResumable(
-  //           imageRef,
-  //           updatedLayout[subCatKey].image.name
-  //         );
-  //         // uploadTasks.push(uploadTask);
-
-  //         const downloadURL = await getDownloadURL(imageRef);
-  //         updatedLayout[subCatKey].image = downloadURL;
-  //       }
-  //     }
-
-  //     // await Promise.all(uploadTasks);
-
-  //     const docRef = doc(db, "WHATWEDO", category);
-  //     await setDoc(docRef, updatedLayout);
-
-  //     setIsSubmitting(false);
-  //     navigate("/whatwedo");
-  //   } catch (error) {
-  //     console.log(error);
-  //     setIsSubmitting(false);
-  //   }
-  // };
+    fetchData();
+  }, [category]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

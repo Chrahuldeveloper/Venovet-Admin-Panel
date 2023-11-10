@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db, storage } from "../../../Firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -69,6 +69,25 @@ export default function WareHouseMangement({ category }) {
     Para5: "",
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "WHATWEDO", category);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setlayout(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -96,7 +115,7 @@ export default function WareHouseMangement({ category }) {
 
       // Update the Firestore document with the updated layout
       const docRef = doc(db, "WHATWEDO", category);
-      await setDoc(docRef, updatedLayout);
+      await updateDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
       navigate("/whatwedo");

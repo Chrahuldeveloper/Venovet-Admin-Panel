@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db, storage } from "../Firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
@@ -83,6 +83,28 @@ export default function EditoneBlog() {
       },
     }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const docRef = doc(db, "WHATWEDO", category);
+        const docRef = doc(db, "BLOGS", id);
+
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setlayout(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

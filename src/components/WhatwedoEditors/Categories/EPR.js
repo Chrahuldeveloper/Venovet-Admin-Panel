@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../../../Firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 function UserDetailsField({ label, children }) {
@@ -66,6 +66,25 @@ export default function EPR({ category }) {
       Para: "",
     },
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "WHATWEDO", category);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setlayout(data);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

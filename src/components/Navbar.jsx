@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import MobileSidebar from "./MobileSidebar";
+import { fav } from "../assets";
 function Navbar() {
   const [toogle, settoogle] = useState(false);
 
@@ -29,11 +30,7 @@ function Navbar() {
           </div>
 
           <div className="flex space-x-4 cursor-pointer">
-            <img
-              className="w-10 h-10"
-              src="https://venovet.com/cw_admin/images/favicon.png"
-              alt=""
-            />
+            <img className="w-10 h-10" src={fav} alt="" />
             <div>
               <p className="text-lg font-semibold"> superadmin</p>
               <p className="text-sm text-[#777777]">admin</p>
