@@ -23,6 +23,7 @@ export default function NewServe() {
     Stats: "",
     Title3: "",
     How: "",
+    ChartImage: "",
     Image: "",
     Title4: "",
     Why: "",
@@ -58,6 +59,13 @@ export default function NewServe() {
       Image: imageFile,
     }));
   };
+  const handleImageChange1 = (event) => {
+    const imageFile = event.target.files[0];
+    setForm((prevForm) => ({
+      ...prevForm,
+      ChartImage: imageFile,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,9 +77,19 @@ export default function NewServe() {
       const imageRef = ref(storage, `images/${form.Title}/${form.Image.name}`);
       await uploadBytesResumable(imageRef, form.Image);
       const url = await getDownloadURL(imageRef);
+
+      //upload chart image
+      const chartImageRef = ref(
+        storage,
+        `images/${form.Title}/${form.ChartImage.name}`
+      );
+      await uploadBytesResumable(chartImageRef, form.ChartImage);
+      const chartImageUrl = await getDownloadURL(chartImageRef);
+
       const formData = {
         ...form,
         Image: url,
+        ChartImage: chartImageUrl,
       };
       const formDataPlainText = {
         ...formData,
@@ -226,12 +244,20 @@ export default function NewServe() {
                 onChange={(value) => handleQuillChange("How", value)}
               />
             </div>
-            <div className=" md:space-x-44 space-y-4 lg:space-y-0 ">
+            <div className=" pt-5 space-y-4 md:space-x-24">
+              <label className="text-[#186ad2] text-lg">Chart Image</label>
+              <input
+                type="file"
+                onChange={handleImageChange1}
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+              />
+            </div>
+            <div className=" pt-5 space-y-4 md:space-x-24 ">
               <label className="text-[#186ad2] text-lg">Image</label>
               <input
                 type="file"
                 onChange={handleImageChange}
-                className="border border-[#eb5f0f] w-64 md:w-[30rem] rounded-full p-2 text-sm px-4 font-semibold"
+                className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               />
             </div>
             <div className=" pt-5 space-y-4 md:space-x-24">
