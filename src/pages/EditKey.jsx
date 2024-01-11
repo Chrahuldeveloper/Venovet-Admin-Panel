@@ -62,7 +62,7 @@ export default function EditKey() {
       const docRef = doc(db, "KEY-BENEFITS", form.Category);
       await updateDoc(docRef, form);
       setIsSubmitting(false);
-      navigate("/key-benefits");
+      navigate("/admin-panel/key-benefits");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);

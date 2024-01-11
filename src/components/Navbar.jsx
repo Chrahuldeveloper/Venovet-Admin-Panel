@@ -20,7 +20,7 @@ function Navbar() {
               }}
             />
             <Link
-              to={"/home"}
+              to={"/admin-panel/home"}
               onClick={() => {
                 window.scrollTo(0, 0);
               }}

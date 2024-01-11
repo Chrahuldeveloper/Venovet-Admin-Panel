@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
@@ -35,6 +35,23 @@ export default function EditProduct() {
     Image3: "",
     Image4: "",
   });
+  const [catData, setCatData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = collection(db, "CATEGORIES");
+        const docSnap = await getDocs(docRef);
+
+        // Update the state with the fetched category data
+        setCatData(docSnap.docs.map((doc) => doc.data().Name));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,7 +87,7 @@ export default function EditProduct() {
       await updateDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/products");
+      navigate("/admin-panel/products");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
@@ -126,10 +143,9 @@ export default function EditProduct() {
                 onChange={(e) => handleInputChange("Category", e.target.value)}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
-                <option>Choose Category</option>
-                <option>Electronics</option>
-                <option>Material Handling Equipments</option>
-                <option>Test Category</option>
+                {catData.map((cat, index) => {
+                  return <option key={index}>{cat}</option>;
+                })}
               </select>
             </UserDetailsField>
 

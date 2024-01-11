@@ -27,7 +27,7 @@ export default function NewProduct() {
   const [catData, setCatData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
-    Category: "",
+    Category: null,
     ProductName: "",
     MRP: "",
     Dealprice: "",
@@ -60,8 +60,8 @@ export default function NewProduct() {
       const updatedLayout = { ...form };
 
       for (const subCatKey in updatedLayout) {
-        if (updatedLayout[subCatKey].image) {
-          const imageFile = updatedLayout[subCatKey].image;
+        if (updatedLayout[subCatKey]?.image) {
+          const imageFile = updatedLayout[subCatKey]?.image;
 
           // Create a reference to the image file in Firebase Storage
           const storageRef = ref(
@@ -86,7 +86,7 @@ export default function NewProduct() {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/products");
+      navigate("/admin-panel/products");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
@@ -137,8 +137,7 @@ export default function NewProduct() {
           <form className="p-8 space-y-4" onSubmit={handleSubmit}>
             <UserDetailsField label="Category" required>
               <select
-                value={form.Category}
-                defaultValue={"Electronics"}
+                value={form.Category || catData[0]}
                 onChange={(e) => handleInputChange("Category", e.target.value)}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >

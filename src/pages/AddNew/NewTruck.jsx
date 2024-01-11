@@ -147,7 +147,7 @@ export default function NewTruck() {
 
       await setDoc(doc(db, "TRUCKS", form.vendor), formData);
       setIsSubmitting(false);
-      navigate("/trucks");
+      navigate("/admin-panel/trucks");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);

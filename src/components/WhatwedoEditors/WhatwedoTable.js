@@ -105,7 +105,9 @@ export default function WhatwedoTable() {
                           <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/edit/whatwedo/${item.Tittle}`);
+                              navigate(
+                                `/admin-panel/edit/whatwedo/${item.Tittle}`
+                              );
                             }}
                           >
                             Edit

@@ -32,7 +32,7 @@ export default function Sidebar() {
       <img src={logo} className="mx-auto mt-10 " alt="" />
       <div className="mt-5 ">
         <ul className="px-5 pt-8">
-          <Link to="/home">
+          <Link to="/admin-panel/home">
             <div className="flex items-center gap-5 cursor-pointer hover:bg-[#e6e9f4] rounded-lg p-5">
               <CgDatabase size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">DashBoard</li>
@@ -53,24 +53,24 @@ export default function Sidebar() {
           <div
             className={`${toogle.dropdown1 ? "block" : "hidden"} pl-8  my-6`}
           >
-            <Link to={"/whoweserve"}>
+            <Link to={"/admin-panel/whoweserve"}>
               <li className="text-gray-500 duration-300 ease-in-out cursor-pointer hover:text-blue-600">
                 Who We Serve
               </li>
             </Link>
-            <Link to="/why-us">
+            <Link to="/admin-panel/why-us">
               <li className="cursor-pointer hover:text-blue-600 ease-in-out my-3.5 duration-300 text-gray-500">
                 Why Us
               </li>
             </Link>
-            <Link to="/key-benefits">
+            <Link to="/admin-panel/key-benefits">
               <li className="text-gray-500 duration-300 ease-in-out cursor-pointer hover:text-blue-600">
                 Key Benifits
               </li>
             </Link>
           </div>
 
-          <Link to={"/whatwedo"}>
+          <Link to={"/admin-panel/whatwedo"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <AiOutlineDatabase size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">
@@ -96,28 +96,28 @@ export default function Sidebar() {
           <div
             className={`${toogle.dropdown2 ? "block" : "hidden"} pl-8  my-6`}
           >
-            <Link to={"/nature-of-enquiry"}>
+            <Link to={"/admin-panel/nature-of-enquiry"}>
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
                 Nature of Enquiry
               </li>
             </Link>
-            <Link to={"/enquiries"}>
+            <Link to={"/admin-panel/enquiries"}>
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
                 Enquire
               </li>
             </Link>
-            <Link to="/career">
+            <Link to="/admin-panel/career">
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
                 Career
               </li>
             </Link>
-            <Link to="/news-letters">
+            <Link to="/admin-panel/news-letters">
               <li className="cursor-pointer hover:text-blue-600 ease-in-out duration-300 text-gray-500 my-3.5">
                 News Letter
               </li>
             </Link>
           </div>
-          <Link to={"/EditBlog"}>
+          <Link to={"/admin-panel/EditBlog"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <BsPencilSquare size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">Blogs</li>
@@ -130,7 +130,7 @@ export default function Sidebar() {
               <li className="text-lg font-semibold text-gray-500">Brochure</li>
             </div>
           </Link> */}
-          <Link to={"/social-media"}>
+          <Link to={"/admin-panel/social-media"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <MdOutlineSocialDistance size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">
@@ -152,29 +152,29 @@ export default function Sidebar() {
           <div
             className={`${toogle.dropdown3 ? "block" : "hidden"} pl-8  my-6`}
           >
-            <Link to={"/categories"}>
+            <Link to={"/admin-panel/categories"}>
               <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
                 Categeory
               </li>
             </Link>
-            <Link to={"/products"}>
+            <Link to={"/admin-panel/products"}>
               <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
                 Products
               </li>
             </Link>
-            <Link to={"/orders"}>
+            <Link to={"/admin-panel/orders"}>
               <li className="text-gray-500 cursor-pointer hover:text-blue-600 ease-in-out duration-300 my-3.5">
                 Orders
               </li>
             </Link>
           </div>
-          <Link to="/profile">
+          <Link to="/admin-panel/profile">
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <BsFillPersonFill size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">Profile</li>
             </div>
           </Link>
-          <Link to="/">
+          <Link to="/admin-panel/">
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <AiFillLock size="25" color="gray" />
               <li className="text-lg font-semibold text-gray-500">Logout</li>

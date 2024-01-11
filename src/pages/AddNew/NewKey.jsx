@@ -38,7 +38,7 @@ export default function NewKey() {
     try {
       await setDoc(doc(db, "KEY-BENEFITS", form.Category), form);
       setIsSubmitting(false);
-      navigate("/key-benefits");
+      navigate("/admin-panel/key-benefits");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);

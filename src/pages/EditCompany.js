@@ -55,7 +55,7 @@ export default function EditCompany() {
           const docRef = doc(db, "COMPANIES", editid);
           await updateDoc(docRef, formData);
           setIsSubmitting(false);
-          navigate("/companies");
+          navigate("/admin-panel/companies");
         }
       );
     } catch (error) {

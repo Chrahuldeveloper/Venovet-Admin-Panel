@@ -86,7 +86,7 @@ export default function EditWhyUs() {
       const docRef = doc(db, "WHY-US", form.Category);
       await updateDoc(docRef, formData);
       setIsSubmitting(false);
-      navigate(`/why-us`);
+      navigate(`/admin-panel/why-us`);
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);

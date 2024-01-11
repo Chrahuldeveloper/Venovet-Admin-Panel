@@ -102,7 +102,7 @@ export default function NewServe() {
       await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);
       setIsSubmitting(false);
 
-      navigate("/whoweserve");
+      navigate("/admin-panel/whoweserve");
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);

@@ -109,7 +109,7 @@ export default function EditCategory() {
       await updateDoc(docRef, formDataPlainText);
       setIsSubmitting(false);
 
-      navigate("/whoweserve");
+      navigate("/admin-panel/whoweserve");
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);

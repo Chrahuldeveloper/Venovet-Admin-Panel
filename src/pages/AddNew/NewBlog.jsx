@@ -99,7 +99,7 @@ export default function NewBlog() {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/EditBlog");
+      navigate("/admin-panel/EditBlog");
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);

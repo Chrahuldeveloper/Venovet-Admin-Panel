@@ -36,7 +36,7 @@ export default function Login() {
       user.Name === data[0].UserName &&
       user.Password === data[0].Password
     ) {
-      navigate("/home");
+      navigate("/admin-panel/home");
     } else {
       alert("Wrong Password. Try Again!!");
     }

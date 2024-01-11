@@ -33,7 +33,7 @@ export default function BlogsTable() {
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       setIsSubmitting(false);
       alert("Sorry! Couldn't delete document");
@@ -57,7 +57,7 @@ export default function BlogsTable() {
         <div className="p-6 bg-white rounded-xl">
           <div className="flex flex-col justify-between pt-2 space-y-5 md:flex-row md:space-y-0 md:px-6">
             <h1 className="font-semibold md:text-xl">Blogs</h1>
-            <Link to={"/addnewblog"}>
+            <Link to={"/admin-panel/addnewblog"}>
               {" "}
               <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
                 Add New Blog
@@ -95,7 +95,7 @@ export default function BlogsTable() {
                           <td
                             className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                             onClick={() => {
-                              navigate(`/EditBlog/edit/${item.id}`);
+                              navigate(`/admin-panel/EditBlog/edit/${item.id}`);
                             }}
                           >
                             Edit

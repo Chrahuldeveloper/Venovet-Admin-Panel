@@ -46,7 +46,7 @@ import SocialMedia from "../pages/SocialMedia";
 export default function Routing() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/whoweserve" element={<WhoweServe />} />
@@ -86,6 +86,61 @@ export default function Routing() {
         <Route path="/EditBlog/edit/:id" element={<EditingPage />} />
         <Route
           path="/edit/whatwedo/:category"
+          element={<WhatWeDoEditCategory />}
+        />
+      </Routes> */}
+      <Routes>
+        <Route path="/admin-panel/" element={<Login />} />
+        <Route path="/admin-panel/home" element={<Home />} />
+        <Route path="/admin-panel/whoweserve" element={<WhoweServe />} />
+        <Route path="/admin-panel/why-us" element={<WhyUs />} />
+        <Route path="/admin-panel/key-benefits" element={<Key />} />
+        <Route path="/admin-panel/companies" element={<Companies />} />
+        <Route path="/admin-panel/trucks" element={<Trucks />} />
+        <Route path="/admin-panel/properties" element={<Properties />} />
+        <Route path="/admin-panel/nature-of-enquiry" element={<Nature />} />
+        <Route path="/admin-panel/enquiries" element={<Enquiries />} />
+        <Route path="/admin-panel/career" element={<Careers />} />
+        <Route path="/admin-panel/news-letters" element={<NewsLetter />} />
+        <Route path="/admin-panel/categories" element={<Categories />} />
+        <Route path="/admin-panel/products" element={<Products />} />
+        <Route path="/admin-panel/orders" element={<Orders />} />
+        <Route path="/admin-panel/brochure" element={<Brochure />} />
+        <Route path="/admin-panel/addnewserve" element={<NewServe />} />
+        <Route path="/admin-panel/addnewkey" element={<NewKey />} />
+        <Route path="/admin-panel/addnewwhy" element={<NewWhy />} />
+        <Route path="/admin-panel/addnewcompany" element={<NewCompany />} />
+        <Route path="/admin-panel/addnewtruck" element={<NewTruck />} />
+        <Route path="/admin-panel/addnewcategory" element={<NewCategory />} />
+        <Route path="/admin-panel/addnewproduct" element={<NewProduct />} />
+        <Route path="/admin-panel/addnewblog" element={<NewBlog />} />
+        <Route path="/admin-panel/addnewnatureenq" element={<NewNature />} />
+        <Route path="/admin-panel/:id" element={<EditCategory />} />
+        <Route path="/admin-panel/key/:keyid" element={<EditKey />} />
+        <Route path="/admin-panel/edit/:editid" element={<EditCompany />} />
+        <Route
+          path="/admin-panel/truckedit/:truckid"
+          element={<EditTrucks />}
+        />
+        <Route path="/admin-panel/whyusedit/:whyusid" element={<EditWhyUs />} />
+        <Route
+          path="/admin-panel/editcategory/:categoryid"
+          element={<EditCategeory />}
+        />
+        <Route
+          path="/admin-panel/editProduct/:Productid"
+          element={<EditProduct />}
+        />
+        <Route path="/admin-panel/social-media" element={<SocialMedia />} />
+        <Route path="/admin-panel/profile" element={<Profile />} />
+        <Route path="/admin-panel/whatwedo" element={<SelectCategory />} />
+        <Route path="/admin-panel/EditBlog" element={<EditBlog />} />
+        <Route
+          path="/admin-panel/EditBlog/edit/:id"
+          element={<EditingPage />}
+        />
+        <Route
+          path="/admin-panel/edit/whatwedo/:category"
           element={<WhatWeDoEditCategory />}
         />
       </Routes>

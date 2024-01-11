@@ -82,7 +82,7 @@ export default function NewCompany() {
 
           await setDoc(doc(db, "COMPANIES", form.Business), formData);
           setIsSubmitting(false);
-          navigate("/companies");
+          navigate("/admin-panel/companies");
         }
       );
     } catch (error) {

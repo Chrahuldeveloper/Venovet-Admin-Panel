@@ -33,7 +33,7 @@ export default function ProductsTable() {
       const docRef = doc(db, "PRODUCTS", docId);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       console.error("Error deleting document:", error);
     }
@@ -55,7 +55,7 @@ export default function ProductsTable() {
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 justify-between md:px-6 pt-2">
           <h1 className="md:text-xl font-semibold">Products</h1>
-          <Link to={"/addnewproduct"}>
+          <Link to={"/admin-panel/addnewproduct"}>
             {" "}
             <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
               Add New Product
@@ -101,7 +101,9 @@ export default function ProductsTable() {
                         </td>
                         <td
                           onClick={() => {
-                            navigate(`/editProduct/${item.ProductName}`);
+                            navigate(
+                              `/admin-panel/editProduct/${item.ProductName}`
+                            );
                           }}
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                         >
