@@ -110,7 +110,7 @@ export default function WareHouseMangement({ category }) {
       const docRef = doc(db, "WHATWEDO", category);
       await updateDoc(docRef, updatedLayout);
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/admin-panel/whatwedo");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);

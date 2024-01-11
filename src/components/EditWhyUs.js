@@ -177,36 +177,3 @@ export default function EditWhyUs() {
     </div>
   );
 }
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setIsSubmitting(true);
-//   try {
-//     // upload image
-//     const imageRef = ref(storage, `whyus/${Image.name}`);
-//     const uploadTask = uploadBytes(imageRef, Image);
-//     uploadTask.snapshot.ref.on(
-//       "state_changed",
-//       null,
-//       (error) => {
-//         setIsSubmitting(false);
-//         alert("Upload Image Again...!");
-//         console.error(error);
-//       },
-//       async () => {
-//         // get download url for upload file
-//         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-//         const formData = {
-//           ...form,
-//           Image: downloadURL,
-//         };
-//         const docRef = doc(db, "WHY-US", form.Category);
-//         await updateDoc(docRef, formData);
-//         setIsSubmitting(false);
-//         navigate("/why-us");
-//       }
-//     );
-//   } catch (error) {
-//     setIsSubmitting(false);
-//     console.log(error);
-//   }
-// };

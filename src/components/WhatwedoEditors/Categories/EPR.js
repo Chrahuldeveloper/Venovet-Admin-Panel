@@ -95,7 +95,7 @@ export default function EPR({ category }) {
       await setDoc(docRef, layout);
 
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/admin-panel/whatwedo");
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);

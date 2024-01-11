@@ -112,7 +112,7 @@ export default function ValueAddedServices({ category }) {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/admin-panel/whatwedo");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);

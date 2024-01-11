@@ -123,7 +123,7 @@ export default function EditoneBlog() {
       await updateDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/EditBlog");
+      navigate("/admin-panel/EditBlog");
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);

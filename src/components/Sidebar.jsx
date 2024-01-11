@@ -124,12 +124,6 @@ export default function Sidebar() {
             </div>
           </Link>
 
-          {/* <Link to={"/brochure"}>
-            <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
-              <RxButton size="25" color="gray" />
-              <li className="text-lg font-semibold text-gray-500">Brochure</li>
-            </div>
-          </Link> */}
           <Link to={"/admin-panel/social-media"}>
             <div className="flex items-center gap-5 cursor-pointer  hover:bg-[#e6e9f4] p-5 rounded-lg">
               <MdOutlineSocialDistance size="25" color="gray" />
