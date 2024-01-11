@@ -139,10 +139,10 @@ export default function EditProduct() {
             <UserDetailsField label="Category" required>
               <select
                 value={form.Category}
-                defaultValue={"Electronics"}
                 onChange={(e) => handleInputChange("Category", e.target.value)}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
+                <option></option>
                 {catData.map((cat, index) => {
                   return <option key={index}>{cat}</option>;
                 })}
