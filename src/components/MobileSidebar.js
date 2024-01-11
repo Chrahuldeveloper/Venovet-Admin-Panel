@@ -33,12 +33,8 @@ export default function MobileSidebar({ settoogles }) {
     <div className=" lg:hidden fixed top-0 bottom-0 z-50  bg-black w-[100vw]  bg-opacity-60 ">
       <div className="py-7 bg-white w-[70vw] md:w-[40vw] h-full">
         <aside className="lg:hidden">
-          <div className="flex items-center justify-between pr-14">
-            <img
-              src="https://venovet.com/cw_admin/images/logo-full.png"
-              className="mx-auto mt-3 w-28"
-              alt={"images"}
-            />
+          <div className="flex w-full items-center justify-end pr-14">
+            {/* <img src={fav} className="mx-auto mt-3 w-10" alt="img" /> */}
             <RxCross1
               size={26}
               color="gray"
