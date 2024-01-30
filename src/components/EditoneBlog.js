@@ -4,12 +4,13 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div> {children}</div>
     </div>
   );
 }
@@ -165,18 +166,10 @@ export default function EditoneBlog() {
         </UserDetailsField>
 
         <UserDetailsField label="Para1">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para1}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para1: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para1: value })}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -195,18 +188,10 @@ export default function EditoneBlog() {
         </UserDetailsField>
 
         <UserDetailsField label="Para2">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para2}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para2: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para2: value })}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -266,18 +251,10 @@ export default function EditoneBlog() {
         </UserDetailsField>
 
         <UserDetailsField label="Para3">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para3}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para3: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para3: value })}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -392,18 +369,10 @@ export default function EditoneBlog() {
         </UserDetailsField>
 
         <UserDetailsField label="Para4">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para4}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para4: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para4: value })}
+            theme="snow"
           />
         </UserDetailsField>
 

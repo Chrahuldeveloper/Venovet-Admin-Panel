@@ -4,11 +4,12 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div>{children}</div>
     </div>
   );
 }
@@ -135,167 +136,61 @@ export default function SCM({ category }) {
         </div>
       )}
       <form className="pl-10 space-y-4 pt-7" onSubmit={handleSubmit}>
-        <UserDetailsField label="Cat1image">
-          <input
-            type="file"
-            // value={layout.Cat1.image}
-            onChange={(e) => {
-              handleImageChange(e, "SubCat1");
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="Cat1Tittle">
-          <input
-            type="text"
-            value={layout.SubCat1.Tittle}
-            onChange={(e) => {
-              handleFieldChange("SubCat1", "Tittle", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="Cat1Para">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("SubCat1", "Para", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
-          />
-        </UserDetailsField>
+        {["SubCat1", "SubCat2", "SubCat3", "SubCat4", "SubCat5"].map(
+          (subCat, index) => (
+            <React.Fragment key={index}>
+              {index === 1 && (
+                <UserDetailsField label={`${subCat} Image`}>
+                  <input
+                    type="file"
+                    onChange={(e) => handleImageChange(e, subCat)}
+                    className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                  />
+                </UserDetailsField>
+              )}
+              {index === 2 && (
+                <UserDetailsField label={`${subCat} Image`}>
+                  <input
+                    type="file"
+                    onChange={(e) => handleImageChange(e, subCat)}
+                    className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                  />
+                </UserDetailsField>
+              )}
 
-        <UserDetailsField label="Cat2image">
-          <input
-            type="file"
-            // value={layout.Cat2.image}
-            onChange={(e) => {
-              handleImageChange(e, "SubCat2");
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="Cat2Tittle">
-          <input
-            type="text"
-            value={layout.SubCat2.Tittle}
-            onChange={(e) => {
-              handleFieldChange("SubCat2", "Tittle", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="Cat2Para">
-          <textarea
-            type="text"
-            value={layout.SubCat2.Para}
-            onChange={(e) => {
-              handleFieldChange("SubCat2", "Para", e.target.value);
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
-          />
-        </UserDetailsField>
-
-        <UserDetailsField label="SubCat3Tittle">
-          <input
-            type="text"
-            value={layout.SubCat3.Tittle}
-            onChange={(e) => {
-              handleFieldChange("SubCat3", "Tittle", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="SubCat3Para">
-          <textarea
-            type="text"
-            value={layout.SubCat3.Para}
-            onChange={(e) => {
-              handleFieldChange("SubCat3", "Para", e.target.value);
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
-          />
-        </UserDetailsField>
-
-        <UserDetailsField label="SubCat4Tittle">
-          <input
-            type="text"
-            value={layout.SubCat4.Tittle}
-            onChange={(e) => {
-              handleFieldChange("SubCat4", "Tittle", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="SubCat3Para">
-          <textarea
-            type="text"
-            value={layout.SubCat4.Para}
-            onChange={(e) => {
-              handleFieldChange("SubCat4", "Para", e.target.value);
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
-          />
-        </UserDetailsField>
-
-        <UserDetailsField label="SubCat5Tittle">
-          <input
-            type="text"
-            value={layout.SubCat5.Tittle}
-            onChange={(e) => {
-              handleFieldChange("SubCat5", "Tittle", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
-          />
-        </UserDetailsField>
-        <UserDetailsField label="SubCat5Para">
-          <textarea
-            type="text"
-            value={layout.SubCat5.Para}
-            onChange={(e) => {
-              handleFieldChange("SubCat5", "Para", e.target.value);
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
-          />
-        </UserDetailsField>
-
-        <UserDetailsField label="Tittle2">
+              <UserDetailsField label={`${subCat} Title`}>
+                <input
+                  type="text"
+                  value={layout[subCat]?.Tittle || ""}
+                  onChange={(e) =>
+                    handleFieldChange(subCat, "Tittle", e.target.value)
+                  }
+                  className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                />
+              </UserDetailsField>
+              <UserDetailsField label={`${subCat} Paragraph`}>
+                <ReactQuill
+                  value={layout[subCat]?.Para || ""}
+                  onChange={(value) => handleFieldChange(subCat, "Para", value)}
+                  theme="snow"
+                />
+              </UserDetailsField>
+            </React.Fragment>
+          )
+        )}
+        <UserDetailsField label="Title2">
           <input
             type="text"
             value={layout.Tittle2}
-            onChange={(e) => {
-              setlayout({
-                ...layout,
-                Tittle2: e.target.value,
-              });
-            }}
+            onChange={(e) => setlayout({ ...layout, Tittle2: e.target.value })}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
-        <UserDetailsField label="Para2">
-          <textarea
-            type="text"
+        <UserDetailsField label="Paragraph2">
+          <ReactQuill
             value={layout.Para2}
-            onChange={(e) => {
-              setlayout({
-                ...layout,
-                Para2: e.target.value,
-              });
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para2: value })}
+            theme="snow"
           />
         </UserDetailsField>
         <div className="flex items-center justify-center pt-10">
