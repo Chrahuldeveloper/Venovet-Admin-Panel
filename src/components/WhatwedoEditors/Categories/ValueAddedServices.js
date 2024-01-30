@@ -4,12 +4,13 @@ import { doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div>{children}</div>
     </div>
   );
 }
@@ -141,6 +142,35 @@ export default function ValueAddedServices({ category }) {
     }));
   };
 
+  const renderCategoryFields = (category) => (
+    <>
+      <UserDetailsField label={`${category} Title`}>
+        <input
+          type="text"
+          value={layout[category]?.Tittle || ""}
+          onChange={(e) =>
+            handleFieldChange(category, "Tittle", e.target.value)
+          }
+          className="outline-none border w-full font-semibold text-sm border-gray-300 px-4 py-2 focus:border-blue-500 rounded-full"
+        />
+      </UserDetailsField>
+      <UserDetailsField label={`${category} Paragraph`}>
+        <ReactQuill
+          value={layout[category]?.Para || ""}
+          onChange={(value) => handleFieldChange(category, "Para", value)}
+          theme="snow"
+        />
+      </UserDetailsField>
+      <UserDetailsField label={`${category} Image`}>
+        <input
+          type="file"
+          onChange={(event) => handleImageChange(event, category)}
+          className="outline-none border w-full font-semibold text-sm border-gray-300 px-4 py-2 focus:border-blue-500 rounded-full"
+        />
+      </UserDetailsField>
+    </>
+  );
+
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true
@@ -156,18 +186,15 @@ export default function ValueAddedServices({ category }) {
       )}
       <form className="pl-10 space-y-4 pt-7" onSubmit={handleSubmit}>
         <UserDetailsField label="Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para}
-            onChange={(e) => {
+            onChange={(value) => {
               setlayout({
                 ...layout,
-                Para: e.target.value,
+                Para: value,
               });
             }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1image">
@@ -178,7 +205,32 @@ export default function ValueAddedServices({ category }) {
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
-        <UserDetailsField label="SubCat1Tittle">
+
+        {[
+          "SubCat1",
+          "SubCat2",
+          "SubCat3",
+          "SubCat4",
+          "SubCat5",
+          "SubCat6",
+          "SubCat7",
+          "SubCat8",
+        ].map((category) => renderCategoryFields(category))}
+
+        <div className="flex items-center justify-center pt-10">
+          <button
+            className="rounded-full text-white px-20 py-2 bg-blue-900"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </>
+  );
+}
+
+/* <UserDetailsField label="SubCat1Tittle">
           <input
             type="text"
             value={layout.SubCat1.Tittle}
@@ -189,15 +241,10 @@ export default function ValueAddedServices({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat1.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat1", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat2image">
@@ -417,8 +464,4 @@ export default function ValueAddedServices({ category }) {
           >
             Submit
           </button>
-        </div>
-      </form>
-    </>
-  );
-}
+        </div> */

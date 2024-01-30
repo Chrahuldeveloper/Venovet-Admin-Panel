@@ -4,12 +4,13 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 function UserDetailsField({ label, children }) {
   return (
-    <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
-      <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+    <div className="grid  gap-6 pr-5 md:grid-cols-3  md:gap-0 md:pr-0">
+      <label className="text-[#186ad2] text-lg ">{label}</label>
+      <div className="">{children}</div>
     </div>
   );
 }
@@ -149,7 +150,15 @@ export default function WareHouseMangement({ category }) {
     }));
     console.log(layout);
   };
-
+  const handleQuillChange = (section, field, value) => {
+    setlayout((prevLayout) => ({
+      ...prevLayout,
+      [section]: {
+        ...prevLayout[section],
+        [field]: value,
+      },
+    }));
+  };
   return (
     <>
       {isSubmitting && ( // Render loader only when isSubmitting is true
@@ -167,55 +176,36 @@ export default function WareHouseMangement({ category }) {
         <UserDetailsField label="Tittle1">
           <input
             type="text"
-            value={""}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Tittle1: e.target.value,
-              })
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            value={layout.Tittle1}
+            onChange={(e) => setlayout({ ...layout, Tittle1: e.target.value })}
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
         <UserDetailsField label="Para1">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para1}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para1: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para1: value })}
+            theme="snow"
           />
         </UserDetailsField>
+
         <UserDetailsField label="Para2">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para2}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para2: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para2: value })}
+            className=""
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat1image">
           <input
             type="file"
-            // value={layout.SubCat1.image}
             onChange={(event) => handleImageChange(event, "SubCat1")}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat1Tittle">
           <input
             type="text"
@@ -223,28 +213,26 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat1", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat1Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat1.Para}
-            cols={8}
-            rows={8}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para", e.target.value)
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat1", "Para", value)}
+            className=""
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat2image">
           <input
             type="file"
             onChange={(event) => handleImageChange(event, "SubCat2")}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat2Tittle">
           <input
             type="text"
@@ -252,29 +240,26 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat2", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat2Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat2.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat2", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat2", "Para", value)}
+            className=""
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat3image">
           <input
             type="file"
-            // value={layout.SubCat3.image}
             onChange={(event) => handleImageChange(event, "SubCat3")}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat3Tittle">
           <input
             type="text"
@@ -282,30 +267,26 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat3", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat3Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat3.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat3", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat3", "Para", value)}
+            className=""
           />
         </UserDetailsField>
 
         <UserDetailsField label="SubCat4image">
           <input
             type="file"
-            // value={layout.SubCat4.image}
             onChange={(event) => handleImageChange(event, "SubCat4")}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat4Tittle">
           <input
             type="text"
@@ -313,19 +294,15 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat4", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat4Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat4.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat4", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat4", "Para", value)}
+            className=""
           />
         </UserDetailsField>
 
@@ -333,13 +310,8 @@ export default function WareHouseMangement({ category }) {
           <input
             type="text"
             value={layout.Tittle3}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Tittle3: e.target.value,
-              })
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            onChange={(e) => setlayout({ ...layout, Tittle3: e.target.value })}
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
@@ -350,20 +322,15 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat5", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
         <UserDetailsField label="SubCat5Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat5.Para}
-            cols={8}
-            rows={8}
-            onChange={(e) =>
-              handleFieldChange("SubCat5", "Para", e.target.value)
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat5", "Para", value)}
+            className=""
           />
         </UserDetailsField>
 
@@ -374,22 +341,18 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat6", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
         <UserDetailsField label="SubCat6Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat6.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat6", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat6", "Para", value)}
+            className=""
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat7Tittle">
           <input
             type="text"
@@ -397,22 +360,18 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat7", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
         <UserDetailsField label="SubCat7Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat7.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat7", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat7", "Para", value)}
+            className=""
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat8Tittle">
           <input
             type="text"
@@ -420,20 +379,15 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("SubCat8", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
         <UserDetailsField label="SubCat8Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.SubCat8.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat8", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("SubCat8", "Para", value)}
+            className=""
           />
         </UserDetailsField>
 
@@ -441,13 +395,8 @@ export default function WareHouseMangement({ category }) {
           <input
             type="text"
             value={layout.Tittle4}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Tittle4: e.target.value,
-              })
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            onChange={(e) => setlayout({ ...layout, Tittle4: e.target.value })}
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
@@ -455,7 +404,7 @@ export default function WareHouseMangement({ category }) {
           <input
             type="file"
             onChange={handleImageChangeSubCat9}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
 
@@ -466,9 +415,10 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("Subcat9", "Tittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat9subTittle">
           <input
             type="text"
@@ -476,19 +426,15 @@ export default function WareHouseMangement({ category }) {
             onChange={(e) =>
               handleFieldChange("Subcat9", "SubTittle", e.target.value)
             }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="SubCat9Para">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Subcat9.Para}
-            onChange={(e) =>
-              handleFieldChange("Subcat9", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleFieldChange("Subcat9", "Para", value)}
+            className=""
           />
         </UserDetailsField>
 
@@ -496,28 +442,16 @@ export default function WareHouseMangement({ category }) {
           <input
             type="text"
             value={layout.Tittle5}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Tittle5: e.target.value,
-              })
-            }
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+            onChange={(e) => setlayout({ ...layout, Tittle5: e.target.value })}
+            className="outline-none border  font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
         </UserDetailsField>
+
         <UserDetailsField label="Para5">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para5}
-            onChange={(e) =>
-              setlayout({
-                ...layout,
-                Para5: e.target.value,
-              })
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para5: value })}
+            className=""
           />
         </UserDetailsField>
 

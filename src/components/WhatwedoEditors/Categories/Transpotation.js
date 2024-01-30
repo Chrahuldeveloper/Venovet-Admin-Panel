@@ -4,12 +4,13 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid grid-cols-3">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div> {children}</div>
     </div>
   );
 }
@@ -103,11 +104,11 @@ export default function Transpotation({ category }) {
     }));
   };
 
-  const handleFieldChange = (field, value) => {
-    setlayout({
-      ...layout,
+  const handleQuillChange = (field, value) => {
+    setlayout((prevForm) => ({
+      ...prevForm,
       [field]: value,
-    });
+    }));
   };
 
   return (
@@ -145,15 +146,10 @@ export default function Transpotation({ category }) {
         </UserDetailsField>
 
         <UserDetailsField label="Para1">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para1}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para1", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para1", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -178,15 +174,10 @@ export default function Transpotation({ category }) {
         </UserDetailsField>
 
         <UserDetailsField label="Para2">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para2}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para2", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para2", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -211,15 +202,10 @@ export default function Transpotation({ category }) {
         </UserDetailsField>
 
         <UserDetailsField label="Para3">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para3}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para3", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para3", value)}
+            theme="snow"
           />
         </UserDetailsField>
         {/* 
@@ -244,15 +230,10 @@ export default function Transpotation({ category }) {
         </UserDetailsField>
 
         <UserDetailsField label="Para4">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para4}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para4", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para4", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -277,40 +258,25 @@ export default function Transpotation({ category }) {
         </UserDetailsField>
 
         <UserDetailsField label="Para5">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para5}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para5", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para5", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
         <UserDetailsField label="Para6">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para6}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para6", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para6", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="Para7">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para7}
-            cols={8}
-            rows={8}
-            onChange={(e) => {
-              handleFieldChange("Para7", e.target.value);
-            }}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => handleQuillChange("Para7", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
