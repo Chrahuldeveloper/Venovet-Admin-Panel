@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { convert } from "html-to-text";
 import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
 

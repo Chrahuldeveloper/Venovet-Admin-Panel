@@ -91,7 +91,7 @@ export default function KeyTable() {
                         <td
                           className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/key/${item.Category}`);
+                            navigate(`/admin-panel/key/${item.Category}`);
                           }}
                         >
                           Edit

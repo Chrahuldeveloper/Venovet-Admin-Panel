@@ -6,7 +6,6 @@ import "react-quill/dist/quill.snow.css";
 import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import { convert } from "html-to-text";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
@@ -93,10 +92,10 @@ export default function NewServe() {
       };
       const formDataPlainText = {
         ...formData,
-        Overview: convert(formData.Overview),
-        Stats: convert(formData.Stats),
-        How: convert(formData.How),
-        Why: convert(formData.Why),
+        Overview: formData.Overview,
+        Stats: formData.Stats,
+        How: formData.How,
+        Why: formData.Why,
       };
 
       await setDoc(doc(db, "WHO-WE-SERVE", form.Title), formDataPlainText);

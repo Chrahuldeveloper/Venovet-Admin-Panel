@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 export default function NewKey() {
   const navigate = useNavigate();
@@ -31,6 +32,13 @@ export default function NewKey() {
     Title: "",
     Text: "",
   });
+
+  const handleQuillChange = (value) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      Text: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -110,15 +118,10 @@ export default function NewKey() {
             </div>
             <div className=" grid gap-5 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">Text</label>
-              <textarea
+              <ReactQuill
                 value={form.Text}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    Text: e.target.value,
-                  });
-                }}
-                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
+                onChange={handleQuillChange}
+                className="w-64 md:w-80 lg:w-[30rem]"
               />
             </div>
             <div className="flex items-center justify-center pt-10">
