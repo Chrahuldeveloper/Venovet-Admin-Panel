@@ -100,10 +100,10 @@ export default function EditCategory() {
       };
       const formDataPlainText = {
         ...formData,
-        Overview: convert(formData.Overview),
-        Stats: convert(formData.Stats),
-        How: convert(formData.How),
-        Why: convert(formData.Why),
+        Overview: formData.Overview,
+        Stats: formData.Stats,
+        How: formData.How,
+        Why: formData.Why,
       };
       const docRef = doc(db, "WHO-WE-SERVE", id);
       await updateDoc(docRef, formDataPlainText);
