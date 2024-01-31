@@ -202,13 +202,13 @@ export default function EnquiryTable() {
                           />
                         </td>
                         <td>
-                        <button
-                          onClick={() => {
-                            saveComment(_.id, comments[i]);
-                          }}
-                        >
-                          Save
-                        </button>
+                          <button
+                            onClick={() => {
+                              saveComment(_.id, comments[i]);
+                            }}
+                          >
+                            Save
+                          </button>
                         </td>
                         <td
                           className="py-8 pl-5 cursor-pointer"
