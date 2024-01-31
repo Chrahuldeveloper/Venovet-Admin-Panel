@@ -4,11 +4,12 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div>{children}</div>
     </div>
   );
 }
@@ -127,7 +128,7 @@ export default function RealEstate({ category }) {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/admin-panel/whatwedo");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
@@ -188,28 +189,16 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat1?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat1", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
         <UserDetailsField label="image1">
           <input
             type="file"
-            // onChange={(e) => {
-            //   const imageFile = e.target.files[0];
-            //   setlayout((prevForm) => ({
-            //     ...prevForm,
-            //     image1: imageFile,
-            //   }));
-            // }}
             onChange={(e) => handleImageChange(e, "image1")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -239,15 +228,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat2Para">
-          <textarea
-            type="text"
-            value={layout.SubCat2.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat2", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat2?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat2", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -262,15 +246,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat3Para">
-          <textarea
-            type="text"
-            value={layout.SubCat3.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat3", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat3?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat3", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -285,15 +264,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat4Para">
-          <textarea
-            type="text"
-            value={layout.SubCat4.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat4", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat4?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat4", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -308,15 +282,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat5Para">
-          <textarea
-            type="text"
-            value={layout.SubCat5.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat5", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat5?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat5", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -331,15 +300,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat6Para">
-          <textarea
-            type="text"
-            value={layout.SubCat6.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat6", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat6?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat6", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -354,15 +318,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat7Para">
-          <textarea
-            type="text"
-            value={layout.SubCat7.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat7", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat7?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat7", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -377,15 +336,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat8Para">
-          <textarea
-            type="text"
-            value={layout.SubCat8.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat8", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat8?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat8", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -400,15 +354,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat9Para">
-          <textarea
-            type="text"
-            value={layout.SubCat9.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat9", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat9?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat9", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -423,15 +372,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat10Para">
-          <textarea
-            type="text"
-            value={layout.SubCat10.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat10", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat10?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat10", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -446,15 +390,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat11Para">
-          <textarea
-            type="text"
-            value={layout.SubCat11.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat11", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat11?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat11", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
 
@@ -469,15 +408,10 @@ export default function RealEstate({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat12Para">
-          <textarea
-            type="text"
-            value={layout.SubCat12.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat12", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat12?.Para || ""}
+            onChange={(value) => handleFieldChange("SubCat12", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <div className="flex items-center justify-center pt-10">

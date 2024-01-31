@@ -152,7 +152,7 @@ export default function EditTrucks() {
       const docRef = doc(db, "TRUCKS", form.vendor);
       await updateDoc(docRef, formData);
       setIsSubmitting(false);
-      navigate("/trucks");
+      navigate("/admin-panel/trucks");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);

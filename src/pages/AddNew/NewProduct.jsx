@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -6,8 +6,9 @@ import Sidebar from "../../components/Sidebar";
 import { useState } from "react";
 import { db, storage } from "../../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { RotatingLines } from "react-loader-spinner";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 function UserDetailsField({ label, required, children }) {
   return (
@@ -22,9 +23,11 @@ function UserDetailsField({ label, required, children }) {
 
 export default function NewProduct() {
   const navigate = useNavigate();
+
+  const [catData, setCatData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
-    Category: "",
+    Category: null,
     ProductName: "",
     MRP: "",
     Dealprice: "",
@@ -34,7 +37,21 @@ export default function NewProduct() {
     Image3: "",
     Image4: "",
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = collection(db, "CATEGORIES");
+        const docSnap = await getDocs(docRef);
 
+        // Update the state with the fetched category data
+        setCatData(docSnap.docs.map((doc) => doc.data().Name));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -43,8 +60,8 @@ export default function NewProduct() {
       const updatedLayout = { ...form };
 
       for (const subCatKey in updatedLayout) {
-        if (updatedLayout[subCatKey].image) {
-          const imageFile = updatedLayout[subCatKey].image;
+        if (updatedLayout[subCatKey]?.image) {
+          const imageFile = updatedLayout[subCatKey]?.image;
 
           // Create a reference to the image file in Firebase Storage
           const storageRef = ref(
@@ -69,7 +86,7 @@ export default function NewProduct() {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/products");
+      navigate("/admin-panel/products");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
@@ -121,14 +138,13 @@ export default function NewProduct() {
             <UserDetailsField label="Category" required>
               <select
                 value={form.Category}
-                defaultValue={"Electronics"}
                 onChange={(e) => handleInputChange("Category", e.target.value)}
                 className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
               >
-                <option>Choose Category</option>
-                <option>Electronics</option>
-                <option>Material Handling Equipments</option>
-                <option>Test Category</option>
+                <option></option>
+                {catData.map((cat, index) => {
+                  return <option key={index}>{cat}</option>;
+                })}
               </select>
             </UserDetailsField>
 

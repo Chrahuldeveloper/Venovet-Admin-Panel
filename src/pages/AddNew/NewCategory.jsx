@@ -41,7 +41,7 @@ export default function NewCategory() {
       const docRef = doc(db, "CATEGORIES", form.Name);
       await setDoc(docRef, formData);
       setIsSubmitting(false);
-      navigate(`/categories`);
+      navigate(`/admin-panel/categories`);
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);

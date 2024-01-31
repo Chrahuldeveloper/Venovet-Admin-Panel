@@ -49,7 +49,7 @@ export default function EditCategeory() {
           const docRef = doc(db, "CATEGORIES", categoryid);
           await updateDoc(docRef, formData);
           setIsSubmitting(false);
-          navigate("/categories");
+          navigate("/admin-panel/categories");
         }
       );
     } catch (error) {

@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { convert } from "html-to-text";
 import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
 
@@ -100,16 +99,16 @@ export default function EditCategory() {
       };
       const formDataPlainText = {
         ...formData,
-        Overview: convert(formData.Overview),
-        Stats: convert(formData.Stats),
-        How: convert(formData.How),
-        Why: convert(formData.Why),
+        Overview: formData.Overview,
+        Stats: formData.Stats,
+        How: formData.How,
+        Why: formData.Why,
       };
       const docRef = doc(db, "WHO-WE-SERVE", id);
       await updateDoc(docRef, formDataPlainText);
       setIsSubmitting(false);
 
-      navigate("/whoweserve");
+      navigate("/admin-panel/whoweserve");
     } catch (error) {
       console.error("Error submitting data: ", error);
       setIsSubmitting(false);

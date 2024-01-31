@@ -32,7 +32,7 @@ export default function KeyTable() {
       const docRef = doc(db, "KEY-BENEFITS", docId);
       await deleteDoc(docRef);
       setIsSubmitting(false);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error deleting document:", error);
@@ -57,7 +57,7 @@ export default function KeyTable() {
           <h1 className="text-xl font-semibold">Key Benefits</h1>
           <button
             onClick={() => {
-              navigate("/addnewkey");
+              navigate("/admin-panel/addnewkey");
             }}
             className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold"
           >
@@ -91,7 +91,7 @@ export default function KeyTable() {
                         <td
                           className="py-8 pl-6 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/key/${item.Category}`);
+                            navigate(`/admin-panel/key/${item.Category}`);
                           }}
                         >
                           Edit

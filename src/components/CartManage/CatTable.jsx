@@ -26,7 +26,7 @@ export default function CatTable() {
       const docRef = doc(db, "CATEGORIES", docId);
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       console.error("Error deleting document:", error);
     }
@@ -49,7 +49,7 @@ export default function CatTable() {
         <div className="p-6 bg-white rounded-xl">
           <div className="flex justify-between px-6 pt-2">
             <h1 className="text-xl font-semibold">Categories</h1>
-            <Link to={"/addnewcategory"}>
+            <Link to={"/admin-panel/addnewcategory"}>
               {" "}
               <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
                 Add New Category

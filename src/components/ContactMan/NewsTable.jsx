@@ -31,7 +31,7 @@ export default function NewsTable() {
     try {
       const docRef = doc(db, "NEWS-LETTER", docId);
       await deleteDoc(docRef);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       console.error("Error deleting document:", error);
     }

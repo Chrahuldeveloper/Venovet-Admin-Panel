@@ -6,6 +6,7 @@ import { db } from "../Firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Sidebar from "../components/Sidebar";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 
 export default function EditKey() {
   const { keyid } = useParams();
@@ -55,6 +56,13 @@ export default function EditKey() {
     fetchData();
   }, [form.Category]);
 
+  const handleQuillChange = (value) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      Text: value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -62,7 +70,7 @@ export default function EditKey() {
       const docRef = doc(db, "KEY-BENEFITS", form.Category);
       await updateDoc(docRef, form);
       setIsSubmitting(false);
-      navigate("/key-benefits");
+      navigate("/admin-panel/key-benefits");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);
@@ -133,15 +141,10 @@ export default function EditKey() {
             </div>
             <div className="grid gap-5 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
               <label className="text-[#186ad2] text-lg">Text</label>
-              <textarea
+              <ReactQuill
                 value={form.Text}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    Text: e.target.value,
-                  });
-                }}
-                className="outline-none border w-64 md:w-80 lg:w-[30rem] font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-2xl"
+                onChange={handleQuillChange}
+                className="w-64 md:w-80 lg:w-[30rem]"
               />
             </div>
             <div className="flex items-center justify-center pt-10">

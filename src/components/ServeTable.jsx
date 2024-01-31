@@ -32,7 +32,7 @@ export default function ServeTable() {
       await deleteDoc(doc(db, "WHO-WE-SERVE", itemId));
       // setData((prevData) => prevData.filter((item) => item.id !== itemId));
       setData((prevData) => prevData.filter((item) => item.id !== itemId));
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
@@ -54,7 +54,7 @@ export default function ServeTable() {
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col justify-between pt-2 space-y-5 md:flex-row md:space-y-0 md:px-6">
           <h1 className="font-semibold md:text-xl">Who We Serve</h1>
-          <Link to={"/addnewserve"}>
+          <Link to={"/admin-panel/addnewserve"}>
             {" "}
             <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
               Add New Who We Serve
@@ -92,7 +92,7 @@ export default function ServeTable() {
                         <td
                           className="py-8 pl-10 cursor-pointer text-[#7e7e7e]"
                           onClick={() => {
-                            navigate(`/${item.Title}`);
+                            navigate(`/admin-panel/${item.Title}`);
                           }}
                         >
                           Edit

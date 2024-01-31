@@ -21,7 +21,7 @@ export default function NewNature() {
     try {
       await setDoc(doc(db, "NATURE-OF-ENQUIRY", form.Title), form);
       setIsSubmitting(false);
-      navigate("/nature-of-enquiry");
+      navigate("/admin-panel/nature-of-enquiry");
     } catch (error) {
       setIsSubmitting(false);
       console.log(error);

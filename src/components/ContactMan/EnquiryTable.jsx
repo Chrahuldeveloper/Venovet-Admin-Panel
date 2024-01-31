@@ -109,7 +109,7 @@ export default function EnquiryTable() {
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       setIsSubmitting(false);
       alert("Sorry! Couldn't delete document");

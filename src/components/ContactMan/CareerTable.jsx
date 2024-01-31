@@ -29,7 +29,7 @@ export default function CareerTable() {
     try {
       const docRef = doc(db, "RESUMES", docId);
       await deleteDoc(docRef);
-      navigate("/home");
+      navigate("/admin-panel/home");
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
     } catch (error) {

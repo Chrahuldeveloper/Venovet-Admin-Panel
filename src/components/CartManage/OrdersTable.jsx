@@ -74,7 +74,7 @@ export default function OrdersTable() {
       await deleteDoc(docRef);
       console.log("Document successfully deleted!");
       setIsSubmitting(false);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error deleting document:", error);

@@ -33,7 +33,7 @@ export default function NatureTable() {
       const docRef = doc(db, "NATURE-OF-ENQUIRY", docId);
       await deleteDoc(docRef);
       setIsSubmitting(false);
-      navigate("/home");
+      navigate("/admin-panel/home");
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error deleting document:", error);
@@ -57,7 +57,7 @@ export default function NatureTable() {
         <div className="bg-white rounded-xl p-6">
           <div className="flex justify-between md:px-6 pt-2">
             <h1 className="text-xl font-semibold">Nature of Enquiry</h1>
-            <Link to={"/addnewnatureenq"}>
+            <Link to={"/admin-panel/addnewnatureenq"}>
               <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
                 Add Nature of Enquiry
               </button>

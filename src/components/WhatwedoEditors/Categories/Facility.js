@@ -4,11 +4,12 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+import ReactQuill from "react-quill";
 function UserDetailsField({ label, children }) {
   return (
     <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
-      {children}
+      <div> {children}</div>
     </div>
   );
 }
@@ -110,7 +111,7 @@ export default function Facility({ category }) {
       await setDoc(docRef, updatedLayout);
 
       setIsSubmitting(false);
-      navigate("/whatwedo");
+      navigate("/admin-panel/whatwedo");
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
@@ -167,18 +168,10 @@ export default function Facility({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="Para1">
-          <textarea
-            type="text"
+          <ReactQuill
             value={layout.Para1}
-            onChange={(e) => {
-              setlayout({
-                ...layout,
-                Para1: e.target.value,
-              });
-            }}
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+            onChange={(value) => setlayout({ ...layout, Para1: value })}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1image">
@@ -199,51 +192,31 @@ export default function Facility({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para1">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para1}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para1", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat1?.Para1}
+            onChange={(value) => handleFieldChange("SubCat1", "Para1", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para2">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para2}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para2", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat1?.Para1}
+            onChange={(value) => handleFieldChange("SubCat1", "Para2", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para3">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para3}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para3", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat1?.Para1}
+            onChange={(value) => handleFieldChange("SubCat1", "Para3", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
-          <textarea
-            type="text"
-            value={layout.SubCat1.Para4}
-            onChange={(e) =>
-              handleFieldChange("SubCat1", "Para4", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat1?.Para1}
+            onChange={(value) => handleFieldChange("SubCat1", "Para4", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat2image">
@@ -265,27 +238,17 @@ export default function Facility({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
-          <textarea
-            type="text"
-            value={layout.SubCat2.Para1}
-            onChange={(e) =>
-              handleFieldChange("SubCat2", "Para1", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat2?.Para1}
+            onChange={(value) => handleFieldChange("SubCat2", "Para1", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
-          <textarea
-            type="text"
-            value={layout.SubCat2.Para2}
-            onChange={(e) =>
-              handleFieldChange("SubCat2", "Para2", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat2?.Para2}
+            onChange={(value) => handleFieldChange("SubCat2", "Para2", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat3image">
@@ -307,15 +270,10 @@ export default function Facility({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat3Para">
-          <textarea
-            type="text"
-            value={layout.SubCat3.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat3", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat3?.Para}
+            onChange={(value) => handleFieldChange("SubCat3", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat4image">
@@ -336,15 +294,10 @@ export default function Facility({ category }) {
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat4Para">
-          <textarea
-            type="text"
-            value={layout.SubCat4.Para}
-            onChange={(e) =>
-              handleFieldChange("SubCat4", "Para", e.target.value)
-            }
-            cols={8}
-            rows={8}
-            className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2]  rounded-xl"
+          <ReactQuill
+            value={layout.SubCat4?.Para}
+            onChange={(value) => handleFieldChange("SubCat4", "Para", value)}
+            theme="snow"
           />
         </UserDetailsField>
         <div className="flex items-center justify-center pt-10">

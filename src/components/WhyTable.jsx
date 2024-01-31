@@ -57,7 +57,7 @@ export default function WhyTable() {
       <div className="p-6 bg-white rounded-xl">
         <div className="flex flex-col justify-between px-6 pt-2 space-y-5 md:flex-row md:space-y-0">
           <h1 className="text-xl font-semibold">Why Us</h1>
-          <Link to={"/addnewwhy"}>
+          <Link to={"/admin-panel/addnewwhy"}>
             <button className="bg-[#0B2A97] px-5 py-3 text-white rounded-3xl text-sm font-semibold">
               Add New Why Us
             </button>
