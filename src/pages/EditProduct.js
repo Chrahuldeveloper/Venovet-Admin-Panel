@@ -6,7 +6,13 @@ import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 import { db, storage } from "../Firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { RotatingLines } from "react-loader-spinner";
 
 function UserDetailsField({ label, required, children }) {
@@ -44,6 +50,9 @@ export default function EditProduct() {
         const docSnap = await getDocs(docRef);
 
         // Update the state with the fetched category data
+        const docRef1 = doc(db, "PRODUCTS", Productid);
+        const docSnap1 = await getDoc(docRef1);
+        setForm(docSnap1.data());
         setCatData(docSnap.docs.map((doc) => doc.data().Name));
       } catch (error) {
         console.error("Error fetching data:", error);
