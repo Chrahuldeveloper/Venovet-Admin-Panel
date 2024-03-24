@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { db, storage } from "../../../Firebase";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 import ReactQuill from "react-quill";
+
 function UserDetailsField({ label, children }) {
   return (
-    <div className="grid md:grid-cols-3 gap-6 md:gap-0 pr-5 md:pr-0">
+    <div className="grid gap-6 pr-5 md:grid-cols-3 md:gap-0 md:pr-0">
       <label className="text-[#186ad2] text-lg">{label}</label>
       <div> {children}</div>
     </div>
   );
 }
+
 export default function Facility({ category }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -44,21 +46,6 @@ export default function Facility({ category }) {
       Tittle: "",
       Para: "",
     },
-    // SubCat5: {
-    //   image: "",
-    //   Tittle1: "",
-    //   Para1: "",
-    //   Tittle2: "",
-    //   Para2: "",
-    //   Tittle3: "",
-    //   Para3: "",
-    //   Tittle4: "",
-    //   Para4: "",
-    //   Tittle5: "",
-    //   Para5: "",
-    //   Tittle6: "",
-    //   Para6: "",
-    // },
   });
 
   useEffect(() => {
@@ -91,22 +78,15 @@ export default function Facility({ category }) {
         if (updatedLayout[subCatKey].image) {
           const imageFile = updatedLayout[subCatKey].image;
 
-          // Create a reference to the image file in Firebase Storage
           const storageRef = ref(storage, `warehouse/${imageFile.name}`);
-
-          // Upload the image file to Firebase Storage
           await uploadBytesResumable(storageRef, imageFile);
-
-          // Wait for the upload to complete and get the download URL
           const snapshot = await getDownloadURL(storageRef);
           const downloadURL = snapshot;
 
-          // Update the layout object with the download URL
           updatedLayout[subCatKey].image = downloadURL;
         }
       }
 
-      // Update the Firestore document with the updated layout
       const docRef = doc(db, "WHATWEDO", category);
       await setDoc(docRef, updatedLayout);
 
@@ -130,7 +110,6 @@ export default function Facility({ category }) {
   };
 
   const handleFieldChange = (section, field, value) => {
-    // console.log("Field changed:", field, "New value:", value);
     setlayout((prevLayout) => ({
       ...prevLayout,
       [section]: {
@@ -142,8 +121,8 @@ export default function Facility({ category }) {
 
   return (
     <>
-      {isSubmitting && ( // Render loader only when isSubmitting is true
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-100">
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <RotatingLines
             strokeColor="grey"
             strokeWidth="5"
@@ -159,10 +138,10 @@ export default function Facility({ category }) {
             type="text"
             value={layout.Tittle1}
             onChange={(e) => {
-              setlayout({
-                ...layout,
+              setlayout((prevLayout) => ({
+                ...prevLayout,
                 Tittle1: e.target.value,
-              });
+              }));
             }}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -193,14 +172,14 @@ export default function Facility({ category }) {
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para1">
           <ReactQuill
-            value={layout.SubCat1?.Para1}
+            value={layout.SubCat1.Para1}
             onChange={(value) => handleFieldChange("SubCat1", "Para1", value)}
             theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para2">
           <ReactQuill
-            value={layout.SubCat1?.Para1}
+            value={layout.SubCat1.Para1}
             onChange={(value) => handleFieldChange("SubCat1", "Para2", value)}
             theme="snow"
           />
@@ -214,7 +193,7 @@ export default function Facility({ category }) {
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
           <ReactQuill
-            value={layout.SubCat1?.Para1}
+            value={layout.SubCat1.Para1}
             onChange={(value) => handleFieldChange("SubCat1", "Para4", value)}
             theme="snow"
           />
@@ -222,7 +201,6 @@ export default function Facility({ category }) {
         <UserDetailsField label="SubCat2image">
           <input
             type="file"
-            // value={layout.SubCat2.image}
             onChange={(event) => handleImageChange(event, "SubCat2")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -239,14 +217,14 @@ export default function Facility({ category }) {
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
           <ReactQuill
-            value={layout.SubCat2?.Para1}
+            value={layout.SubCat2.Para1}
             onChange={(value) => handleFieldChange("SubCat2", "Para1", value)}
             theme="snow"
           />
         </UserDetailsField>
         <UserDetailsField label="SubCat1Para4">
           <ReactQuill
-            value={layout.SubCat2?.Para2}
+            value={layout.SubCat2.Para2}
             onChange={(value) => handleFieldChange("SubCat2", "Para2", value)}
             theme="snow"
           />
@@ -254,7 +232,6 @@ export default function Facility({ category }) {
         <UserDetailsField label="SubCat3image">
           <input
             type="file"
-            // value={layout.SubCat3.image}
             onChange={(event) => handleImageChange(event, "SubCat3")}
             className="outline-none border w-30rem font-semibold text-sm border-[#eb5f0f] px-4 py-2 focus:border-[#186ad2] rounded-full"
           />
@@ -295,7 +272,7 @@ export default function Facility({ category }) {
         </UserDetailsField>
         <UserDetailsField label="SubCat4Para">
           <ReactQuill
-            value={layout.SubCat4?.Para}
+            value={layout.SubCat4.Para}
             onChange={(value) => handleFieldChange("SubCat4", "Para", value)}
             theme="snow"
           />
@@ -312,3 +289,4 @@ export default function Facility({ category }) {
     </>
   );
 }
+
